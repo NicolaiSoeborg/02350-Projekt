@@ -6,24 +6,24 @@
         xmlns:local="clr-namespace:OLProgram"
         mc:Ignorable="d"
         Title="Window1" Height="600" Width="800">
-    <Grid Height="600" Margin="0,0,-6.4,-29.6" VerticalAlignment="Top" Background="WhiteSmoke" ShowGridLines="True">
+    <Grid Name="UserWindowFrame" Height="600" Margin="0" VerticalAlignment="Top" Background="WhiteSmoke" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="85*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" x:Name="title" Content="Hej Peter Petersen" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" />
-        <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" ShowGridLines="True">
+        <Label Grid.Row="0" Name="TitleLabel" Content="Hej Peter Petersen" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" />
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch" ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65*"/>
                 <ColumnDefinition Width="35*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" HorizontalAlignment="Stretch" Margin="20,20,20,20" VerticalAlignment="Stretch" ShowGridLines="True">
+            <Grid Grid.Column="0" Name="ProductButtons"  HorizontalAlignment="Stretch" Margin="20" VerticalAlignment="Stretch" ShowGridLines="True">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="90*"/>
-                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="80*"/>
+                    <RowDefinition Height="20*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" HorizontalAlignment="Stretch" Margin="20,20,20,20" VerticalAlignment="Stretch" Background="White" ShowGridLines="True">
+                <Grid Grid.Row="0" Name="Products" HorizontalAlignment="Stretch" Margin="20" VerticalAlignment="Stretch" Background="White" ShowGridLines="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"/>
                         <ColumnDefinition Width="30*"/>
@@ -57,8 +57,63 @@
                         </Grid>
                     </Button>
                 </Grid>
-            </Grid> 
-                
+
+                <Grid Grid.Row="1" Name="UndoRedo" HorizontalAlignment="Stretch" Margin="20" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Undo"/>
+                            <Label FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center">&#57614;</Label>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Grid.Column="1"  Margin="10">
+                        <Label Content="Redo"/>
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" Name="ShoppingCart" HorizontalAlignment="Stretch" Margin="20" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
+                    <StackPanel>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Image Source="Images/tuborg.png" Height="{Binding ActualHeight, ElementName=CartProductName, Mode=OneWay}"/>
+                                <Label Name="CartProductName" Content="3 x Grøn Tuborg" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            
+                            <Button x:Name="AddButton" Grid.Column="1" Margin="2">
+                                <TextBlock x:Name="textBlock" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center">&#57609;</TextBlock>
+                            </Button>
+                            <Button Grid.Column="2" Margin="{Binding Margin, ElementName=AddButton}" >
+                                <TextBlock FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Margin, ElementName=textBlock}">&#57608;</TextBlock>
+                            </Button>
+                            <Button Grid.Column="3" Margin="{Binding Margin, ElementName=AddButton}" Background="Red">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">&#57606;</TextBlock>
+                            </Button>
+
+                        </Grid>
+
+                        
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
