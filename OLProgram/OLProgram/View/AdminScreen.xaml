@@ -39,7 +39,7 @@
     </DockPanel>
     <Grid Grid.Row="1">
       <Grid.Background>
-        <ImageBrush ImageSource="C:\Users\bruger\Documents\Visual Studio 2015\Projects\WpfApplication6\WpfApplication6/beer.png" Stretch="Uniform" TileMode="Tile"/>
+        <ImageBrush ImageSource="../Images/beer.png" Stretch="Uniform" TileMode="Tile"/>
       </Grid.Background>
 
     </Grid>

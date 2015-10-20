@@ -52,7 +52,7 @@
                                 <RowDefinition Height="70*"/>
                                 <RowDefinition Height="30*"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="../Images/guldtuborg.png" x:Name="image2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <Image Grid.Row="0" Source="/Images/guldtuborg.png" x:Name="image2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             <Label Grid.Row="1" Content="Guld Tuborg" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
                         </Grid>
                     </Button>
