@@ -1,0 +1,125 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication6"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="WpfApplication6.MainWindow"
+        mc:Ignorable="d"
+        Title="AdminScreen" Height="600" Width="900"
+        >
+  <!-- Title="AdminScreen" Height="600" Width="900"  WindowState="Maximized" WindowStyle="None" Topmost="True"/>-->
+  <Window.Resources>
+    <System:Double x:Key="Double1">Infinity</System:Double>
+  </Window.Resources>
+  <Grid x:Name="grid1">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="18"/>
+      <RowDefinition Height="4*"/>
+      <RowDefinition Height="18*"/>
+    </Grid.RowDefinitions>
+    <DockPanel >
+      <Menu DockPanel.Dock="Top">
+        <MenuItem Header="_File">
+          <MenuItem Command="New" />
+          <Separator />
+          <MenuItem Header="_Exit" />
+        </MenuItem>
+        <MenuItem Header="_Edit">
+          <MenuItem Command="Cut" />
+          <MenuItem Command="Copy" />
+          <MenuItem Command="Paste" />
+        </MenuItem>
+        <MenuItem Header="Add">
+          <MenuItem Header="_Add User" />
+          <MenuItem Header="_Add Product" />
+        </MenuItem>
+
+      </Menu>
+    </DockPanel>
+    <Grid Grid.Row="1">
+      <Grid.Background>
+        <ImageBrush ImageSource="C:\Users\bruger\Documents\Visual Studio 2015\Projects\WpfApplication6\WpfApplication6/beer.png" Stretch="Uniform" TileMode="Tile"/>
+      </Grid.Background>
+
+    </Grid>
+
+    <Grid Grid.Row="2" Margin="5">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width ="100*"/>
+        <ColumnDefinition Width="5"/>
+        <ColumnDefinition Width ="100*"/>
+        <ColumnDefinition Width="5"/>
+        <ColumnDefinition Width ="100*"/>
+      </Grid.ColumnDefinitions>
+
+      <Grid x:Name="grid" Grid.Column="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="10*"/>
+          <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+          <TextBlock TextWrapping="Wrap" FontSize="16"  Text="Users "/>
+          <TextBox x:Name="search" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"
+  Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"  />
+        </StackPanel>
+
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+          <StackPanel>
+            <TextBlock Text="User1"/>
+            <TextBlock Text="User1"/>
+            <TextBlock Text="User1"/>
+            <TextBlock Text="User1"/>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+
+      <Grid x:Name="grid2" Grid.Column="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="10*"/>
+          <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+          <TextBlock TextWrapping="Wrap" FontSize="16"  Text="Products "/>
+          <TextBox x:Name="search1" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"
+  Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"  />
+        </StackPanel>
+
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+          <StackPanel>
+            <TextBlock Text="Product1"/>
+            <TextBlock Text="Product1"/>
+            <TextBlock Text="Product1"/>
+            <TextBlock Text="Product1"/>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <Grid x:Name="grid3" Grid.Column="4">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="10*"/>
+          <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+          <TextBlock TextWrapping="Wrap" FontSize="16"  Text="Log "/>
+          <TextBox x:Name="search3" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"
+  Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}"  />
+        </StackPanel>
+
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+          <StackPanel>
+            <TextBlock Text="Product1"/>
+            <TextBlock Text="Product1"/>
+            <TextBlock Text="Product1"/>
+            <TextBlock Text="Product1"/>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+    </Grid>
+  </Grid>
+</Window>
