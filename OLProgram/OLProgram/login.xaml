@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:OLProgram"
         mc:Ignorable="d"
         Title="Beer Program" Height="600" Width="900" MinWidth="500">
+    <!--<Window.DataContext>
+        <ViewModel:UserViewModel />
+    </Window.DataContext>-->
     <!-- baggrund grid -->
     <Grid>
         <Grid.RowDefinitions>
