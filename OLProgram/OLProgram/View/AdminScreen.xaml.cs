@@ -21,7 +21,6 @@ namespace OLProgram.View
     {
         public AdminScreen()
         {
-            InitializeComponent();
         }
     }
 }
