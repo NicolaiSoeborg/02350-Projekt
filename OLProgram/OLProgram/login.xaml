@@ -42,7 +42,8 @@
                             <TextBlock x:Name="User" HorizontalAlignment="Left" Height="16" TextWrapping="Wrap" Text="User:" Width="53"/>
                             <TextBox x:Name="UserTxtBox" HorizontalAlignment="Center" Height="21" TextWrapping="Wrap" Text="" Width="{Binding ActualWidth, ElementName=stackPanel, Mode=OneWay}" Background="White"/>
                             <TextBlock x:Name="Password" TextWrapping="Wrap" Text="Password:" Height="16" />
-                            <PasswordBox x:Name="PasswordTxtBox" HorizontalAlignment="Center" Height="21" Width="{Binding ActualWidth, ElementName=stackPanel, Mode=OneWay}"/>
+                            <PasswordBox x:Name="PasswordTxtBox" HorizontalAlignment="Center" Height="21" Width="{Binding ActualWidth, ElementName=stackPanel, Mode=OneWay}" />
+                            <Button IsDefault="True">Hej</Button><!-- Vigtigt at IsDefault="true", så "Enter" bliver fanget i textboxen -->
                         </StackPanel>
                     </Border>
                 </Grid>
