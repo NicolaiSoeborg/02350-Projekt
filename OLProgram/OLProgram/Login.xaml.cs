@@ -23,5 +23,10 @@ namespace OLProgram
         {
             InitializeComponent();
         }
+
+        private void loginBox_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello, world!");
+        }
     }
 }
