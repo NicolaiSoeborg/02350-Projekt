@@ -8,6 +8,5 @@ namespace OLModel
 {
     public class StudentImporter
     {
-
     }
 }
