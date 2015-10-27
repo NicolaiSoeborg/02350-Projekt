@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace OLProgram
+namespace OLProgram.View
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class UserWindow : Window
     {
-        public Window1()
+        public UserWindow()
         {
             InitializeComponent();
         }
