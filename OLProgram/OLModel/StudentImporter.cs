@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace OLModel
 {
-    class StudentImporter
+    public class StudentImporter
     {
+        int abe;
+        public StudentImporter() { abe = 1; }
+
+        public int AbeTest()
+        {
+            return abe;
+        }
     }
 }

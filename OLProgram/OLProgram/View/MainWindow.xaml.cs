@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OLModel;
 
 namespace OLProgram.View
 {
@@ -23,6 +24,10 @@ namespace OLProgram.View
         public MainWindow()
         {
             InitializeComponent();
+
+            // Grevil test:
+            //int abe = (new StudentImporter()).AbeTest();
+            //MessageBox.Show(abe.ToString());
 
             this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
 
