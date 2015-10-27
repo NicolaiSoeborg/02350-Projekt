@@ -12,10 +12,6 @@
         <ViewModel:MainViewModel/>
     </Window.DataContext>
     
-    <View:Login>
-        
-        
-        
-    </View:Login>
+    <View:Login />
     
 </Window>
