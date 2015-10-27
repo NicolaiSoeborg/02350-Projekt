@@ -23,6 +23,23 @@ namespace OLProgram.View
         public MainWindow()
         {
             InitializeComponent();
+
+            this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
+
         }
+
+        private void LoginClick(object o, RoutedEventArgs e)
+        {
+            var abe = e.OriginalSource as Button;
+
+            if(abe != null && abe.Name == "LoginButton")
+            {
+                this.Content = new UserWindow();
+                e.Handled = true;
+            }
+            
+        }
+
+
     }
 }

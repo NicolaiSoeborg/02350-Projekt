@@ -17,7 +17,7 @@ namespace OLProgram.View
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class UserWindow : Window
+    public partial class UserWindow : UserControl
     {
         public UserWindow()
         {

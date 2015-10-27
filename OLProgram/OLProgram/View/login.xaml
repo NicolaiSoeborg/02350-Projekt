@@ -1,4 +1,4 @@
-﻿<Window x:Class="OLProgram.View.Login"
+﻿<UserControl x:Class="OLProgram.View.Login"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d"
-        Title="Beer Program" Height="600" Width="900" MinWidth="500">
+        Height="600" Width="900" MinWidth="500">
     <!--<Window.DataContext>
         <ViewModel:UserViewModel />
     </Window.DataContext>-->
@@ -47,7 +47,7 @@
                             <TextBox x:Name="UserTxtBox" HorizontalAlignment="Center" Height="21" TextWrapping="Wrap" Text="" Width="{Binding ActualWidth, ElementName=stackPanel, Mode=OneWay}" Background="White"/>
                             <TextBlock x:Name="Password" TextWrapping="Wrap" Text="Password:" Height="16" />
                             <PasswordBox x:Name="PasswordTxtBox" HorizontalAlignment="Center" Height="21" Width="{Binding ActualWidth, ElementName=stackPanel, Mode=OneWay}" />
-                            <Button IsDefault="True" Click="loginBox_Click">Hej</Button><!-- Vigtigt at IsDefault="true", så "Enter" bliver fanget i textboxen -->
+                            <Button x:Name="LoginButton" IsDefault="True" Command="{Binding LoginCommand}">Login</Button><!-- Vigtigt at IsDefault="true", så "Enter" bliver fanget i textboxen -->
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -96,4 +96,4 @@
 
     </Grid>
     <!-- /baggrund grid -->
-</Window>
+</UserControl>

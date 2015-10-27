@@ -17,16 +17,11 @@ namespace OLProgram.View
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class Login : UserControl
     {
         public Login()
         {
             InitializeComponent();
-        }
-
-        private void loginBox_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello, world!");
         }
     }
 }

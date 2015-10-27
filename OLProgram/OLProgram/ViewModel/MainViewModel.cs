@@ -1,4 +1,7 @@
+using System;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows.Input;
 
 namespace OLProgram.ViewModel
 {
@@ -19,8 +22,23 @@ namespace OLProgram.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
+        /// 
+
+        public ICommand LoginCommand
+        {
+            get { return new RelayCommand(LoginClick);}
+        }
+
+        private void LoginClick()
+        {
+            throw new NotImplementedException();
+        }
+
         public MainViewModel()
         {
+
+
+
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

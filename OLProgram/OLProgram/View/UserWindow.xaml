@@ -1,4 +1,4 @@
-﻿<Window x:Class="OLProgram.View.UserWindow"
+﻿<UserControl x:Class="OLProgram.View.UserWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d"
-        Title="UserWindow" Height="600" Width="800">
+        Height="600" Width="800">
     <Grid Name="UserWindowFrame" Height="600" Margin="0" VerticalAlignment="Top" Background="WhiteSmoke" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
@@ -142,4 +142,4 @@
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</UserControl>
