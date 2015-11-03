@@ -30,28 +30,23 @@ namespace OLProgram.View
         private void LoginClick(object o, RoutedEventArgs e)
         {
             var ButtonEvent = e.OriginalSource as Button;
-
-            if(ButtonEvent != null && ButtonEvent.Name == "LoginButton")
-            {
-                
-                this.Content = new UserWindow();
-                e.Handled = true;
-            }
-            if (ButtonEvent != null && ButtonEvent.Name == "CheckOutButton")
-            {
-                this.Content = new Login();
-                e.Handled = true;
-            }
-
-            if (ButtonEvent != null && ButtonEvent.Name == "AdminButton")
-            {
-                this.Content = new AdminScreen();
-                e.Handled = true;
-            }
-
-
+            if (ButtonEvent != null)
+                switch (ButtonEvent.Name)
+                {
+                    case "LoginButton":
+                        this.Content = new UserWindow();
+                        e.Handled = true;
+                        break;
+                    case "CheckOutButton":
+                        this.Content = new Login();
+                        e.Handled = true;
+                        break;
+                    case "AdminButton":
+                        this.Content = new AdminScreen();
+                        e.Handled = true;
+                        break;
+                }
 
         }
-
     }
 }
