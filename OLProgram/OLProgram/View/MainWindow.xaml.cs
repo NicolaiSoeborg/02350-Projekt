@@ -29,12 +29,10 @@ namespace OLProgram.View
             //int abe = (new StudentImporter()).AbeTest();
             //MessageBox.Show(abe.ToString());
 
-            this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
-
-
+            //this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
         }
 
-        private void LoginClick(object o, RoutedEventArgs e)
+        /*private void LoginClick(object o, RoutedEventArgs e)
         {
             var buttonCliced = e.Source as Button;
 
@@ -43,7 +41,7 @@ namespace OLProgram.View
                 e.Handled = true;
             }
             
-        }
+        }*/
 
 
     }
