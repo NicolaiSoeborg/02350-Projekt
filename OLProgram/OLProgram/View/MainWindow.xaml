@@ -9,12 +9,12 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowState="Maximized"
-        Title="ØL-program bby" >
+        Title="ØL-program bby">
 
     <Window.DataContext>
         <ViewModel:MainViewModel/>
     </Window.DataContext>
     
-    <View:Login Loaded="Login_Loaded" />
+    <View:Login />
     
 </Window>

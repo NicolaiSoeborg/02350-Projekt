@@ -25,10 +25,10 @@ namespace OLProgram.ViewModel
         /// </summary>
         /// 
 
-        public ICommand LoginCommand
+        /*public ICommand LoginCommand
         {
             get { return new Commands.LoginCommand(); }
-        }
+        }*/
         
 
         public MainViewModel()
