@@ -17,10 +17,11 @@ namespace OLProgram.View
     /// <summary>
     /// Interaction logic for AdminScreen.xaml
     /// </summary>
-    public partial class AdminScreen : Window
+    public partial class AdminScreen : UserControl
     {
         public AdminScreen()
         {
+            InitializeComponent();
         }
     }
 }

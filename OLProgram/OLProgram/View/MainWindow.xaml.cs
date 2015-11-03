@@ -30,16 +30,33 @@ namespace OLProgram.View
 
         private void LoginClick(object o, RoutedEventArgs e)
         {
-            var abe = e.OriginalSource as Button;
+            var ButtonEvent = e.OriginalSource as Button;
 
-            if(abe != null && abe.Name == "LoginButton")
+            if(ButtonEvent != null && ButtonEvent.Name == "LoginButton")
             {
+                
                 this.Content = new UserWindow();
                 e.Handled = true;
             }
-            
+            if (ButtonEvent != null && ButtonEvent.Name == "CheckOutButton")
+            {
+                this.Content = new Login();
+                e.Handled = true;
+            }
+
+            if (ButtonEvent != null && ButtonEvent.Name == "AdminButton")
+            {
+                this.Content = new AdminScreen();
+                e.Handled = true;
+            }
+
+
+
         }
 
+        private void Login_Loaded(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }
