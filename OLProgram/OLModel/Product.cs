@@ -27,14 +27,14 @@ namespace OLModel
 
     class BasketItem
     {
-        public int ProductId { get; }
+        public Product Product { get; }
         public int Count { get; set; }
 
-        public BasketItem(int ProductId) : this(ProductId, 1) { }
+        public BasketItem(Product Product) : this(Product, 1) { }
 
-        public BasketItem(int ProductId, int Count)
+        public BasketItem(Product Product, int Count)
         {
-            this.ProductId = ProductId;
+            this.Product = Product;
             this.Count = Math.Max(Count, 1);
         }
     }
