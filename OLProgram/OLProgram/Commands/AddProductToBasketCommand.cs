@@ -13,17 +13,17 @@ namespace OLProgram.Commands
     {
         #region Fields
 
-        private ObservableCollection<Product> productsInBasket;
-        private Product productInBasket;
+        private ObservableCollection<Product> basketItems;
+        private Product baskeItem;
 
         #endregion
             
         #region Constructor 
 
-        public AddProductToBasketCommand(ObservableCollection<Product> _products, Product _product)
+        public AddProductToBasketCommand(ObservableCollection<Product> _basketItems, Product _basketItem)
         {
-            productInBasket = _product;
-            productsInBasket = _products;
+            baskeItem = _basketItem;
+            basketItems = _basketItems;
         }
 
         #endregion
@@ -32,12 +32,12 @@ namespace OLProgram.Commands
 
         public void Execute()
         {
-            productsInBasket.Add(productInBasket);
+            basketItems.Add(baskeItem);
         }
 
         public void UnExecute()
         {
-            productsInBasket.Remove(productInBasket);
+            basketItems.Remove(baskeItem);
         }
 
         #endregion

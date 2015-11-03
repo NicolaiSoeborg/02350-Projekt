@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OLModel
+namespace OLProgram.OLModel
 {
     public class Product
     {
@@ -14,7 +14,7 @@ namespace OLModel
 
         public string Name { get; set; }
         public string ImageFileName { get; set; }
-        
+
         public Product() : this("<NAME>", "default.png") { }
 
         public Product(string Name, string ImageFileName)
@@ -25,10 +25,15 @@ namespace OLModel
         }
     }
 
-    public class BasketItem
+    public class BasketItem : NotifyBase
     {
         public Product Product { get; }
         public int Count { get; set; }
+
+        public BasketItem()
+        {
+            Count++;
+        }
 
         public BasketItem(Product Product) : this(Product, 1) { }
 

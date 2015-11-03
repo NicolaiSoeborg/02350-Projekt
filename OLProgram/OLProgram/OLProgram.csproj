@@ -75,7 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\AddItemCommand.cs" />
+    <Compile Include="Commands\AddProductToBasketCommand.cs" />
+    <Compile Include="Commands\IUndoRedoCommand.cs" />
+    <Compile Include="Commands\UndoRedoController.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>

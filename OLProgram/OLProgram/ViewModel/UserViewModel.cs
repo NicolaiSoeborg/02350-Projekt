@@ -14,14 +14,32 @@ namespace OLProgram.ViewModel
 {
     class UserViewModel : ViewModelBase
     {
-        public ObservableCollection<String> users { get; set; }
-        public ObservableCollection<Item> Items { get; set; }
+        private UndoRedoController undoRedoController = UndoRedoController.Instance;
 
-        public ICommand AddItemCommand { get; }
+        //public ObservableCollection<String> users { get; set; }
+        public ObservableCollection<Product> BasketItems { get; set; }
 
-        private void AddItem()
+
+        public ICommand UndoCommand { get; }
+        public ICommand RedoCommand { get; }
+
+        // Bindings to UI
+        public ICommand AddProductToBasketCommand { get; }
+
+
+        public UserViewModel()
         {
-            new AddItemCommand(Items, new Item()).Execute();
+            BasketItems = new ObservableCollection<Product>();
+
+            UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
+
+            AddProductToBasketCommand = new RelayCommand(AddProductToBasket);
+
+        }
+
+        private void AddProductToBasket()
+        {
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(BasketItems, new Product()));
         }
     }
 }
