@@ -2,7 +2,7 @@ using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
-
+using OLModel;
 namespace OLProgram.ViewModel
 {
     /// <summary>
