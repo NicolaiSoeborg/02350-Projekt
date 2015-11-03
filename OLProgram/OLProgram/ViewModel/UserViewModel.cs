@@ -1,4 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using OLProgram.Commands;
+using OLProgram.OLModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +15,13 @@ namespace OLProgram.ViewModel
     class UserViewModel : ViewModelBase
     {
         public ObservableCollection<String> users { get; set; }
+        public ObservableCollection<Item> Items { get; set; }
 
-        public ICommand LoginCommand { get; }
+        public ICommand AddItemCommand { get; }
+
+        private void AddItem()
+        {
+            new AddItemCommand(Items, new Item()).Execute();
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
+using OLModel;
 
 namespace OLProgram.ViewModel
 {
@@ -26,13 +27,9 @@ namespace OLProgram.ViewModel
 
         public ICommand LoginCommand
         {
-            get { return new RelayCommand(LoginClick);}
+            get { return new Commands.LoginCommand(); }
         }
-
-        private void LoginClick()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public MainViewModel()
         {

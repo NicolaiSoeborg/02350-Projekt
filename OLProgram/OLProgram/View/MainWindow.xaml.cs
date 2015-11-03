@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OLModel;
 
 namespace OLProgram.View
 {
@@ -24,12 +25,16 @@ namespace OLProgram.View
         {
             InitializeComponent();
 
-            this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
+            // Grevil test:
+            //int abe = (new StudentImporter()).AbeTest();
+            //MessageBox.Show(abe.ToString());
 
+            //this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
         }
 
-        private void LoginClick(object o, RoutedEventArgs e)
+        /*private void LoginClick(object o, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             var ButtonEvent = e.OriginalSource as Button;
 
             if(ButtonEvent != null && ButtonEvent.Name == "LoginButton")
@@ -53,6 +58,16 @@ namespace OLProgram.View
 
 
         }
+=======
+            var buttonCliced = e.Source as Button;
+
+            if (buttonCliced != null && buttonCliced.Name == "LoginButton") {
+                this.Content = new UserWindow();
+                e.Handled = true;
+            }
+            
+        }*/
+>>>>>>> origin/master
 
         private void Login_Loaded(object sender, RoutedEventArgs e)
         {
