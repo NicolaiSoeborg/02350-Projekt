@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AddItemCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\AdminScreen.xaml.cs">
@@ -175,6 +176,12 @@
     <Resource Include="Images\guldtuborg.png" />
     <Resource Include="Images\tuborg.jpg" />
     <Resource Include="Images\tuborg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OLModel\OLModel.csproj">
+      <Project>{5b81d2ba-b856-4402-a7cd-e0d7738ae45a}</Project>
+      <Name>OLModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

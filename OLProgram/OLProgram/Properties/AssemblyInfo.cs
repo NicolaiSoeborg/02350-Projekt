@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("OLProgram")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("The dudes")]
 [assembly: AssemblyProduct("OLProgram")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright © Christian Grevil, Nicolai Søborg, Rasmus Jensen, Silas Pihl 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

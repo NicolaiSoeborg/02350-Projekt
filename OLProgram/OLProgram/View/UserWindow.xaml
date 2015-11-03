@@ -7,12 +7,18 @@
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d"
         Height="600" Width="800">
+    
+    <UserControl.DataContext>
+        <ViewModel:UserViewModel/> 
+    </UserControl.DataContext>
+    
     <Grid Name="UserWindowFrame" Height="600" Margin="0" VerticalAlignment="Top" Background="WhiteSmoke" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="85*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Name="TitleLabel" Content="Hej Peter Petersen" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" />
+        <Button Content="Add" HorizontalAlignment="Right" Command="{Binding AddTuborgCommand}"/>
         <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch" ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65*"/>
