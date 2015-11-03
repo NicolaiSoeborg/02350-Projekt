@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OLModel
 {
-    class Product
+    public class Product
     {
         private static int ProductIdCounter = 0;
 
@@ -25,7 +25,7 @@ namespace OLModel
         }
     }
 
-    class BasketItem
+    public class BasketItem
     {
         public Product Product { get; }
         public int Count { get; set; }
