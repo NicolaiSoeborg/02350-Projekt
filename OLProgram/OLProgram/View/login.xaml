@@ -66,7 +66,7 @@
                                     <PasswordBox x:Name="PasswordTxtBox" HorizontalAlignment="Center" Height="21" Width="{Binding ActualWidth, ElementName=stackPanel, Mode=OneWay}" />
                                     <TextBlock TextWrapping="Wrap" Text="" Height="16" />
                                     <!-- This is a hack -->
-                                    <Button x:Name="LoginButton"  >Login</Button>
+                                    <Button x:Name="LoginButton" IsDefault="true">Login</Button>
                                     <!-- Vigtigt at IsDefault="true", så "Enter" bliver fanget i textboxen -->
                                 </StackPanel>
                             </Border>
