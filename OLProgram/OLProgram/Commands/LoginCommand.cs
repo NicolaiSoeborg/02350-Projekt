@@ -4,11 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OLProgram.Commands
 {
-    class LoginCommand
+    public class LoginCommand : ICommand
     {
+        public event EventHandler CanExecuteChanged;
+
         private ObservableCollection<String> users; // String skal være en Model.User
         public string loggedInUser = null;
 
@@ -21,6 +24,14 @@ namespace OLProgram.Commands
             return true;
         }
 
+        public bool CanExecute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void Execute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
