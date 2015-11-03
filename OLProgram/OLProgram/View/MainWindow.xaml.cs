@@ -31,14 +31,14 @@ namespace OLProgram.View
 
             this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
 
+
         }
 
         private void LoginClick(object o, RoutedEventArgs e)
         {
-            var abe = e.OriginalSource as Button;
+            var buttonCliced = e.Source as Button;
 
-            if(abe != null && abe.Name == "LoginButton")
-            {
+            if (buttonCliced != null && buttonCliced.Name == "LoginButton") {
                 this.Content = new UserWindow();
                 e.Handled = true;
             }
