@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="OLProgram.View.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:OLProgram.View"
+             xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
+             mc:Ignorable="d" >
+
+    <Grid HorizontalAlignment="Stretch" Height="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Horizontal">
+            <Image Source="../Images/tuborg.png" Height="{Binding ActualHeight, ElementName=CartProductName, Mode=OneWay}"/>
+            <Label Name="CartProductName" Content="3 x Grøn Tuborg" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Button x:Name="AddButton" Grid.Column="1" Margin="2">
+            <TextBlock x:Name="textBlock" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center">&#57609;</TextBlock>
+        </Button>
+        <Button Grid.Column="2" Margin="{Binding Margin, ElementName=AddButton}" >
+            <TextBlock FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{Binding Margin, ElementName=textBlock}">&#57608;</TextBlock>
+        </Button>
+        <Button Grid.Column="3" Margin="{Binding Margin, ElementName=AddButton}" Background="Red">
+            <TextBlock FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">&#57606;</TextBlock>
+        </Button>
+
+    </Grid>
+
+</UserControl>
