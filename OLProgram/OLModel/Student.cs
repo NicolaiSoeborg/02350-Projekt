@@ -14,9 +14,9 @@ namespace OLModel
 
         public string Name { get; set; }
 
-        public Student() : this("", "") { }
+        public Student() : this("") { }
 
-        public Student(string FirstName, string Name)
+        public Student(string Name)
         {
             this.StudentId = StudentIdCounter++;
             this.Name = Name;
