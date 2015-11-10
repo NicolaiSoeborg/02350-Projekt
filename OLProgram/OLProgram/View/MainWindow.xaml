@@ -15,6 +15,6 @@
         <ViewModel:MainViewModel/>
     </Window.DataContext>
     
-    <View:Login Loaded="Login_Loaded" />
+    <View:Login />
     
 </Window>
