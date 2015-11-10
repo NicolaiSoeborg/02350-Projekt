@@ -42,14 +42,14 @@ namespace OLProgram.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<MainVM>();
         }
 
-        public MainViewModel Main
+        public MainVM Main
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return ServiceLocator.Current.GetInstance<MainVM>();
             }
         }
         

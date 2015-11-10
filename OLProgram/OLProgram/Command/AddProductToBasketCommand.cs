@@ -7,25 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace OLProgram.Commands
+namespace OLProgram.Command
 {
-    public class AddProductToBasketCommand : IUndoRedoCommand   
+    public class AddProductToBasketCommand : IUndoRedoCommand
     {
         #region Fields
 
-        private Basket basket;
-        private Product product;
-        private int count;
+        private Basket _basket;
+        private Product _product;
+        private int _count;
 
         #endregion
-            
+
         #region Constructor 
 
-        public AddProductToBasketCommand(Basket _basket, Product _product, int _count)
+        public AddProductToBasketCommand(Basket basket, Product product, int count)
         {
-            product = _product;
-            count = _count;
-            basket = _basket;
+            _product = product;
+            _count = count;
+            _basket = basket;
         }
 
         #endregion
@@ -34,17 +34,15 @@ namespace OLProgram.Commands
 
         public void Execute()
         {
-            basket.Increase(product, count);
+            _basket.Increase(_product, _count);
         }
 
         public void UnExecute()
         {
-            basket.Decrease(product, count);
+            _basket.Decrease(_product, _count);
         }
 
         #endregion
-
-
 
     }
 }

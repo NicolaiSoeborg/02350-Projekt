@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using OLProgram.Commands;
+using OLProgram.Command;
 using OLProgram.OLModel;
 using System;
 using System.Collections.Generic;
@@ -13,14 +13,11 @@ using System.Windows.Input;
 
 namespace OLProgram.ViewModel
 {
-    class AdminViewModel : ViewModelBase
+    public class AdminVM : ViewModelBase
     {
-
-
-        public AdminViewModel()
+        public AdminVM()
         {
 
         }
-
     }
 }

@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
 using OLProgram.OLModel;
-using OLProgram.Commands;
+using OLProgram.Command;
 using System.Collections.ObjectModel;
 using OLModel;
 using System.Windows;
@@ -11,7 +11,7 @@ using System.Windows;
 namespace OLProgram.ViewModel
 {
 
-    public class MainViewModel : ViewModelBase
+    public class MainVM : ViewModelBase
     {
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -44,7 +44,7 @@ namespace OLProgram.ViewModel
 
 
 
-        public MainViewModel()
+        public MainVM()
         {
             ////if (IsInDesignMode)
             ////{

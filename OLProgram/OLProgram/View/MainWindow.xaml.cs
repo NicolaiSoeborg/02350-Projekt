@@ -42,7 +42,7 @@ namespace OLProgram.View
                         e.Handled = true;
                         break;
                     case "AdminButton":
-                        this.Content = new AdminScreen();
+                        this.Content = new AdminUC();
                         e.Handled = true;
                         break;
                 }

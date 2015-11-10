@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OLProgram.Commands
+namespace OLProgram.Command
 {
     // Custom interface for implementing Undo/Redo commands.
     public interface IUndoRedoCommand

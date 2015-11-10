@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OLProgram.Commands
+namespace OLProgram.Command
 {
     // Keeps track of the Undo/Redo commands.
     // This is a Singleton, which ensures there will only ever be one instance of the class.

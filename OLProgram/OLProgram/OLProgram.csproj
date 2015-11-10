@@ -75,30 +75,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\AddProductToBasketCommand.cs" />
-    <Compile Include="Commands\AddUserCommand.cs" />
-    <Compile Include="Commands\IUndoRedoCommand.cs" />
-    <Compile Include="Commands\UndoRedoController.cs" />
-    <Compile Include="ViewModel\AdminViewModel.cs" />
-    <Compile Include="ViewModel\UserViewModel.cs" />
-    <Compile Include="View\AdminScreen.xaml.cs">
-      <DependentUpon>AdminScreen.xaml</DependentUpon>
+    <Compile Include="Command\AddProductToBasketCommand.cs" />
+    <Compile Include="Command\AddUserCommand.cs" />
+    <Compile Include="Command\IUndoRedoCommand.cs" />
+    <Compile Include="Command\UndoRedoController.cs" />
+    <Compile Include="ViewModel\AdminVM.cs" />
+    <Compile Include="ViewModel\UserVM.cs" />
+    <Compile Include="View\AdminUC.xaml.cs">
+      <DependentUpon>AdminUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BasketItemUC.xaml.cs">
       <DependentUpon>BasketItemUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="View\LoginUC.xaml.cs">
+      <DependentUpon>LoginUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserWindow.xaml.cs">
-      <DependentUpon>UserWindow.xaml</DependentUpon>
+    <Compile Include="View\UserUC.xaml.cs">
+      <DependentUpon>UserUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="View\AdminScreen.xaml">
+    <Page Include="View\AdminUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,7 +106,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Login.xaml">
+    <Page Include="View\LoginUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,7 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\UserWindow.xaml">
+    <Page Include="View\UserUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,26 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Beer.png" />

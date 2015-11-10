@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using OLProgram.Commands;
+using OLProgram.Command;
 using OLProgram.OLModel;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace OLProgram.ViewModel
 {
-    class UserViewModel : ViewModelBase
+    class UserVM : ViewModelBase
     {
         private UndoRedoController undoRedoController = UndoRedoController.Instance;
 
@@ -28,7 +28,7 @@ namespace OLProgram.ViewModel
         public ICommand AddProductToBasketCommand { get; }
 
 
-        public UserViewModel()
+        public UserVM()
         {
             //BasketItems = new ObservableCollection<BasketItem>();
 
@@ -36,10 +36,7 @@ namespace OLProgram.ViewModel
 
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
 
-
-
             AddProductToBasketCommand = new RelayCommand(AddProductToBasket);
-
         }
        
         private void AddProductToBasket()

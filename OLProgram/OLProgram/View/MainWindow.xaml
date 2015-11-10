@@ -5,16 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
-        mc:Ignorable="d"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        WindowState="Maximized"
-        Title="ØL-program bby">
+        WindowStyle="None" WindowState="Maximized"
+        ResizeMode="NoResize" Title="ØL-program bby">
 
     <Window.DataContext>
-        <ViewModel:MainViewModel/>
+        <ViewModel:MainVM/>
     </Window.DataContext>
-    
+
     <View:Login />
-    
+
 </Window>

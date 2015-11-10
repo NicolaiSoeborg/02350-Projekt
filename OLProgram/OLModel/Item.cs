@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// TODO: Kan vi slette dette?
+
 namespace OLProgram.OLModel
 {
     public class Item : NotifyBase
