@@ -15,10 +15,15 @@ namespace OLProgram.ViewModel
     **/
     public class BaseVM : ViewModelBase
     {
-        public static string _username;
-        public string loggedInUser {
+        private static string _username = "";
+        public string TxtUsername {
             get { return _username; }
             set { _username = value; RaisePropertyChanged(); }
         }
+        public string HelloTxtUsername
+        {
+            get { return String.Format("Hej {0}.", _username); }
+        }
+
     }
 }
