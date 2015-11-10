@@ -95,7 +95,7 @@
 
 
                 <Grid Grid.Row="0" Grid.Column="1" x:Name="BasketItems" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="Azure" >
-                    <ItemsControl ItemsSource="{Binding BasketItems}"/>
+                    <ItemsControl ItemsSource="{Binding basket.BasketItems}"/>
                 </Grid>
                 
                 <Grid Grid.Row="1" Grid.Column="1" x:Name="BasketButtons" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="Azure">

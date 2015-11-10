@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +29,47 @@ namespace OLProgram.OLModel
             this.ImageFileName = ImageFileName;
         }
     }
+    public class Basket
+    {
+        public ObservableCollection<BasketItem> BasketItems;
 
-    public class BasketItem : NotifyBase
+        public Basket ()
+        {
+            BasketItems = new ObservableCollection<BasketItem>();
+        }
+
+        public void Increase (Product product, int count)
+        {
+            foreach (BasketItem item in BasketItems)
+            {
+                if (item.Product == product)
+                {
+                    item.Count += count;
+                    return;
+                }
+            }
+
+            BasketItems.Add(new BasketItem(product, count));
+        }
+
+        public void Decrease(Product product, int count)
+        {
+            foreach (BasketItem item in BasketItems)
+            {
+                if (item.Product == product)
+                {
+                    item.Count -= count;
+                    if (item.Count < 1)
+                    {
+                        BasketItems.Remove(item);
+                    }
+                    return;
+                }
+            }
+        }
+    }
+
+    public class BasketItem
     {
         public Product Product { get; }
         public int Count { get; set; }
