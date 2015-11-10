@@ -1,4 +1,4 @@
-﻿using OLModel;
+﻿using OLProgram.OLModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-// Currently only for students
+// Currently only for users
 namespace OLProgram.Serialization
 {   
     public class SerializerXML
@@ -17,67 +17,67 @@ namespace OLProgram.Serialization
         private SerializerXML() { }
 
         // Asynchronical in order to avoid conflicts with main program
-        public async void AsyncSerializeToFile(Student student, string path)
+        public async void AsyncSerializeToFile(User user, string path)
         {
-            await Task.Run(() => SerializeToFile(student, path));
+            await Task.Run(() => SerializeToFile(user, path));
         }
 
-        private void SerializeToFile(Student student, string path)
+        private void SerializeToFile(User user, string path)
         {
             using (FileStream stream = File.Create(path))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Student));
-                serializer.Serialize(stream, student);
+                XmlSerializer serializer = new XmlSerializer(typeof(User));
+                serializer.Serialize(stream, user);
             }
         }
 
-        public Task<Student> AsyncDeserializeFromFile(string path)
+        public Task<User> AsyncDeserializeFromFile(string path)
         {
             return Task.Run(() => DeserializeFromFile(path));
         }
 
-        private Student DeserializeFromFile(string path)
+        private User DeserializeFromFile(string path)
         {
             using (FileStream stream = File.OpenRead(path))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Student));
-                Student student = serializer.Deserialize(stream) as Student;
+                XmlSerializer serializer = new XmlSerializer(typeof(User));
+                User user = serializer.Deserialize(stream) as User;
 
-                return student;
+                return user;
             }
         }
 
-        public Task<string> AsyncSerializeToString(Student student)
+        public Task<string> AsyncSerializeToString(User user)
         {
-            return Task.Run(() => SerializeToString(student));
+            return Task.Run(() => SerializeToString(user));
         }
 
-        private string SerializeToString(Student student)
+        private string SerializeToString(User user)
         {
             var stringBuilder = new StringBuilder();
 
             using (TextWriter stream = new StringWriter(stringBuilder))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Student));
-                serializer.Serialize(stream, student);
+                XmlSerializer serializer = new XmlSerializer(typeof(User));
+                serializer.Serialize(stream, user);
             }
 
             return stringBuilder.ToString();
         }
 
-        public Task<Student> AsyncDeserializeFromString(string xml)
+        public Task<User> AsyncDeserializeFromString(string xml)
         {
             return Task.Run(() => DeserializeFromString(xml));
         }
 
-        private Student DeserializeFromString(string xml)
+        private User DeserializeFromString(string xml)
         {
             using (TextReader stream = new StringReader(xml))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Student));
-                Student student = serializer.Deserialize(stream) as Student;
+                XmlSerializer serializer = new XmlSerializer(typeof(User));
+                User user = serializer.Deserialize(stream) as User;
 
-                return student;
+                return user;
             }
         }
     }

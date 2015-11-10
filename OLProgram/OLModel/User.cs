@@ -1,25 +1,43 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OLModel
+namespace OLProgram.OLModel
 {
-    public class Student
+    public class User
     {
-        private static int StudentIdCounter = 0;
+        private static int UserIdCounter = 0;
 
-        public int StudentId { get; }
+        public int UserID { get; }
 
         public string Name { get; set; }
 
-        public Student() : this("") { }
+        public Dictionary<int,int> ProductsBought = new Dictionary<int,int>();
 
-        public Student(string Name)
+        public User() : this(UserIdCounter, "")
         {
-            this.StudentId = StudentIdCounter++;
+            UserIdCounter++;
+        }
+
+        public User(int UserID, string Name)
+        {
+            this.UserID = UserID;
             this.Name = Name;
+        }
+
+        public void ManageProducts(int ProductID, int Purchase)
+        {
+            if (ProductsBought.ContainsKey(ProductID))
+            {
+                ProductsBought[ProductID] += Purchase;
+            }
+            else
+            {
+                ProductsBought.Add(ProductID, Purchase);
+            }
         }
     }
     /*
