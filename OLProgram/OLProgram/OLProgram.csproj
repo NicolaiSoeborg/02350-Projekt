@@ -83,8 +83,8 @@
     <Compile Include="View\AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BasketItemUS.xaml.cs">
-      <DependentUpon>BasketItemUS.xaml</DependentUpon>
+    <Compile Include="View\BasketItemUC.xaml.cs">
+      <DependentUpon>BasketItemUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -101,9 +101,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BasketItemUS.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\BasketItemUC.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Login.xaml">
       <SubType>Designer</SubType>
