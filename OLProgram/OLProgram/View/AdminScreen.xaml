@@ -8,7 +8,12 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         >
-  <!-- Title="AdminScreen" Height="600" Width="900"  WindowState="Maximized" WindowStyle="None" Topmost="True"/>-->
+
+    <UserControl.DataContext>
+        <ViewModel:UserViewModel/>
+    </UserControl.DataContext>
+    
+    <!-- Title="AdminScreen" Height="600" Width="900"  WindowState="Maximized" WindowStyle="None" Topmost="True"/>-->
   <Grid x:Name="grid1">
     <Grid.RowDefinitions>
       <RowDefinition Height="18"/>
@@ -29,7 +34,7 @@
         </MenuItem>
         <MenuItem Header="Add">
           <MenuItem Header="_Add User" />
-          <MenuItem Header="_Add Product" />
+          <MenuItem Header="_Add Product" Command="{Binding AddProductToGlobalCommand}"/>
         </MenuItem>
 
       </Menu>
@@ -38,7 +43,6 @@
       <Grid.Background>
         <ImageBrush ImageSource="/Images/beer.png" Stretch="Uniform" TileMode="Tile"/>
       </Grid.Background>
-
     </Grid>
 
     <Grid Grid.Row="2" Margin="5">

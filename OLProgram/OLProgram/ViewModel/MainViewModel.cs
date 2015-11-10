@@ -2,22 +2,13 @@ using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
-using OLModel;
+using OLProgram.OLModel;
+using OLProgram.Commands;
+using System.Collections.ObjectModel;
 
 namespace OLProgram.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
+
     public class MainViewModel : ViewModelBase
     {
         /// <summary>
@@ -29,13 +20,22 @@ namespace OLProgram.ViewModel
         {
             get { return new Commands.LoginCommand(); }
         }*/
-        
+
+        private UndoRedoController undoRedoController = UndoRedoController.Instance;
+
+        //public ObservableCollection<String> users { get; set; }
+        public ObservableCollection<Product> Products { get; set; }
+
+
+        public ICommand UndoCommand { get; }
+        public ICommand RedoCommand { get; }
+
+        // Bindings to UI
+        public ICommand AddProductToGlobalCommand { get; }
+
 
         public MainViewModel()
         {
-
-
-
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -44,6 +44,18 @@ namespace OLProgram.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+
+            Products = new ObservableCollection<Product>();
+
+            UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
+
+            AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
+
+        }
+
+        private void AddProductToGlobal()
+        {
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Products, new Product()));
         }
     }
 }
