@@ -17,9 +17,7 @@ namespace OLProgram.ViewModel
     {
         private UndoRedoController undoRedoController = UndoRedoController.Instance;
 
-        //public ObservableCollection<String> users { get; set; }
-        //public ObservableCollection<BasketItem> BasketItems { get ; set; }
-        public Basket basket { get; set; }
+        public Basket Basket { get; set; }
 
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
@@ -30,18 +28,17 @@ namespace OLProgram.ViewModel
 
         public UserVM()
         {
-            //BasketItems = new ObservableCollection<BasketItem>();
-
-            basket = new Basket();
+            Basket = new Basket();
 
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
+            RedoCommand = new RelayCommand(undoRedoController.Redo, undoRedoController.CanRedo);
 
             AddProductToBasketCommand = new RelayCommand(AddProductToBasket);
         }
        
         private void AddProductToBasket()
         {
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(basket, new Product(), 1));
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, new Product(), 1));
         }
     }
 }

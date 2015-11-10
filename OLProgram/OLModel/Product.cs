@@ -33,7 +33,7 @@ namespace OLProgram.OLModel
     }
     public class Basket
     {
-        public ObservableCollection<BasketItem> BasketItems;
+        public ObservableCollection<BasketItem> BasketItems { get; }
 
         public Basket ()
         {
