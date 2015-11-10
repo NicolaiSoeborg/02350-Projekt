@@ -15,24 +15,15 @@ namespace OLProgram.ViewModel
 {
     public class UserVM : BaseVM
     {
-        private UndoRedoController undoRedoController = UndoRedoController.Instance;
-
         public Basket Basket { get; set; }
-
-        public ICommand UndoCommand { get; }
-        public ICommand RedoCommand { get; }
-
-        // Bindings to UI
+        
         public ICommand AddProductToBasketCommand { get; }
-
 
         public UserVM()
         {
             Basket = new Basket();
 
-            UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
-            RedoCommand = new RelayCommand(undoRedoController.Redo, undoRedoController.CanRedo);
-
+            // Commands:
             AddProductToBasketCommand = new RelayCommand(AddProductToBasket);
         }
        

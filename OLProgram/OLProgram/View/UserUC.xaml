@@ -76,13 +76,9 @@
                             <Label FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center">&#57614;</Label>
                         </StackPanel>
                     </Button>
-
-                    <Button Grid.Column="1" Margin="5" Command="{Binding RedoCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Redo"/>
-                            <Label FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center">&#59302;</Label>
-                        </StackPanel>
-                    </Button>
+                    <!-- TODO: Overvej at gøre med knappen ovenover, som gjort nedenunder? -->
+                    <!-- TODO: Fonten er Win10 og op efter? I så fald skal vi have en portabel version af den -->
+                    <Button Grid.Column="1" Margin="4,5,6,5" Command="{Binding RedoCommand}" FontFamily="Segoe MDL2 Assets">Redo &#59302;</Button>
                 </Grid>
             </Grid>
 
@@ -98,8 +94,12 @@
                 </Grid>
 
                 <Grid Grid.Row="1" Grid.Column="1" x:Name="BasketButtons" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
-                    <Button Content="Add" HorizontalAlignment="Left" Command="{Binding AddProductToBasketCommand}"/>
-                    <Button Content="Undo" HorizontalAlignment="Right" Command="{Binding UndoCommand}"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Add" Command="{Binding AddProductToBasketCommand}" Grid.Column="0" />
+                    <Button Content="Remove" Command="{Binding UndoCommand}" Grid.Column="1" />
                 </Grid>
 
                 <!--<ScrollViewer Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
