@@ -29,35 +29,20 @@ namespace OLProgram.OLModel
         }
 
         // Product is added to the users list and bought is incremented 
-        public void ManageProducts(Product product, int purchase)
+        public void BuyProducts(Product product, int amountBought)
         {
-            
+            // Add "product*amount" to user
             if (ProductsBought.ContainsKey(product.ProductId))
             {
-                ProductsBought[product.ProductId] += purchase;
+                ProductsBought[product.ProductId] += amountBought;
             }
             else
             {
-                ProductsBought.Add(product.ProductId, purchase);
+                ProductsBought.Add(product.ProductId, amountBought);
             }
-            product.Bought += purchase;
+
+            // Add "amount bought" to product
+            product.Bought += amountBought;
         }
     }
-    /*
-    public class StudyProgramme
-    {
-        private static int ProgrammeIdCounter = 0;
-
-        public int ProgrammeId { get; }
-
-        public string ProgrammeName { get; set; }
-        public Boolean IsBEngProgramme { get; set; } //diplom?
-
-        public StudyProgramme(String ProgrammeName, Boolean IsBEngProgramme)
-        {
-            this.ProgrammeId = ProgrammeIdCounter++;
-            this.ProgrammeName = ProgrammeName;
-            this.IsBEngProgramme = IsBEngProgramme;
-        }
-    }*/
 }

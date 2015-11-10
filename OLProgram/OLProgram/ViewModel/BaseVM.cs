@@ -15,15 +15,10 @@ namespace OLProgram.ViewModel
     **/
     public class BaseVM : ViewModelBase
     {
+        // Vigtigt at alle fields er static, så værdien deles over alle klasser der extender BaseVM
         private static string _username = "";
-        public string TxtUsername {
-            get { return _username; }
-            set { _username = value; RaisePropertyChanged(); }
-        }
-        public string HelloTxtUsername
-        {
-            get { return String.Format("Hej {0}.", _username); }
-        }
+        public string TxtUsername { get { return _username; } set { _username = value;  } }
+        public string HelloTxtUsername { get { return String.Format("Velkommen {0}.", _username); } }
 
     }
 }

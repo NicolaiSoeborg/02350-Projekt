@@ -31,6 +31,7 @@ namespace OLProgram.OLModel
             this.ImageFileName = ImageFileName;
         }
     }
+
     public class Basket
     {
         public ObservableCollection<BasketItem> BasketItems { get; }
@@ -40,7 +41,7 @@ namespace OLProgram.OLModel
             BasketItems = new ObservableCollection<BasketItem>();
         }
 
-        public void Increase (Product product, int count)
+        public void Increase(Product product, int count)
         {
             foreach (BasketItem item in BasketItems)
             {
@@ -50,7 +51,6 @@ namespace OLProgram.OLModel
                     return;
                 }
             }
-
             BasketItems.Add(new BasketItem(product, count));
         }
 
