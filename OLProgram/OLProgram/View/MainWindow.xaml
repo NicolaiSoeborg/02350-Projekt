@@ -12,6 +12,6 @@
         <ViewModel:MainVM/>
     </Window.DataContext>
 
-    <View:Login />
+    <View:LoginUC />
 
 </Window>

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace OLProgram.View
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for LoginUC.xaml
     /// </summary>
-    public partial class Login : UserControl
+    public partial class LoginUC : UserControl
     {
-        public Login()
+        public LoginUC()
         {
             InitializeComponent();
         }

@@ -24,29 +24,31 @@ namespace OLProgram.View
         public MainWindow()
         {
             InitializeComponent();
-            this.AddHandler(Button.ClickEvent, new RoutedEventHandler(LoginClick));
+            this.AddHandler(Button.ClickEvent, new RoutedEventHandler(ChangeUC_Click));
         }
 
-        private void LoginClick(object o, RoutedEventArgs e)
+        private void ChangeUC_Click(object o, RoutedEventArgs e)
         {
             var ButtonEvent = e.OriginalSource as Button;
             if (ButtonEvent != null)
                 switch (ButtonEvent.Name)
                 {
                     case "LoginButton":
-                        this.Content = new UserWindow();
-                        e.Handled = true;
+                        DoChangeUC(e, new UserUC());
                         break;
                     case "CheckOutButton":
-                        this.Content = new Login();
-                        e.Handled = true;
+                        DoChangeUC(e, new LoginUC()); 
                         break;
                     case "AdminButton":
-                        this.Content = new AdminUC();
-                        e.Handled = true;
+                        DoChangeUC(e, new AdminUC());
                         break;
                 }
+        }
 
+        private void DoChangeUC(RoutedEventArgs e, object newUserControl)
+        {
+            this.Content = newUserControl;
+            e.Handled = true;
         }
     }
 }

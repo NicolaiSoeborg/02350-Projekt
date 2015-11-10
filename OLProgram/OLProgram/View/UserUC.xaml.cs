@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace OLProgram.View
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for UserUC.xaml
     /// </summary>
-    public partial class UserWindow : UserControl
+    public partial class UserUC : UserControl
     {
-        public UserWindow()
+        public UserUC()
         {
             InitializeComponent();
         }
