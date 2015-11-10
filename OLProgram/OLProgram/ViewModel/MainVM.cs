@@ -13,16 +13,16 @@ namespace OLProgram.ViewModel
 
     public class MainVM : BaseVM
     {
-        public ICommand AddProductToGlobalCommand { get; }
+        public RelayCommand ShowStatisticCommand { get; }
 
         public MainVM()
         {
-            //AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
+            //ShowStatisticCommand = new RelayCommand(ShowStatistic);
         }
-        
-        //private void AddProductToGlobal()
+
+        //private void ShowStatistic()
         //{
-        //    undoRedoController.AddAndExecute(new AddProductToBasketCommand(Products, new Product()));
+        //    TODO
         //}
 
     }
