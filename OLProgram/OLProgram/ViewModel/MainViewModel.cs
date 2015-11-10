@@ -27,17 +27,21 @@ namespace OLProgram.ViewModel
 
         private UndoRedoController undoRedoController = UndoRedoController.Instance;
 
-        //public ObservableCollection<String> users { get; set; }
+        public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<Product> Products { get; set; }
 
-            //closeApplicationCommand = new RelayCommand(closeApplication(0));
+        //closeApplicationCommand = new RelayCommand(closeApplication(0));
 
-
+        // Commands that the UI can be bound to.
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
+        public ICommand AddUserCommand { get; }
 
         // Bindings to UI
         public ICommand AddProductToGlobalCommand { get; }
+
+
+
 
 
         public MainViewModel()
@@ -53,10 +57,26 @@ namespace OLProgram.ViewModel
 
             Products = new ObservableCollection<Product>();
 
+            Users = new ObservableCollection<User>()
+            {
+                new User() { UserID = 1001, Name = "Rasmus" },
+                new User() { UserID = 1002, Name = "Nicolai" },
+                new User() { UserID = 1003, Name = "Silas" },
+                new User() { UserID = 1004, Name = "Greven" }
+            }; 
+
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
 
             AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
 
+
+            // Commands
+            AddUserCommand = new RelayCommand(AddUser);
+
+        }
+        private void AddUser()
+        {
+            undoRedoController.AddAndExecute(new AddUserCommand(Users, new User()));
         }
 
         private void AddProductToGlobal()
@@ -70,13 +90,17 @@ namespace OLProgram.ViewModel
                                 MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 
             //if (response = MessageBoxResult.No)
-           // {
-                
+            // {
+
             //} else
-           // {
-           //     Environment.Exit(0);
-           // }
+            // {
+            //     Environment.Exit(0);
+            // }
+
+
+
         }
+
 
     }
 }

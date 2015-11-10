@@ -9,8 +9,8 @@
         mc:Ignorable="d">
         <!-- Title="AdminScreen" Height="600" Width="900"  WindowState="Maximized" WindowStyle="None" Topmost="True"/>-->
 
-    <!--<UserControl.DataContext>
-        <ViewModel:AdminViewModel />
+    <UserControl.DataContext>
+        <ViewModel:MainViewModel />
     </UserControl.DataContext>
 
 

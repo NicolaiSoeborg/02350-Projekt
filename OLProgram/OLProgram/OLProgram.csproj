@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\AddProductToBasketCommand.cs" />
+    <Compile Include="Commands\AddUserCommand.cs" />
     <Compile Include="Commands\IUndoRedoCommand.cs" />
     <Compile Include="Commands\UndoRedoController.cs" />
     <Compile Include="Serialization\SerializerXML.cs" />

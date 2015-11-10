@@ -15,6 +15,8 @@ namespace OLProgram.OLModel
 
         public string Name { get; set; }
         public string ImageFileName { get; set; }
+        public int Stock { get; set; }
+        public int Bought { get; set; }
 
         public Product() : this(ProductIdCounter, "<NAME>", "default.png")
         {
@@ -29,7 +31,7 @@ namespace OLProgram.OLModel
         }
     }
 
-    public class BasketItem : NotifyBase
+    public class BasketItem
     {
         public Product Product { get; }
         public int Count { get; set; }

@@ -105,6 +105,7 @@
                         <TextBlock Text="Christine purchased: 2 Cider" />
                         <TextBlock Text="Christine purchased: 2 Cider" />
                         <Button x:Name="AdminButton">ADMIN SHH</Button>
+                        <Button x:Name="UserAddButton" Content="Add User" Command="{Binding AddUserCommand}"/>
                     </StackPanel>
 
                 </Grid>

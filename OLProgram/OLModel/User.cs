@@ -11,7 +11,7 @@ namespace OLProgram.OLModel
     {
         private static int UserIdCounter = 0;
 
-        public int UserID { get; }
+        public int UserID { get; set; }
 
         public string Name { get; set; }
 
@@ -28,16 +28,19 @@ namespace OLProgram.OLModel
             this.Name = Name;
         }
 
-        public void ManageProducts(int ProductID, int Purchase)
+        // Product is added to the users list and bought is incremented 
+        public void ManageProducts(Product product, int purchase)
         {
-            if (ProductsBought.ContainsKey(ProductID))
+            
+            if (ProductsBought.ContainsKey(product.ProductId))
             {
-                ProductsBought[ProductID] += Purchase;
+                ProductsBought[product.ProductId] += purchase;
             }
             else
             {
-                ProductsBought.Add(ProductID, Purchase);
+                ProductsBought.Add(product.ProductId, purchase);
             }
+            product.Bought += purchase;
         }
     }
     /*
