@@ -22,12 +22,12 @@ namespace OLProgram.Command
 
         public void Execute()
         {
-            throw new NotImplementedException();
+            _users.Add(_user);
         }
 
         public void UnExecute()
         {
-            throw new NotImplementedException();
+            _users.Remove(_user);
         }
     }
 }

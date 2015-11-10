@@ -20,29 +20,26 @@ namespace OLProgram.ViewModel
     **/
     public class BaseVM : ViewModelBase
     {
-        // Vigtigt at field er static, så værdien deles over alle klasser der extender BaseVM
-
-        private static string _username = ""; // From LoginUC
-        public string TxtUsername { get { return _username; } set { _username = value; } }
-        public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", _username); } }
-
-        public static ObservableCollection<User> Users { get; set; }
-        public static ObservableCollection<Product> Products { get; set; }
-
         // Undo/Redo controller + commands that the UI can be bound to.
         public UndoRedoController undoRedoController = UndoRedoController.Instance;
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
 
+        // Liste over brugere og produkter
+        public static ObservableCollection<User> Users { get; set; }
+        public static ObservableCollection<Product> Products { get; set; }
+
+        // Vigtigt at field er static, så værdien deles over alle klasser der extender BaseVM
+        // I Undo/Redo er det vigtigt at den IKKE er static, så vi får nye Undo/Redo for hver klasse der extender BaseVM
+        private static string _username = ""; // From LoginUC
+        public string TxtUsername { get { return _username; } set { _username = value; } }
+        public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", _username); } }
 
         public BaseVM()
         {
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
             RedoCommand = new RelayCommand(undoRedoController.Redo, undoRedoController.CanRedo);
         }
-
-        
-
         
     }
 }
