@@ -9,9 +9,10 @@
         mc:Ignorable="d">
         <!-- Title="AdminScreen" Height="600" Width="900"  WindowState="Maximized" WindowStyle="None" Topmost="True"/>-->
 
-    <UserControl.DataContext>
-        <ViewModel:MainViewModel />
+    <!--<UserControl.DataContext>
+        <ViewModel:AdminViewModel />
     </UserControl.DataContext>
+
 
   <Grid x:Name="grid1">
     <Grid.RowDefinitions>
