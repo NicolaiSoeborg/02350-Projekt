@@ -5,6 +5,8 @@ using System.Windows.Input;
 using OLProgram.OLModel;
 using OLProgram.Commands;
 using System.Collections.ObjectModel;
+using OLModel;
+using System.Windows;
 
 namespace OLProgram.ViewModel
 {
@@ -20,11 +22,15 @@ namespace OLProgram.ViewModel
         {
             get { return new Commands.LoginCommand(); }
         }*/
+        
+        public ICommand closeApplicationCommand { get; }
 
         private UndoRedoController undoRedoController = UndoRedoController.Instance;
 
         //public ObservableCollection<String> users { get; set; }
         public ObservableCollection<Product> Products { get; set; }
+
+            //closeApplicationCommand = new RelayCommand(closeApplication(0));
 
 
         public ICommand UndoCommand { get; }
@@ -57,5 +63,20 @@ namespace OLProgram.ViewModel
         {
             undoRedoController.AddAndExecute(new AddProductToBasketCommand(Products, new Product()));
         }
+
+        private void closeApplication(int status)
+        {
+            var response = MessageBox.Show("Do you really want to exit?", "Exiting...",
+                                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+            //if (response = MessageBoxResult.No)
+           // {
+                
+            //} else
+           // {
+           //     Environment.Exit(0);
+           // }
+        }
+
     }
 }
