@@ -67,7 +67,7 @@ namespace OLProgram.ViewModel
 
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
 
-            AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
+            //AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
 
 
             // Commands
@@ -79,10 +79,10 @@ namespace OLProgram.ViewModel
             undoRedoController.AddAndExecute(new AddUserCommand(Users, new User()));
         }
 
-        private void AddProductToGlobal()
-        {
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Products, new Product()));
-        }
+        //private void AddProductToGlobal()
+        //{
+        //    undoRedoController.AddAndExecute(new AddProductToBasketCommand(Products, new Product()));
+        //}
 
         private void closeApplication(int status)
         {
