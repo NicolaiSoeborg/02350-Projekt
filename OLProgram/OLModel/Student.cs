@@ -12,22 +12,17 @@ namespace OLModel
 
         public int StudentId { get; }
 
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
-        public StudyProgramme StudyProgramme { get; set; }
+        public Student() : this("", "") { }
 
-        public Student() : this("", "", null) { }
-
-        public Student(string FirstName, string LastName, StudyProgramme StudyProgramme)
+        public Student(string FirstName, string Name)
         {
             this.StudentId = StudentIdCounter++;
-            this.FirstName = FirstName;
-            this.LastName = LastName;
-            this.StudyProgramme = StudyProgramme;
+            this.Name = Name;
         }
     }
-
+    /*
     public class StudyProgramme
     {
         private static int ProgrammeIdCounter = 0;
@@ -43,5 +38,5 @@ namespace OLModel
             this.ProgrammeName = ProgrammeName;
             this.IsBEngProgramme = IsBEngProgramme;
         }
-    }
+    }*/
 }
