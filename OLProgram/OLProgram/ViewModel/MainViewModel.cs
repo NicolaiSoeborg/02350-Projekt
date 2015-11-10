@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
 using OLModel;
+using System.Windows;
 
 namespace OLProgram.ViewModel
 {
@@ -30,9 +31,14 @@ namespace OLProgram.ViewModel
             get { return new Commands.LoginCommand(); }
         }
         
+        public ICommand closeApplicationCommand { get; }
+
+
 
         public MainViewModel()
         {
+
+            //closeApplicationCommand = new RelayCommand(closeApplication(0));
 
 
 
@@ -45,5 +51,20 @@ namespace OLProgram.ViewModel
             ////    // Code runs "for real"
             ////}
         }
+
+        private void closeApplication(int status)
+        {
+            var response = MessageBox.Show("Do you really want to exit?", "Exiting...",
+                                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+            //if (response = MessageBoxResult.No)
+           // {
+                
+            //} else
+           // {
+           //     Environment.Exit(0);
+           // }
+        }
+
     }
 }

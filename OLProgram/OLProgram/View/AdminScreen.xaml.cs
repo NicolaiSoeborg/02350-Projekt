@@ -23,5 +23,20 @@ namespace OLProgram.View
         {
             InitializeComponent();
         }
+
+
+        private void MenuItemClick(object o, RoutedEventArgs e)
+        {
+
+            MessageBox.Show("Hello!");
+            //var exitEvent = e.OriginalSource as MenuItem;
+
+            //if (exitEvent != null && exitEvent.Name == "MenuItem_Click_Exit")
+            //{
+            //    var response = MessageBox.Show("Do you really want to exit?", "Exiting...",
+            //                   MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+            //}
+        }
     }
 }
