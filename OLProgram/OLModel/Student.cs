@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OLModel
 {
-    class Student
+    public class Student
     {
         private static int StudentIdCounter = 0;
 
@@ -28,7 +28,7 @@ namespace OLModel
         }
     }
 
-    class StudyProgramme
+    public class StudyProgramme
     {
         private static int ProgrammeIdCounter = 0;
 

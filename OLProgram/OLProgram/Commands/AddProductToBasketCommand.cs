@@ -9,22 +9,21 @@ using System.Windows.Input;
 
 namespace OLProgram.Commands
 {
-    public class AddItemCommand
+    public class AddProductToBasketCommand : IUndoRedoCommand   
     {
         #region Fields
 
-        private ObservableCollection<Item> items;
-        private Item item;
-        public ICommand AddShapeCommand { get; }
+        private ObservableCollection<Product> basketItems;
+        private Product baskeItem;
 
         #endregion
-
+            
         #region Constructor 
 
-        public AddItemCommand(ObservableCollection<Item> _items, Item _item)
+        public AddProductToBasketCommand(ObservableCollection<Product> _basketItems, Product _basketItem)
         {
-            items = _items;
-            item = _item;
+            baskeItem = _basketItem;
+            basketItems = _basketItems;
         }
 
         #endregion
@@ -33,12 +32,12 @@ namespace OLProgram.Commands
 
         public void Execute()
         {
-            items.Add(item);
+            basketItems.Add(baskeItem);
         }
 
         public void UnExecute()
         {
-            items.Remove(item);
+            basketItems.Remove(baskeItem);
         }
 
         #endregion
