@@ -34,7 +34,7 @@
 
                 <!-- top venstre top -->
                 <Grid Grid.Row="0">
-                    <TextBlock FontSize="40" HorizontalAlignment="Left" Text="Event Name" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                    <TextBlock Text="Event Name" FontSize="40" Margin="10,10,0,0"/>
                 </Grid>
                 <!-- /top venstre top -->
 
@@ -58,12 +58,12 @@
 
                             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2">
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" FocusManager.FocusedElement="{Binding ElementName=UserTxtBox}">
-                                    <TextBlock FontSize="30" Text="Login" Height="46" />
-                                    <TextBlock HorizontalAlignment="Left" Height="16" Text="User:" Width="53" />
-                                    <TextBox x:Name="UserTxtBox" HorizontalAlignment="Center" Height="21" Text="" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" Background="White"/>
-                                    <TextBlock Text="Password:" Height="16" />
-                                    <PasswordBox x:Name="PasswordTxtBox" HorizontalAlignment="Center" Height="21" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
-                                    <TextBlock TextWrapping="Wrap" Text="" Height="16" />
+                                    <TextBlock Text="Login" FontSize="30" />
+                                    <TextBlock Text="User:" />
+                                    <TextBox x:Name="UserTxtBox" Text="" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
+                                    <TextBlock Text="Password:" />
+                                    <PasswordBox x:Name="PasswordTxtBox" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
+                                    <TextBlock x:Name="TODOSpaceHackSoBtnIsntToCloseToPwdBox" Height="16" />
                                     <Button x:Name="LoginButton" IsDefault="true">Login</Button>
                                     <!-- Vigtigt at IsDefault="true", så "Enter" bliver fanget i textboxen -->
                                 </StackPanel>
@@ -86,11 +86,11 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" FontSize="30" Text="Latest Purchase" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Latest Purchase" FontSize="30" />
                 </Grid>
 
                 <Grid Grid.Row="1">
-                    <StackPanel>
+                    <StackPanel x:Name="LastestPurchaseStackPanel">
                         <TextBlock Text="Christine purchased: 2 Cider" />
                         <TextBlock Text="Lars purchased: 30 Beer" />
                         <TextBlock Text="Peter purchased: 1 Beer" />
@@ -103,7 +103,6 @@
                         <Button x:Name="AdminButton">ADMIN SHH</Button>
                         <Button x:Name="UserAddButton" Content="Add User" Command="{Binding AddUserCommand}"/>
                     </StackPanel>
-
                 </Grid>
 
             </Grid>
@@ -114,8 +113,8 @@
         <!-- Bund grid -->
         <Grid Grid.Row="1">
             <TextBlock FontSize="40" Text=" Statistics"/>
-            <Rectangle Fill="#0000FF" HorizontalAlignment="Left" Height="120" Margin="10,70,0,0" Stroke="Black" VerticalAlignment="Top" Width="549"/>
-            <Ellipse Fill="#FF0000" HorizontalAlignment="Left" Height="104" Margin="654,70,0,0" Stroke="Black" VerticalAlignment="Top" Width="130"/>
+            <Rectangle Fill="#0000FF" Height="120" Margin="10,70,10,10" Stroke="Black" />
+            <Ellipse Fill="#FF0000" Height="120" Margin="650,70,10,10" Stroke="Black" />
         </Grid>
 
     </Grid>

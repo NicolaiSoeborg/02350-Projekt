@@ -45,10 +45,10 @@ namespace OLProgram.View
                 }
         }
 
-        private void DoChangeUC(RoutedEventArgs e, object newUserControl)
+        private void DoChangeUC(RoutedEventArgs evt, object newUserControl)
         {
             this.Content = newUserControl;
-            e.Handled = true;
+            evt.Handled = true; // Stop event from doing any more modifications
         }
     }
 }

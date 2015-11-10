@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace OLProgram.ViewModel
 {
-    public class AdminVM : ViewModelBase
+    public class AdminVM : BaseVM
     {
         public AdminVM()
         {

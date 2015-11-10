@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace OLProgram.ViewModel
 {
-    class UserVM : ViewModelBase
+    public class UserVM : BaseVM
     {
         private UndoRedoController undoRedoController = UndoRedoController.Instance;
 

@@ -80,6 +80,7 @@
     <Compile Include="Command\IUndoRedoCommand.cs" />
     <Compile Include="Command\UndoRedoController.cs" />
     <Compile Include="ViewModel\AdminVM.cs" />
+    <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
     <Compile Include="View\AdminUC.xaml.cs">
       <DependentUpon>AdminUC.xaml</DependentUpon>

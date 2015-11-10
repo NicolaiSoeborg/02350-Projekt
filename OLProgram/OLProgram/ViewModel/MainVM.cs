@@ -11,7 +11,7 @@ using System.Windows;
 namespace OLProgram.ViewModel
 {
 
-    public class MainVM : ViewModelBase
+    public class MainVM : BaseVM
     {
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
