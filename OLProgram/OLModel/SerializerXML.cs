@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-// Currently only for users
+// TODO: Currently only for users
 namespace OLProgram.Serialization
 {   
     public class SerializerXML

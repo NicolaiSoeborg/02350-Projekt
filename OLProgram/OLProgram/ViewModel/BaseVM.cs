@@ -31,7 +31,7 @@ namespace OLProgram.ViewModel
 
         // Vigtigt at field er static, så værdien deles over alle klasser der extender BaseVM
         // I Undo/Redo er det vigtigt at den IKKE er static, så vi får nye Undo/Redo for hver klasse der extender BaseVM
-        private static User loggedInUser; // From LoginUC
+        private static User loggedInUser = new User(0, ""); // From LoginUC
         public string TxtUsername { get { return loggedInUser.Name; } set { loggedInUser = new User(0, value); } } // TODO: fix setter
         public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", loggedInUser.Name); } } // TODO: Kan flyttes til UserVM?
 
@@ -40,10 +40,9 @@ namespace OLProgram.ViewModel
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
             RedoCommand = new RelayCommand(undoRedoController.Redo, undoRedoController.CanRedo);
 
-            // TODO: Skal ikke være med i den endelige version:
-            Users.Add(new User(1000, "Admin"));
-            Users.Add(new User(1001, "Guest"));
-            Users.Add(new User(1002, "Rus"));
+            // TODO: Skal ikke være med i den endelige version (load fra OLModel?):
+            Products = new ObservableCollection<Product>();
+            Users = new ObservableCollection<User>() { new User(1001, "Rasmus"), new User(1002, "Nicolai"), new User(1003, "Silas"), new User(1004, "Greven") };
         }
         
     }

@@ -11,12 +11,13 @@ namespace OLProgram.OLModel
     {
         public int UserID { get; set; }
         public string Name { get; set; }
-        public Dictionary<int,int> ProductsBought = new Dictionary<int,int>();
+        public Dictionary<int,int> ProductsBought { get; }
         
         public User(int UserID, string Name)
         {
             this.UserID = UserID;
             this.Name = Name;
+            this.ProductsBought = new Dictionary<int, int>();
         }
 
         // Product is added to the users list and bought is incremented 

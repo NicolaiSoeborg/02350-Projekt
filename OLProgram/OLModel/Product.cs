@@ -13,9 +13,8 @@ namespace OLProgram.OLModel
         private static int ProductIdCounter = 0;
 
         public int ProductId { get; }
-
-        public string Name { get; set; }
-        public string ImageFileName { get; set; }
+        public string Name { get; } // TODO: Skal der være en setter? Nej, vel? Eller kan man så ikke ændre navn fra admin panel?
+        public string ImageFileName { get; }
         public int Stock { get; set; }
         public int Bought { get; set; }
 

@@ -79,6 +79,8 @@
     <Compile Include="Command\AddUserCommand.cs" />
     <Compile Include="Command\IUndoRedoCommand.cs" />
     <Compile Include="Command\UndoRedoController.cs" />
+    <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="ViewModel\AdminVM.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
