@@ -9,19 +9,10 @@ namespace OLProgram.OLModel
 {
     public class User
     {
-        private static int UserIdCounter = 0;
-
         public int UserID { get; set; }
-
         public string Name { get; set; }
-
         public Dictionary<int,int> ProductsBought = new Dictionary<int,int>();
-
-        public User() : this(UserIdCounter, "")
-        {
-            UserIdCounter++;
-        }
-
+        
         public User(int UserID, string Name)
         {
             this.UserID = UserID;
@@ -33,13 +24,10 @@ namespace OLProgram.OLModel
         {
             // Add "product*amount" to user
             if (ProductsBought.ContainsKey(product.ProductId))
-            {
                 ProductsBought[product.ProductId] += amountBought;
-            }
             else
-            {
                 ProductsBought.Add(product.ProductId, amountBought);
-            }
+            
 
             // Add "amount bought" to product
             product.Bought += amountBought;

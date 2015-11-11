@@ -22,10 +22,10 @@ namespace OLProgram.ViewModel
 
         public AdminVM()
         {
-            // TODO: Intet skal initialiseres når Admin ViewModel laves?
+            // Intet skal initialiseres når Admin ViewModel laves (ud over commands)?
             
             // Commands:
-            AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal); // TODO
+            AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
             AddUserCommand = new RelayCommand(AddUser);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
         }
@@ -34,14 +34,14 @@ namespace OLProgram.ViewModel
 
         private void AddUser()
         {
-            undoRedoController.AddAndExecute(new AddUserCommand(Users, new User()));
+            undoRedoController.AddAndExecute(new AddUserCommand(Users, new User(123, "TODO")));
         }
 
         private void CloseApplication()
         {
             var response = MessageBox.Show("Do you really want to exit?", "Exiting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (response == MessageBoxResult.Yes)
-                Environment.Exit(0); // TODO: More graceful shutdown?
+                Environment.Exit(0); // TODO: More graceful shutdown? Call OLModel.save() ?
         }
 
     }

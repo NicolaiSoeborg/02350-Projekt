@@ -34,6 +34,7 @@ namespace OLProgram.View
                 switch (ButtonEvent.Name)
                 {
                     case "LoginButton":
+                        // TODO: Check login (men hvordan? MainWindow extender ikke BaseVM)
                         DoChangeUC(e, new UserUC());
                         break;
                     case "CheckOutButton":

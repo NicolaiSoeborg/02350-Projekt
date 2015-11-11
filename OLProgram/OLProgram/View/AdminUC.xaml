@@ -14,9 +14,9 @@
 
     <Grid x:Name="grid1">
         <Grid.RowDefinitions>
-            <RowDefinition Height="18"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="18*"/>
+            <RowDefinition Height="18" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="18*" />
         </Grid.RowDefinitions>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -32,42 +32,42 @@
                 </MenuItem>
                 <MenuItem Header="Add">
                     <MenuItem Header="_Add User" />
-                    <MenuItem Header="_Add Product" Command="{Binding AddProductToGlobalCommand}"/>
+                    <MenuItem Header="_Add Product" Command="{Binding AddProductToGlobalCommand}" />
                 </MenuItem>
             </Menu>
         </DockPanel>
         <Grid Grid.Row="1">
             <Grid.Background>
-                <ImageBrush ImageSource="/Images/beer.png" Stretch="Uniform" TileMode="Tile"/>
+                <ImageBrush ImageSource="/Images/beer.png" Stretch="Uniform" TileMode="Tile" />
             </Grid.Background>
         </Grid>
 
         <Grid Grid.Row="2" Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="100*" />
             </Grid.ColumnDefinitions>
 
             <Grid x:Name="grid" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10*"/>
-                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="100*" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
-                    <TextBlock TextWrapping="Wrap" FontSize="16" Text="Users" />
-                    <TextBox x:Name="search" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
+                    <TextBlock FontSize="16" Text="Users" />
+                    <TextBox x:Name="searchUsers" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
                 </StackPanel>
 
                 <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="User1"/>
-                        <TextBlock Text="User1"/>
-                        <TextBlock Text="User1"/>
-                        <TextBlock Text="User1"/>
+                        <TextBlock Text="User1" />
+                        <TextBlock Text="User2" />
+                        <TextBlock Text="User3" />
+                        <TextBlock Text="User4" />
                     </StackPanel>
                 </Border>
             </Grid>
@@ -79,16 +79,16 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
-                    <TextBlock TextWrapping="Wrap" FontSize="16" Text="Products" />
-                    <TextBox x:Name="search1" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
+                    <TextBlock FontSize="16" Text="Products" />
+                    <TextBox x:Name="searchProducts" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
                 </StackPanel>
 
                 <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                     <StackPanel>
                         <TextBlock Text="Product1" />
-                        <TextBlock Text="Product1" />
-                        <TextBlock Text="Product1" />
-                        <TextBlock Text="Product1" />
+                        <TextBlock Text="Product2" />
+                        <TextBlock Text="Product3" />
+                        <TextBlock Text="Product4" />
                     </StackPanel>
                 </Border>
             </Grid>
@@ -100,16 +100,17 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
-                    <TextBlock TextWrapping="Wrap" FontSize="16" Text="Log" />
-                    <TextBox x:Name="search3" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
+                    <TextBlock FontSize="16" Text="Log" />
+                    <TextBox x:Name="searchLog" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
                 </StackPanel>
+                <!-- TODO: De 3 "Search" TextBox skal ikke have teksten "Search", det skal være en placeholder -->
 
                 <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                     <StackPanel>
-                        <TextBlock Text="Product1"/>
-                        <TextBlock Text="Product1"/>
-                        <TextBlock Text="Product1"/>
-                        <TextBlock Text="Product1"/>
+                        <TextBlock Text="Product1" />
+                        <TextBlock Text="Product2" />
+                        <TextBlock Text="Product3" />
+                        <TextBlock Text="Product4" />
                     </StackPanel>
                 </Border>
             </Grid>
