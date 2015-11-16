@@ -19,7 +19,6 @@ namespace OLProgram.ViewModel
         public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", loggedInUser.Name); } }
 
         public ICommand AddProductToBasketCommand { get; }
-        
 
         public UserVM()
         {

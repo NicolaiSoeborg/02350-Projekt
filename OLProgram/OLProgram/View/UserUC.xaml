@@ -10,6 +10,15 @@
     <UserControl.DataContext>
         <ViewModel:UserVM/>
     </UserControl.DataContext>
+    
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding TODO_SomeCommand}" Gesture="CTRL+T" />
+        <!--
+            TODO: Hvilke specifikke keybindings skal views have?
+            Globale keybindings (Undo/Redo) er defineret i MainWindow
+        -->
+    </UserControl.InputBindings>
+
 
     <Grid Name="UserWindowFrame" Height="600" Margin="0" VerticalAlignment="Top" Background="WhiteSmoke" ShowGridLines="True">
         <Grid.RowDefinitions>
@@ -70,15 +79,9 @@
                         <ColumnDefinition Width="60*" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Margin="5" Command="{Binding UndoCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Undo"/>
-                            <Label FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center">&#57614;</Label>
-                        </StackPanel>
-                    </Button>
-                    <!-- TODO: Overvej at gøre med knappen ovenover, som gjort nedenunder? -->
-                    <!-- TODO: Fonten er Win10 og op efter? I så fald skal vi have en portabel version af den -->
-                    <Button Grid.Column="1" Margin="4,5,6,5" Command="{Binding RedoCommand}" FontFamily="Segoe MDL2 Assets">Redo &#59302;</Button>
+                    <Button Grid.Column="0" Margin="5" Command="{Binding UndoCommand}" FontFamily="Segoe MDL2 Assets">Undo &#57614;</Button>
+                    <!-- TODO: Fonten er kun Win10 og op efter? I så fald skal vi have en portabel version af den -->
+                    <Button Grid.Column="1" Margin="5" Command="{Binding RedoCommand}" FontFamily="Segoe MDL2 Assets">Redo &#59302;</Button>
                 </Grid>
             </Grid>
 

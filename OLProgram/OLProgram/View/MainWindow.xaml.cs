@@ -35,14 +35,11 @@ namespace OLProgram.View
                 {
                     case "LoginButton":
                         // TODO: Check login (men hvordan? MainWindow extender ikke BaseVM)
-                        DoChangeUC(e, new UserUC());
-                        break;
+                        DoChangeUC(e, new UserUC());  break;
                     case "CheckOutButton":
-                        DoChangeUC(e, new LoginUC()); 
-                        break;
+                        DoChangeUC(e, new LoginUC()); break;
                     case "AdminButton":
-                        DoChangeUC(e, new AdminUC());
-                        break;
+                        DoChangeUC(e, new AdminUC()); break;
                 }
         }
 
