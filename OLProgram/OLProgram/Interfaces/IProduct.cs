@@ -11,7 +11,7 @@ namespace OLProgram.Interfaces
     // TODO: Læs og find ud af om interfacet ser korrekt ud
     // TODO: Hvordan specificeres at alle produkter skal have en constructor med bestemt signatur?
 
-    interface IProduct
+    public interface IProduct
     {
         int ProductId { get; }
         string Name { get; set; }

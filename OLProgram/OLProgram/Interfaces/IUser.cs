@@ -11,7 +11,7 @@ namespace OLProgram
     // https://msdn.microsoft.com/en-us/library/scsyfw1d(v=vs.71).aspx
     // TODO: Læs og find ud af om interfacet ser korrekt ud
     
-    interface IUser
+    public interface IUser
     {
         int UserID { get; set; }
         string Name { get; set; }
