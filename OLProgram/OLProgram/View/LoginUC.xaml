@@ -64,7 +64,7 @@
                                     <TextBlock Text="Password:" />
                                     <PasswordBox x:Name="PasswordTxtBox" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
                                     <TextBlock x:Name="TODOSpaceHackSoBtnIsntToCloseToPwdBox" Height="16" />
-                                    <Button x:Name="LoginButton" IsDefault="true">Login</Button>
+                                    <Button x:Name="LoginButton" Command="{Binding LoginCommand}" IsDefault="true">Login</Button>
                                     <!-- Vigtigt at IsDefault="true", så "Enter" bliver fanget i textboxen -->
                                 </StackPanel>
                             </Border>

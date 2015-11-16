@@ -32,5 +32,6 @@ namespace OLProgram.ViewModel
         {
             undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, new Product(), 1));
         }
+
     }
 }

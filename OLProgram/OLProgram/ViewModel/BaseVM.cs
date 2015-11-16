@@ -8,15 +8,17 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OLProgram.ViewModel
 {
     /**
-      * Alle ViewModels skal extende denne "BaseVM".
       * BaseVM extender "ViewModelBase" som foretager "MvvmLight" magi.
+      * Alle ViewModels skal extende denne "BaseVM" (som derved laver MvvmLight magi).
       * Skal data deles mellem ViewModels, så kan denne klasse bruges,
-      * dog skal denne model ikke indeholde alt mulig crap, flyt selve logikken til ViewModelen.
+      * dog skal denne model ikke indeholde alt mulig crap, flyt selve logikken til den relevante ViewModelen.
+      * (delte variabler skal naturligvis være static)
     **/
     public class BaseVM : ViewModelBase
     {
@@ -28,16 +30,16 @@ namespace OLProgram.ViewModel
         // Liste over brugere og produkter
         public static ObservableCollection<User> Users { get; set; }
         public static ObservableCollection<Product> Products { get; set; }
+        public static User loggedInUser { get; set; }
 
-        // Vigtigt at field er static, så værdien deles over alle klasser der extender BaseVM
-        // I Undo/Redo er det vigtigt at den IKKE er static, så vi får nye Undo/Redo for hver klasse der extender BaseVM
-        public static User loggedInUser = new User(0, ""); // From LoginUC
+        // Ref til MainWindow, brug MainWindow.Content = new View.ViewUC(); for at skrifte UC.
+        public static Window MainWindow { get; set; }
 
         public BaseVM()
         {
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
             RedoCommand = new RelayCommand(undoRedoController.Redo, undoRedoController.CanRedo);
-
+            
             // TODO: Skal ikke være med i den endelige version (load fra OLModel?):
             Products = new ObservableCollection<Product>();
             Users = new ObservableCollection<User>() { new User(1001, "Rasmus"), new User(1002, "Nicolai"), new User(1003, "Silas"), new User(1004, "Greven") };

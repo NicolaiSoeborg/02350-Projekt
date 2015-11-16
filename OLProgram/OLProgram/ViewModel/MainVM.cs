@@ -14,14 +14,30 @@ namespace OLProgram.ViewModel
     public class MainVM : BaseVM
     {
         // Tekstbox på LoginUC:
-        public string TxtUsername { get { return loggedInUser.Name; } set { loggedInUser = new User(0, value); } }
+        private string _txtUsername = "";
+        public string TxtUsername {
+            get { if (loggedInUser == null) return _txtUsername; /*else*/ return loggedInUser.Name; }
+            set { _txtUsername = value; }
+        }
 
+        public ICommand LoginCommand { get; }
 
-        public RelayCommand ShowStatisticCommand { get; }
 
         public MainVM()
         {
-            //ShowStatisticCommand = new RelayCommand(ShowStatistic);
+            LoginCommand = new RelayCommand(DoLogin);
+        }
+
+        private void DoLogin()
+        {
+            // TODO: Check login
+            loggedInUser = new User(0, _txtUsername);
+
+            if (TxtUsername.ToLower().Equals("admin")) {
+                MainWindow.Content = new View.AdminUC();
+            } else {
+                MainWindow.Content = new View.UserUC();
+            }
         }
 
         //private void ShowStatistic()
