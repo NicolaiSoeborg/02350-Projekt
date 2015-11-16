@@ -16,8 +16,10 @@ namespace OLProgram.ViewModel
     public class UserVM : BaseVM
     {
         public Basket Basket { get; set; }
-        
+        public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", loggedInUser.Name); } }
+
         public ICommand AddProductToBasketCommand { get; }
+        
 
         public UserVM()
         {

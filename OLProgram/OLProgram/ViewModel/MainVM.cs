@@ -13,6 +13,8 @@ namespace OLProgram.ViewModel
 
     public class MainVM : BaseVM
     {
+        public string TxtUsername { get { return loggedInUser.Name; } set { loggedInUser = new User(0, value); } }
+
         public RelayCommand ShowStatisticCommand { get; }
 
         public MainVM()

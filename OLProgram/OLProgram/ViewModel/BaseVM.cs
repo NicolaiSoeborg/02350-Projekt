@@ -31,9 +31,7 @@ namespace OLProgram.ViewModel
 
         // Vigtigt at field er static, så værdien deles over alle klasser der extender BaseVM
         // I Undo/Redo er det vigtigt at den IKKE er static, så vi får nye Undo/Redo for hver klasse der extender BaseVM
-        private static User loggedInUser = new User(0, ""); // From LoginUC
-        public string TxtUsername { get { return loggedInUser.Name; } set { loggedInUser = new User(0, value); } } // TODO: fix setter
-        public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", loggedInUser.Name); } } // TODO: Kan flyttes til UserVM?
+        public static User loggedInUser = new User(0, ""); // From LoginUC
 
         public BaseVM()
         {
