@@ -20,8 +20,8 @@
     </UserControl.InputBindings>
 
     <DockPanel>
-
-        <TextBlock DockPanel.Dock="Top" Text="{Binding HelloTxtUsername}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" />
+        <View:UserTopPanelUC DockPanel.Dock="Top" />
+        
         <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65*"/>
@@ -29,22 +29,8 @@
             </Grid.ColumnDefinitions>
 
             <View:ProductSelectionUC Grid.Column="0" />
-
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="85*"/>
-                    <RowDefinition Height="15*"/>
-                </Grid.RowDefinitions>
-                <ItemsControl ItemsSource="{Binding Basket.BasketItems}" Grid.Row="0"/>
-                <Grid Grid.Row="1" Grid.Column="1" x:Name="BasketButtons" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Content="Add" Command="{Binding AddProductToBasketCommand}" Grid.Column="0" />
-                    <Button Content="Remove" Command="{Binding UndoCommand}" Grid.Column="1" />
-                </Grid>
-            </Grid>
+            <View:UserBasketPanelUC Grid.Column="1" />
+            
         </Grid>
     </DockPanel>
 

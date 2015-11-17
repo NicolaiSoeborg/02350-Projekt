@@ -25,9 +25,7 @@
                 <ColumnDefinition Width="20*" />
                 <ColumnDefinition Width="60*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="5" Command="{Binding UndoCommand}" FontFamily="Segoe MDL2 Assets" >Undo &#57614;</Button>
-            <!-- TODO: Fonten er kun Win10 og op efter? I så fald skal vi have en portabel version af den -->
-            <Button Grid.Column="1" Margin="5" Command="{Binding RedoCommand}" FontFamily="Segoe MDL2 Assets">Redo &#59302;</Button>
+           
         </Grid>
     </Grid>
 </UserControl>

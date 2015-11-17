@@ -20,22 +20,26 @@ namespace OLProgram.ViewModel
         public string HelloTxtUsername { get { return loggedInUser == null ? "NoUserLoggedIn" : String.Format("Velkommen {0}!", loggedInUser.Name); } }
 
         public ICommand AddProductToBasketCommand { get; }
+        public ICommand DeleteBasketCommand { get; }
 
         public UserVM()
         {
             if (Basket == null) Basket = new Basket();
 
-            // Commands:
+            // Commands to access from UI:
             AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
+            DeleteBasketCommand = new RelayCommand(DeleteBasket);
         }
        
         private void AddProductToBasket(Product Product)
         {
-            
             undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, 1));
+        }
 
-            //Basket.Increase(new Product("Random"), 1);
-            //RaisePropertyChanged();
+        private void DeleteBasket()
+        {
+            //TODO Make DeleteBasket
+            //undoRedoController.AddAndExecute(new DeleteBasketCommand(Basket));
         }
 
     }

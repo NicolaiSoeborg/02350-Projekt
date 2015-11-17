@@ -20,11 +20,7 @@
     </UserControl.Resources>
 
     <Button Command="{Binding DataContext.AddProductToBasketCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" CommandParameter="{Binding Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure" MaxHeight="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}">
-        <!--Style="{DynamicResource sqr_btn}"-->
-        <!--<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Image DockPanel.Dock="Top" Source="{Binding ImageFileName}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <TextBox DockPanel.Dock="Bottom" Text="{Binding ProductName}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-        </DockPanel>-->
+
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70*"/>

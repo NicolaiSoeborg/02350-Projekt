@@ -6,22 +6,40 @@
              xmlns:local="clr-namespace:OLProgram.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <!--<DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem Command="New" />
-                    <Separator />
-                    <MenuItem Header="_Exit" x:Name="exit" Command="{Binding CloseApplicationCommand}" />
-                </MenuItem>
-                <MenuItem Header="_Edit">
-                    <MenuItem Command="Cut" />
-                    <MenuItem Command="Copy" />
-                    <MenuItem Command="Paste" />
-                </MenuItem>
-                <MenuItem Header="Add">
-                    <MenuItem Header="_Add User" />
-                    <MenuItem Header="_Add Product" Command="{Binding AddProductToGlobalCommand}" />
-                </MenuItem>
-            </Menu>
-        </DockPanel>-->
+
+    <Menu VerticalAlignment="Stretch">
+
+        <Menu.ItemsPanel>
+            <ItemsPanelTemplate>
+                <DockPanel HorizontalAlignment="Stretch"/>
+            </ItemsPanelTemplate>
+        </Menu.ItemsPanel>
+        <MenuItem>
+            <MenuItem.Header>
+                <!--TODO MAKE GO HOME COMMAND-->
+                <Button Command="{Binding GoHomeCommand}" FontFamily="Segoe UI Symbol" >Home &#xE10F;</Button>
+            </MenuItem.Header>
+        </MenuItem>
+        <MenuItem>
+            <MenuItem.Header>
+                <Button Command="{Binding UndoCommand}" FontFamily="Segoe UI Symbol" >Undo &#xE10E;</Button>
+                <!--TODO: Fonten er kun Win10 og op efter? I så fald skal vi have en portabel version af den-->
+                <!--Tidligere brugt: FontFamily="Segoe MDL2 Assets", &#x57614, &#59302-->
+            </MenuItem.Header>
+        </MenuItem>
+        <MenuItem>
+            <MenuItem.Header>
+                <Button Margin="5" Command="{Binding RedoCommand}" FontFamily="Segoe UI Symbol">Redo &#xE10D;</Button>
+            </MenuItem.Header>
+        </MenuItem>
+        <MenuItem HorizontalAlignment="Center" FontWeight="Light">
+            <TextBlock Text="{Binding HelloTxtUsername}" />
+        </MenuItem>
+        <MenuItem HorizontalAlignment="Right">
+            <MenuItem.Header>
+                <!--TODO Make go to profilCommand-->
+                <Button Margin="5" Command="{Binding GoToProfilCommand}" FontFamily="Segoe UI Symbol">Profile &#xE13D;</Button>
+            </MenuItem.Header>
+        </MenuItem>
+    </Menu>
 </UserControl>

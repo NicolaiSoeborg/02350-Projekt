@@ -55,13 +55,13 @@ namespace OLProgram.OLModel
             BasketItems.Add(new BasketItem(product, count));
         }
 
-        public void Decrease(Product product, int Count)
+        public void Decrease(Product product, int count)
         {
             foreach (BasketItem item in BasketItems)
             {
                 if (item.Product == product)
                 {
-                    item.Count -= Count;
+                    item.SetCount(item.Count - count);
                     if (item.Count < 1)
                     {
                         BasketItems.Remove(item);
