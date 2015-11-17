@@ -16,13 +16,14 @@ namespace OLProgram.ViewModel
     public class UserVM : BaseVM
     {
         public static Basket Basket { get; set; }
+
         public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", loggedInUser.Name); } }
 
         public ICommand AddProductToBasketCommand { get; }
 
         public UserVM()
         {
-            Basket = new Basket();
+            if (Basket == null) Basket = new Basket();
 
             // Commands:
             AddProductToBasketCommand = new RelayCommand(AddProductToBasket);
@@ -30,8 +31,8 @@ namespace OLProgram.ViewModel
        
         private void AddProductToBasket()
         {
-            //undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, new Product("Random"), 1));
-            Basket.BasketItems.Add(new BasketItem(new Product("Random"), 1));
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, new Product("Random"), 1));
+            //Basket.Increase(new Product("Random"), 1);
             //RaisePropertyChanged();
         }
 

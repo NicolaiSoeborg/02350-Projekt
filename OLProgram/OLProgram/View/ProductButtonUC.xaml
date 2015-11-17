@@ -5,21 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
              xmlns:View="clr-namespace:OLProgram.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-
-    <UserControl.DataContext>
-        <ViewModel:UserVM/>
-    </UserControl.DataContext>
+             >
     
-    <Button Grid.Row="0" Grid.Column="0" Command="{Binding AddProductToBasketCommand}" CommandParameter="{Binding ProductId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="pbtn" TargetType="{x:Type Button}">
+            <ContentPresenter Content="{TemplateBinding Content}"/>
+        </ControlTemplate>
+        <Style x:Key="sqr_btn" TargetType="{x:Type Button}">
+            <!--<Setter Property="Width" Value="90"/>
+            <Setter Property="Height" Value="90"/>-->
+            <!--<Setter Property="Template" Value="{StaticResource pbtn}"/>-->
+            
+        </Style>
+    </UserControl.Resources>
+
+    <Button  Command="{Binding DataContext.AddProductToBasketCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure" Style="{DynamicResource sqr_btn}"> <!---->
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70*"/>
                 <RowDefinition Height="30*"/>
             </Grid.RowDefinitions>
-            <!--<Image Grid.Row="0" Source="{Binding ImageFileName}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
-            <Label Grid.Row="1" Content="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+            <Image Grid.Row="0" Source="{Binding ImageFileName}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Label Grid.Row="1" Content="{Binding ProductName}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
         </Grid>
     </Button>
 </UserControl>

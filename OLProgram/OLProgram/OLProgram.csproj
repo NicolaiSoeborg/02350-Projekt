@@ -102,6 +102,9 @@
     <Compile Include="View\ProductButtonUC.xaml.cs">
       <DependentUpon>ProductButtonUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProductSelectionUC.xaml.cs">
+      <DependentUpon>ProductSelectionUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserUC.xaml.cs">
       <DependentUpon>UserUC.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ProductButtonUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductSelectionUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

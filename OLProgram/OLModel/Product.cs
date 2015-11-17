@@ -14,18 +14,18 @@ namespace OLProgram.OLModel
         private static int ProductIdCounter = 0;
 
         public int ProductId { get; }
-        public string Name { get; } // TODO: Skal der være en setter? Nej, vel? Eller kan man så ikke ændre navn fra admin panel?
+        public string ProductName { get; } // TODO: Skal der være en setter? Nej, vel? Eller kan man så ikke ændre navn fra admin panel?
         public string ImageFileName { get; }
         public int Stock { get; set; }
         public int Bought { get; set; }
 
-        public Product(string Name) : this(Name, "default.png") { }
+        public Product(string ProductName) : this(ProductName, "default.png") { }
         
-        public Product(string Name, string ImageFileName)
+        public Product(string ProductName, string ImageFileName)
         {
             ProductIdCounter++;
             this.ProductId = ProductIdCounter++;
-            this.Name = Name;
+            this.ProductName = ProductName;
             this.ImageFileName = ImageFileName;
         }
     }
