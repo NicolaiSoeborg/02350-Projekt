@@ -26,12 +26,14 @@ namespace OLProgram.ViewModel
             if (Basket == null) Basket = new Basket();
 
             // Commands:
-            AddProductToBasketCommand = new RelayCommand(AddProductToBasket);
+            AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
         }
        
-        private void AddProductToBasket()
+        private void AddProductToBasket(Product Product)
         {
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, new Product("Random"), 1));
+            
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, 1));
+
             //Basket.Increase(new Product("Random"), 1);
             //RaisePropertyChanged();
         }

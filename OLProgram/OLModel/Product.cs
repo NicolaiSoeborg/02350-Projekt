@@ -47,20 +47,21 @@ namespace OLProgram.OLModel
             {
                 if (item.Product.ProductId == product.ProductId)
                 {
-                    item.Count += count;
+                    item.SetCount(item.Count + count);
+                    //item.Count += count;
                     return;
                 }
             }
             BasketItems.Add(new BasketItem(product, count));
         }
 
-        public void Decrease(Product product, int count)
+        public void Decrease(Product product, int Count)
         {
             foreach (BasketItem item in BasketItems)
             {
                 if (item.Product == product)
                 {
-                    item.Count -= count;
+                    item.Count -= Count;
                     if (item.Count < 1)
                     {
                         BasketItems.Remove(item);
@@ -71,15 +72,15 @@ namespace OLProgram.OLModel
         }
     }
 
-    public class BasketItem
+    public class BasketItem : NotifyBase
     {
         public Product Product { get; }
         public int Count { get; set; }
-        public String hej { get { return "hej"; } }
-        public BasketItem()
-        {
-            Count++;
-        }
+        //private int _Count;
+        //public int Count { get { return _Count; } set { _Count = value; NotifyPropertyChanged();} }
+
+        private String _CountAndName;
+        public String CountAndName { get { return _CountAndName; } set { _CountAndName = value; NotifyPropertyChanged(); } }
 
         public BasketItem(Product Product) : this(Product, 1) { }
 
@@ -87,6 +88,15 @@ namespace OLProgram.OLModel
         {
             this.Product = Product;
             this.Count = Math.Max(Count, 1);
+            this.CountAndName = "" + this.Count + " x " + Product.ProductName;
         }
+
+        public void SetCount(int NewCount)
+        {
+            Count = NewCount;
+            CountAndName = "" + this.Count + " x " + Product.ProductName;
+        }
+
+
     }
 }

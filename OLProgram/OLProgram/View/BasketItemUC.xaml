@@ -16,8 +16,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Orientation="Horizontal">
-            <Image Source="../Images/tuborg.png" Height="{Binding ActualHeight, ElementName=CartProductName, Mode=OneWay}" />
-            <Label Name="CartProductName" Content="{Binding Product.ProductName}" VerticalAlignment="Center" />
+            <Image Source="{Binding Product.ImageFileName}" Height="{Binding ActualHeight, ElementName=CartProductName, Mode=OneWay}" />
+            <TextBlock Name="CartProductName" Text="{Binding CountAndName, Mode=OneWay}" VerticalAlignment="Center" />
         </StackPanel>
 
         <Button x:Name="AddButton" Grid.Column="1" Margin="2">
