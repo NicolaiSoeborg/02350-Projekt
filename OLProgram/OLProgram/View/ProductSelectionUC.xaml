@@ -14,7 +14,7 @@
             <ItemsControl ItemsSource="{Binding Products}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="4"/>
+                        <UniformGrid Columns="4" Margin="2"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>

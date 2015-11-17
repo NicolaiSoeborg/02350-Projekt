@@ -19,7 +19,8 @@
         </Style>
     </UserControl.Resources>
 
-    <Button  Command="{Binding DataContext.AddProductToBasketCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure" Style="{DynamicResource sqr_btn}"> <!---->
+    <Button Command="{Binding DataContext.AddProductToBasketCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure" Height="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}">
+        <!--Style="{DynamicResource sqr_btn}"-->
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70*"/>
