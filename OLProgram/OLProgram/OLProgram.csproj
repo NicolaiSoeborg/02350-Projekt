@@ -105,6 +105,9 @@
     <Compile Include="View\ProductSelectionUC.xaml.cs">
       <DependentUpon>ProductSelectionUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserTopPanelUC.xaml.cs">
+      <DependentUpon>UserTopPanelUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserUC.xaml.cs">
       <DependentUpon>UserUC.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProductSelectionUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserTopPanelUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

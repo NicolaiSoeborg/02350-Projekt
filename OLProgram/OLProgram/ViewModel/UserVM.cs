@@ -17,7 +17,7 @@ namespace OLProgram.ViewModel
     {
         public static Basket Basket { get; set; }
 
-        public string HelloTxtUsername { get { return String.Format("Velkommen {0}!", loggedInUser.Name); } }
+        public string HelloTxtUsername { get { return loggedInUser == null ? "NoUserLoggedIn" : String.Format("Velkommen {0}!", loggedInUser.Name); } }
 
         public ICommand AddProductToBasketCommand { get; }
 
