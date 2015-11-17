@@ -30,7 +30,7 @@ namespace OLProgram.ViewModel
        
         private void AddProductToBasket()
         {
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, new Product(), 1));
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, new Product("Random"), 1));
         }
 
     }

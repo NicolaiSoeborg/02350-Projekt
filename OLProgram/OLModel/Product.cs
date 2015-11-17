@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -18,14 +19,12 @@ namespace OLProgram.OLModel
         public int Stock { get; set; }
         public int Bought { get; set; }
 
-        public Product() : this(ProductIdCounter, "<NAME>", "default.png")
+        public Product(string Name) : this(Name, "default.png") { }
+        
+        public Product(string Name, string ImageFileName)
         {
             ProductIdCounter++;
-        }
-
-        public Product(int ProductID, string Name, string ImageFileName)
-        {
-            this.ProductId = ProductID;
+            this.ProductId = ProductIdCounter++;
             this.Name = Name;
             this.ImageFileName = ImageFileName;
         }
@@ -39,6 +38,8 @@ namespace OLProgram.OLModel
         {
             BasketItems = new ObservableCollection<BasketItem>();
         }
+
+        public void Increase(Product product) { Increase(product, 1); }
 
         public void Increase(Product product, int count)
         {
@@ -74,7 +75,7 @@ namespace OLProgram.OLModel
     {
         public Product Product { get; }
         public int Count { get; set; }
-
+        public String hej { get { return "hej"; } }
         public BasketItem()
         {
             Count++;
