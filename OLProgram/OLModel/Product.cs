@@ -45,7 +45,7 @@ namespace OLProgram.OLModel
         {
             foreach (BasketItem item in BasketItems)
             {
-                if (item.Product == product)
+                if (item.Product.ProductId == product.ProductId)
                 {
                     item.Count += count;
                     return;

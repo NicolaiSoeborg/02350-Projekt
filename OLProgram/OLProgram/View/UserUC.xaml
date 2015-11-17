@@ -38,7 +38,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Name="Products" HorizontalAlignment="Stretch" Margin="20" VerticalAlignment="Stretch" Background="White" ShowGridLines="True">
-                    <Grid.ColumnDefinitions>
+                    <!--<Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"/>
                         <ColumnDefinition Width="30*"/>
                         <ColumnDefinition Width="30*"/>
@@ -49,27 +49,9 @@
                         <RowDefinition Height="20*"/>
                         <RowDefinition Height="20*"/>
 
-                    </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" x:Name="button1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="70*"/>
-                                <RowDefinition Height="30*"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="/Images/tuborg.png" x:Name="image1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <Label Grid.Row="1" Content="Tuborg" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                        </Grid>
-                    </Button>
-                    <Button Grid.Row="0" Grid.Column="1" x:Name="button2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="70*"/>
-                                <RowDefinition Height="30*"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="/Images/guldtuborg.png" x:Name="image2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <Label Grid.Row="1" Content="Guld Tuborg" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                        </Grid>
-                    </Button>
+                    </Grid.RowDefinitions>-->
+                    <ItemsControl ItemsSource="{Binding Products}"/>
+                    
                 </Grid>
 
                 <Grid Grid.Row="1" Name="UndoRedo" HorizontalAlignment="Stretch" Margin="20" VerticalAlignment="Stretch">
