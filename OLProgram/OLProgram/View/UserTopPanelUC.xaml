@@ -17,19 +17,19 @@
         <MenuItem>
             <MenuItem.Header>
                 <!--TODO MAKE GO HOME COMMAND-->
-                <Button Command="{Binding GoHomeCommand}" FontFamily="Segoe UI Symbol" >Home &#xE10F;</Button>
+                <Button Command="{Binding GoHomeCommand}" FontFamily="Segoe UI Symbol" ToolTip="Go to homescreen">Home &#xE10F;</Button>
             </MenuItem.Header>
         </MenuItem>
         <MenuItem>
             <MenuItem.Header>
-                <Button Command="{Binding UndoCommand}" FontFamily="Segoe UI Symbol" >Undo &#xE10E;</Button>
+                <Button Command="{Binding UndoCommand}" FontFamily="Segoe UI Symbol" ToolTip="Undo last command">Undo &#xE10E;</Button>
                 <!--TODO: Fonten er kun Win10 og op efter? I så fald skal vi have en portabel version af den-->
                 <!--Tidligere brugt: FontFamily="Segoe MDL2 Assets", &#x57614, &#59302-->
             </MenuItem.Header>
         </MenuItem>
         <MenuItem>
             <MenuItem.Header>
-                <Button Margin="5" Command="{Binding RedoCommand}" FontFamily="Segoe UI Symbol">Redo &#xE10D;</Button>
+                <Button Margin="5" Command="{Binding RedoCommand}" FontFamily="Segoe UI Symbol" ToolTip="Redo last undo">Redo &#xE10D;</Button>
             </MenuItem.Header>
         </MenuItem>
         <MenuItem HorizontalAlignment="Center" FontWeight="Light">
@@ -38,7 +38,7 @@
         <MenuItem HorizontalAlignment="Right">
             <MenuItem.Header>
                 <!--TODO Make go to profilCommand-->
-                <Button Margin="5" Command="{Binding GoToProfilCommand}" FontFamily="Segoe UI Symbol">Profile &#xE13D;</Button>
+                <Button Margin="5" Command="{Binding GoToProfilCommand}" FontFamily="Segoe UI Symbol" ToolTip="Go to profile info">Profile &#xE13D;</Button>
             </MenuItem.Header>
         </MenuItem>
     </Menu>
