@@ -3,13 +3,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using OLProgram.Command;
 using OLProgram.OLModel;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-
 
 namespace OLProgram.ViewModel
 {
@@ -20,6 +14,7 @@ namespace OLProgram.ViewModel
         public string HelloTxtUsername { get { return loggedInUser == null ? "NoUserLoggedIn" : String.Format("Velkommen {0}!", loggedInUser.Name); } }
 
         public ICommand AddProductToBasketCommand { get; }
+        public ICommand DecreaseBasketItemCommand { get; }
         public ICommand DeleteBasketCommand { get; }
 
         public UserVM()
@@ -28,6 +23,7 @@ namespace OLProgram.ViewModel
 
             // Commands to access from UI:
             AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
+            DecreaseBasketItemCommand = new RelayCommand<Product>(DecreaseBasketItem);
             DeleteBasketCommand = new RelayCommand(DeleteBasket);
         }
        
@@ -36,11 +32,14 @@ namespace OLProgram.ViewModel
             undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, 1));
         }
 
+        private void DecreaseBasketItem(Product Product)
+        {
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, -1));
+        }
         private void DeleteBasket()
         {
             //TODO Make DeleteBasket
             //undoRedoController.AddAndExecute(new DeleteBasketCommand(Basket));
         }
-
     }
 }
