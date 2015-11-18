@@ -78,7 +78,7 @@ namespace OLProgram.OLModel
                 if (item.ProductId == product.ProductId)
                 {
                     item.SetCount(item.Count + count);
-                    if (item.Count < 1)
+                    if (item.Count < 1 || count == 0)
                     {
                         BasketItems.Remove(item);
                     }
@@ -95,13 +95,32 @@ namespace OLProgram.OLModel
                 if (item.ProductId == product.ProductId)
                 {
                     item.SetCount(item.Count - count);
-                    if (item.Count < 1)
+                    if (item.Count < 1 || count == 0)
                     {
                         BasketItems.Remove(item);
                     }
                     return;
                 }
             }
+            BasketItems.Add(new BasketItem(product, count));
         }
+
+        //public void Delete(Product product)
+        //{
+        //    foreach (BasketItem item in BasketItems)
+        //    {
+        //        if (item.ProductId == product.ProductId)
+        //            BasketItems.Remove(item);
+        //    }
+        //}
+
+        //public void Add(Product product)
+        //{
+        //    foreach (BasketItem item in BasketItems)
+        //    {
+        //        if (item.ProductId == product.ProductId)
+        //            BasketItems.Remove(item);
+        //    }
+        //}
     }
 }

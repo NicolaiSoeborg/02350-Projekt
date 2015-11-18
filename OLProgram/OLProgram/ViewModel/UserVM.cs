@@ -15,7 +15,7 @@ namespace OLProgram.ViewModel
 
         public ICommand AddProductToBasketCommand { get; }
         public ICommand DecreaseBasketItemCommand { get; }
-        public ICommand DeleteBasketCommand { get; }
+        public ICommand DeleteBasketItemCommand { get; }
 
         public UserVM()
         {
@@ -24,7 +24,7 @@ namespace OLProgram.ViewModel
             // Commands to access from UI:
             AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
             DecreaseBasketItemCommand = new RelayCommand<Product>(DecreaseBasketItem);
-            DeleteBasketCommand = new RelayCommand(DeleteBasket);
+            DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
         }
        
         private void AddProductToBasket(Product Product)
@@ -36,10 +36,9 @@ namespace OLProgram.ViewModel
         {
             undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, -1));
         }
-        private void DeleteBasket()
+        private void DeleteBasketItem(Product Product)
         {
-            //TODO Make DeleteBasket
-            //undoRedoController.AddAndExecute(new DeleteBasketCommand(Basket));
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, 0));
         }
     }
 }
