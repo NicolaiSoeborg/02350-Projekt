@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Orientation="Horizontal">
-            <Image Source="{Binding Product.ImageFileName}" Height="{Binding ActualHeight, ElementName=CartProductName, Mode=OneWay}" />
+            <Image Source="{Binding ImageFileName}" Height="{Binding ActualHeight, ElementName=CartProductName, Mode=OneWay}" />
             <TextBlock Name="CartProductName" Text="{Binding CountAndName, Mode=OneWay}" VerticalAlignment="Center" />
         </StackPanel>
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OLProgram.OLModel
 {
-    public class Product
+    public class Product : NotifyBase
     {
         // Overvej at slette, da den ikke bliver genmt ned i XML og derved potentielt kan fucke det op
         private static int ProductIdCounter = 0;
@@ -20,13 +20,43 @@ namespace OLProgram.OLModel
         public int Bought { get; set; }
 
         public Product(string ProductName) : this(ProductName, "default.png") { }
-        
+
+        // This Constructor is used for making basketitems, making clone of the parameter Product
+        public Product(Product Product)
+        {
+            ProductId = Product.ProductId;
+            ProductName = Product.ProductName;
+            ImageFileName = Product.ImageFileName;
+        }
+
         public Product(string ProductName, string ImageFileName)
         {
             ProductIdCounter++;
-            this.ProductId = ProductIdCounter++;
+            ProductId = ProductIdCounter++;
             this.ProductName = ProductName;
             this.ImageFileName = ImageFileName;
+        }
+    }
+
+    public class BasketItem : Product
+    {
+        public int Count { get; set; }
+
+        private String _CountAndName;
+        public String CountAndName { get { return _CountAndName; } set { _CountAndName = value; NotifyPropertyChanged(); } }
+
+        public BasketItem(Product Product) : this(Product, 1) { }
+
+        public BasketItem(Product Product, int Amount) : base(Product)
+        {
+            Count = Math.Max(Amount, 1);
+            CountAndName = "" + Count + " x " + Product.ProductName;
+        }
+
+        public void SetCount(int NewCount)
+        {
+            Count = NewCount;
+            CountAndName = "" + Count + " x " + ProductName;
         }
     }
 
@@ -34,7 +64,7 @@ namespace OLProgram.OLModel
     {
         public ObservableCollection<BasketItem> BasketItems { get; }
 
-        public Basket ()
+        public Basket()
         {
             BasketItems = new ObservableCollection<BasketItem>();
         }
@@ -45,7 +75,7 @@ namespace OLProgram.OLModel
         {
             foreach (BasketItem item in BasketItems)
             {
-                if (item.Product.ProductId == product.ProductId)
+                if (item.ProductId == product.ProductId)
                 {
                     item.SetCount(item.Count + count);
                     //item.Count += count;
@@ -59,7 +89,7 @@ namespace OLProgram.OLModel
         {
             foreach (BasketItem item in BasketItems)
             {
-                if (item.Product == product)
+                if (item.ProductId == product.ProductId)
                 {
                     item.SetCount(item.Count - count);
                     if (item.Count < 1)
@@ -70,33 +100,5 @@ namespace OLProgram.OLModel
                 }
             }
         }
-    }
-
-    public class BasketItem : NotifyBase
-    {
-        public Product Product { get; }
-        public int Count { get; set; }
-        //private int _Count;
-        //public int Count { get { return _Count; } set { _Count = value; NotifyPropertyChanged();} }
-
-        private String _CountAndName;
-        public String CountAndName { get { return _CountAndName; } set { _CountAndName = value; NotifyPropertyChanged(); } }
-
-        public BasketItem(Product Product) : this(Product, 1) { }
-
-        public BasketItem(Product Product, int Count)
-        {
-            this.Product = Product;
-            this.Count = Math.Max(Count, 1);
-            this.CountAndName = "" + this.Count + " x " + Product.ProductName;
-        }
-
-        public void SetCount(int NewCount)
-        {
-            Count = NewCount;
-            CountAndName = "" + this.Count + " x " + Product.ProductName;
-        }
-
-
     }
 }
