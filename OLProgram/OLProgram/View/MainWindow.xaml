@@ -6,8 +6,8 @@
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800"
-        WindowStyle="None"
-        ResizeMode="NoResize" Title="ØL-program bby">
+        Title="ØL-program bby">
+	<!-- WindowStyle="None" ResizeMode="NoResize" -->
 
     <Window.DataContext>
         <ViewModel:MainVM />

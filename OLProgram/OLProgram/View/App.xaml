@@ -6,7 +6,7 @@
              d1p1:Ignorable="d"
              xmlns:View="clr-namespace:OLProgram.View"
              xmlns:Model="clr-namespace:OLProgram.OLModel;assembly=OLModel"
-             StartupUri="UserUC.xaml">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:OLProgram.ViewModel" />
