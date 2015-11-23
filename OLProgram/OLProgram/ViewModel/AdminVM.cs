@@ -41,7 +41,7 @@ namespace OLProgram.ViewModel
         {
             var response = MessageBox.Show("Do you really want to exit?", "Exiting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (response == MessageBoxResult.Yes)
-                Environment.Exit(0); // TODO: More graceful shutdown? Call OLModel.save() ?
+                Environment.Exit(0); // TODO: More graceful shutdown? Call OLModel.save() first ?
         }
 
     }
