@@ -16,7 +16,7 @@
     <Window.InputBindings>
         <KeyBinding Command="{Binding UndoCommand}" Gesture="CTRL+Z" />
         <KeyBinding Command="{Binding RedoCommand}" Gesture="CTRL+Y" />
-        <KeyBinding Command="{Binding ChangeToAdminCommand}" Gesture="CTRL+K" /> <!-- TODO: Global shotcut til admin? Implementér -->
+        <KeyBinding Command="{Binding ChangeToAdminCommand}" Gesture="CTRL+K" />
     </Window.InputBindings>
 
     <View:LoginUC />

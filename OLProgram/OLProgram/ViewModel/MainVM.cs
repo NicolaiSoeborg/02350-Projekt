@@ -7,6 +7,7 @@ using OLProgram.Command;
 using System.Collections.ObjectModel;
 using OLModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace OLProgram.ViewModel
 {
@@ -20,12 +21,12 @@ namespace OLProgram.ViewModel
             set { _txtUsername = value; }
         }
 
-        public ICommand LoginCommand { get; }
-
+        public ICommand LoginCommand { get { return new RelayCommand(DoLogin); } }
+        public ICommand ChangeToAdminCommand { get { return new RelayCommand(ShowAdminLoginGUI); } }
 
         public MainVM()
         {
-            LoginCommand = new RelayCommand(DoLogin);
+            // Nothing to initialize when creating the MainWM?
         }
 
         private void DoLogin()
@@ -38,6 +39,38 @@ namespace OLProgram.ViewModel
             } else {
                 MainWindow.Content = new View.UserUC();
             }
+        }
+
+        private void ShowAdminLoginGUI()
+        {
+            Window Box = new Window();//window for the inputbox
+            Box.Title = "Admin password";
+            Box.Width = 300; //Box.Height = 200;
+            Box.Topmost = true;
+            StackPanel sp = new StackPanel();
+
+            TextBlock overskrift = new TextBlock(); overskrift.Text = "Admin Password:";
+            sp.Children.Add(overskrift);
+
+            TextBox input = new TextBox();
+            sp.Children.Add(input);
+
+            PasswordBox test = new PasswordBox();
+            sp.Children.Add(test);
+            
+            Button ok = new Button(); ok.Content = "Login";
+            ok.AddHandler(Button.ClickEvent, new RoutedEventHandler(DoAdminLogin_Click));
+            sp.Children.Add(ok);
+
+            Box.Content = sp;
+            Box.ShowDialog();
+        }
+
+        private void DoAdminLogin_Click(object o, RoutedEventArgs e)
+        {
+            var ButtonEvent = e.OriginalSource as Button;
+            if (ButtonEvent != null)
+                MainWindow.Content = new View.AdminUC();
         }
 
         //private void ShowStatistic()
