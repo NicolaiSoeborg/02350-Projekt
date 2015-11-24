@@ -13,7 +13,7 @@
 
     <DockPanel LastChildFill="True" FocusManager.FocusedElement="{Binding ElementName=TxtBox}">
         <TextBlock DockPanel.Dock="Top" Text="Admin Password:" />
-        <TextBox Name="TxtBox" DockPanel.Dock="Top" Text="{Binding TxtAdminPassword}" />
+        <TextBox Name="TxtBox" DockPanel.Dock="Top" Text="{Binding TxtAdminPassword}" FontFamily="Wingdings" />
         <Button Content="Login" IsDefault="true" Click="AdminLogin_Click" />
     </DockPanel>
 </Window>
