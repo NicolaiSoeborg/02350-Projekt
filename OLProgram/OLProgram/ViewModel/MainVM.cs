@@ -43,27 +43,7 @@ namespace OLProgram.ViewModel
 
         private void ShowAdminLoginGUI()
         {
-            Window Box = new Window();//window for the inputbox
-            Box.Title = "Admin password";
-            Box.Width = 300; //Box.Height = 200;
-            Box.Topmost = true;
-            StackPanel sp = new StackPanel();
-
-            TextBlock overskrift = new TextBlock(); overskrift.Text = "Admin Password:";
-            sp.Children.Add(overskrift);
-
-            TextBox input = new TextBox();
-            sp.Children.Add(input);
-
-            PasswordBox test = new PasswordBox();
-            sp.Children.Add(test);
-            
-            Button ok = new Button(); ok.Content = "Login";
-            ok.AddHandler(Button.ClickEvent, new RoutedEventHandler(DoAdminLogin_Click));
-            sp.Children.Add(ok);
-
-            Box.Content = sp;
-            Box.ShowDialog();
+            (new View.AdminLoginWindow()).ShowDialog();
         }
 
         private void DoAdminLogin_Click(object o, RoutedEventArgs e)

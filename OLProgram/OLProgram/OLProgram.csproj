@@ -87,6 +87,9 @@
     <Compile Include="ViewModel\AdminVM.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
+    <Compile Include="View\AdminLoginWindow.xaml.cs">
+      <DependentUpon>AdminLoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AdminUC.xaml.cs">
       <DependentUpon>AdminUC.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,10 @@
     </Compile>
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="View\AdminLoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
