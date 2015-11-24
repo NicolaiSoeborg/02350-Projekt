@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OLProgram.OLModel
 {
-    public class User 
+    public class User : NotifyBase
     {
         public int UserID { get; set; }
         public string Name { get; set; }
