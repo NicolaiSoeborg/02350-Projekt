@@ -70,7 +70,7 @@ namespace OLProgram.ViewModel
         {
             var ButtonEvent = e.OriginalSource as Button;
             if (ButtonEvent != null)
-                MainWindow.Content = new View.AdminUC();
+                MainWindow.Content = new View.AddUserUC();
         }
 
         //private void ShowStatistic()

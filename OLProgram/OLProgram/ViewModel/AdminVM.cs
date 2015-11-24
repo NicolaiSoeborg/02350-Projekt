@@ -17,7 +17,7 @@ namespace OLProgram.ViewModel
     public class AdminVM : BaseVM
     {
         public RelayCommand AddProductToGlobalCommand { get; }
-        public RelayCommand AddUserCommand { get; }
+       // public RelayCommand AddUserCommand { get; }
         public RelayCommand CloseApplicationCommand { get; }
 
         public AdminVM()
@@ -26,7 +26,7 @@ namespace OLProgram.ViewModel
             
             // Commands:
             AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
-            AddUserCommand = new RelayCommand(AddUser);
+            //AddUserCommand = new RelayCommand(AddUser);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
         }
 
