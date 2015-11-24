@@ -33,5 +33,10 @@ namespace OLProgram.OLModel
             // Add "amount bought" to product
             product.Bought += amountBought;
         }
+
+        public String toString()
+        {
+            return String.Format("[%4d] %s", this.UserID, this.Name);
+        }
     }
 }

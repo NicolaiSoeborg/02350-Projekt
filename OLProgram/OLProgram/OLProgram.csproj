@@ -80,6 +80,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\AddProductToBasketCommand.cs" />
     <Compile Include="Command\AddUserCommand.cs" />
+    <Compile Include="Command\ClearBasketCommand.cs" />
     <Compile Include="Command\IUndoRedoCommand.cs" />
     <Compile Include="Command\UndoRedoController.cs" />
     <Compile Include="Interfaces\IProduct.cs" />

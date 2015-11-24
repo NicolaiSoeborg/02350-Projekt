@@ -62,14 +62,12 @@ namespace OLProgram.OLModel
 
     public class Basket
     {
-        public ObservableCollection<BasketItem> BasketItems { get; }
+        public ObservableCollection<BasketItem> BasketItems { get; set; }
 
         public Basket()
         {
             BasketItems = new ObservableCollection<BasketItem>();
         }
-
-        public void Increase(Product product) { Increase(product, 1); }
 
         public void Increase(Product product, int count)
         {
