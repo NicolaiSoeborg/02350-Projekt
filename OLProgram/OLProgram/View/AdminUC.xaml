@@ -53,26 +53,38 @@
 
             <Grid x:Name="grid" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10*" />
                     <RowDefinition Height="100*" />
+                    <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0">
-                    <TextBlock FontSize="16" Text="Users" />
-                    <TextBox x:Name="searchUsers" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
-                </StackPanel>
-
-                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
-                    <StackPanel>
-                        <TextBlock Text="User1" />
-                        <TextBlock Text="User2" />
-                        <TextBlock Text="User3" />
-                        <TextBlock Text="User4" />
+                <StackPanel Grid.Row="0" Margin="2" >
+                        <GroupBox  Header="Edit Users">
+                            <StackPanel>
+                                <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
+                                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </GroupBox>
                     </StackPanel>
-                </Border>
-            </Grid>
 
-            <Grid x:Name="grid2" Grid.Column="2">
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button  Grid.Column="0" Command="{Binding addNewUserCommand}">Add New User</Button>
+                        <Button Grid.Column="1" Command = "{Binding DeleteSelectedUserCommand}" CommandParameter ="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
+                        <Button Grid.Column="2" Command="{Binding ChangeToAdminCommand}" >Back</Button>
+                    </Grid>
+                </Grid>
+                
+                
+                <Grid x:Name="grid2" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*" />
                     <RowDefinition Height="100*" />
@@ -89,6 +101,8 @@
                         <TextBlock Text="Product2" />
                         <TextBlock Text="Product3" />
                         <TextBlock Text="Product4" />
+                        <TextBlock></TextBlock>
+                        <Button  >Manage Users</Button>
                     </StackPanel>
                 </Border>
             </Grid>
