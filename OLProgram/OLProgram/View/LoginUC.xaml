@@ -100,7 +100,6 @@
                         <TextBlock Text="Christine purchased: 2 Cider" />
                         <TextBlock Text="Christine purchased: 2 Cider" />
                         <TextBlock Text="Christine purchased: 2 Cider" />
-                        <Button x:Name="AdminButton">HEMMELIG ADMIN</Button>
                     </StackPanel>
                 </Grid>
                 
