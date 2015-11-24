@@ -39,7 +39,7 @@ namespace OLProgram.Command
 
         public void UnExecute()
         {
-            _basket.Decrease(_product, _count);
+            _basket.Increase(_product, -_count);
         }
 
         #endregion

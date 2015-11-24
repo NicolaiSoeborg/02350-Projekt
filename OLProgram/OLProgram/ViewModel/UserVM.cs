@@ -38,7 +38,8 @@ namespace OLProgram.ViewModel
         }
         private void DeleteBasketItem(Product Product)
         {
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, 0));
+            int Count = Basket.getCount(Product);
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, -Count));
         }
     }
 }

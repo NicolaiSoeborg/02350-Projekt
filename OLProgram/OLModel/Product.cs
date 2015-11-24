@@ -78,49 +78,20 @@ namespace OLProgram.OLModel
                 if (item.ProductId == product.ProductId)
                 {
                     item.SetCount(item.Count + count);
-                    if (item.Count < 1 || count == 0)
-                    {
-                        BasketItems.Remove(item);
-                    }
                     return;
                 }
             }
             BasketItems.Add(new BasketItem(product, count));
         }
 
-        public void Decrease(Product product, int count)
+        public int getCount(Product product)
         {
-            foreach (BasketItem item in BasketItems)
+            foreach(BasketItem bItem in BasketItems)
             {
-                if (item.ProductId == product.ProductId)
-                {
-                    item.SetCount(item.Count - count);
-                    if (item.Count < 1 || count == 0)
-                    {
-                        BasketItems.Remove(item);
-                    }
-                    return;
-                }
+                if (bItem.ProductId == product.ProductId)
+                    return bItem.Count;
             }
-            BasketItems.Add(new BasketItem(product, count));
+            return 0;
         }
-
-        //public void Delete(Product product)
-        //{
-        //    foreach (BasketItem item in BasketItems)
-        //    {
-        //        if (item.ProductId == product.ProductId)
-        //            BasketItems.Remove(item);
-        //    }
-        //}
-
-        //public void Add(Product product)
-        //{
-        //    foreach (BasketItem item in BasketItems)
-        //    {
-        //        if (item.ProductId == product.ProductId)
-        //            BasketItems.Remove(item);
-        //    }
-        //}
     }
 }
