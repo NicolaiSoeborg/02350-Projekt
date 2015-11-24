@@ -9,13 +9,18 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:OLProgram.ViewModel" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/ShinyDarkPurple.xaml"/>
+                <ResourceDictionary>
+                <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:OLProgram.ViewModel" />
             <DataTemplate DataType="{x:Type Model:BasketItem}">
                 <View:BasketItemUC/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type Model:Product}">
                 <View:ProductButtonUC/>
             </DataTemplate>
+                    </ResourceDictionary>
+                </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -26,11 +26,5 @@ namespace OLProgram.View
         {
             InitializeComponent();
         }
-
-        private void UserList_SelectionChanged(object sender, SelectionChangedEventArgs e) 
-        {
-            /*ViewModel.AdminVM.SelectedUser.RemoveAt(0);
-            ViewModel.AdminVM.SelectedUser.Insert(0, ((sender as ListBox).SelectedItem as User));*/
-        }
     }
 }

@@ -12,53 +12,37 @@
     <UserControl.DataContext>
         <ViewModel:AdminVM />
     </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+    
+    
+    <StackPanel Grid.Row="0" Margin="2" >
+                <GroupBox FontSize="20" Header="Edit Users">
+                    <StackPanel>
+                    <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                </GroupBox>
+            </StackPanel>
 
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid  x:Name="AddUserMainGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="20*"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="100*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <TextBlock FontSize="40"> Edit User</TextBlock>
-            </Grid>
-            <DockPanel Grid.Row="1" Margin="5">
-                <TextBlock DockPanel.Dock="Top">UserName</TextBlock>
-                <TextBox DockPanel.Dock="Top" Text="{Binding SelectedUser.ElementAt(0).Name}" ></TextBox>
-                <TextBlock DockPanel.Dock="Top">PassWord</TextBlock>
-                <TextBox DockPanel.Dock="Top"></TextBox>
-                <TextBlock DockPanel.Dock="Top">Barcode</TextBlock>
-                <TextBox  DockPanel.Dock="Top" ></TextBox>
-                <Button DockPanel.Dock="Top">Delete</Button>
-                <Button DockPanel.Dock="Top">Save</Button>
-                <TextBlock DockPanel.Dock="Top"></TextBlock>
-
-
-            </DockPanel>
-
+            <Button FontSize="20" Grid.Column="0" Command="{Binding addNewUserCommand}">Add New User</Button>
+            <Button FontSize="20" Grid.Column="1" Command = "{Binding DeleteSelectedUserCommand}" CommandParameter ="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
+            <Button FontSize="20" Grid.Column="2" Command="{Binding ChangeToAdminCommand}" >Back</Button>
         </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="100*"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock FontSize="40" Grid.Row="0">UserList</TextBlock>
-
-            <ListView x:Name="UserList" ItemsSource="{Binding Users}" Grid.Row="1" SelectionChanged="UserList_SelectionChanged">
-                
-            </ListView>
-
-
-
-        </Grid>
-
     </Grid>
+
 </UserControl>

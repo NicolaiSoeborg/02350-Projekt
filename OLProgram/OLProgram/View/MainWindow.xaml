@@ -17,6 +17,8 @@
         <KeyBinding Command="{Binding UndoCommand}" Gesture="CTRL+Z" />
         <KeyBinding Command="{Binding RedoCommand}" Gesture="CTRL+Y" />
         <KeyBinding Command="{Binding ChangeToAdminCommand}" Gesture="CTRL+K" />
+        <KeyBinding Command="{Binding ChangeToMainCommand}" Gesture="CTRL+L" />
+        <KeyBinding Command="{Binding ChangeToAddUserCommand}" Gesture="CTRL+J"/>
     </Window.InputBindings>
 
     <View:LoginUC />
