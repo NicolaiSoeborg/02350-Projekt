@@ -20,8 +20,6 @@ namespace OLProgram.View
     /// </summary>
     public partial class AdminLoginWindow : Window
     {
-        private string TxtPassword { get; set; }
-
         public AdminLoginWindow()
         {
             InitializeComponent();
@@ -29,8 +27,7 @@ namespace OLProgram.View
 
         private void AdminLogin_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Test: " + TxtPassword);
-            //MainWindow.Content = new AdminUC();
+            this.Close(); // mega hack, Text="{Binding TxtAdminPassword}" ændre MainWindow.Content
         }
     }
 }

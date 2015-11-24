@@ -11,7 +11,6 @@ using System.Windows.Controls;
 
 namespace OLProgram.ViewModel
 {
-
     public class MainVM : BaseVM
     {
         // Tekstbox på LoginUC:
@@ -32,25 +31,13 @@ namespace OLProgram.ViewModel
         private void DoLogin()
         {
             // TODO: Check login
-            loggedInUser = new User(0, _txtUsername);
-
-            if (TxtUsername.ToLower().Equals("admin")) {
-                MainWindow.Content = new View.AdminUC();
-            } else {
-                MainWindow.Content = new View.UserUC();
-            }
+            loggedInUser = new User(0, _txtUsername); // TODO: Load user
+            MainWindow.Content = new View.UserUC();
         }
 
         private void ShowAdminLoginGUI()
         {
             (new View.AdminLoginWindow()).ShowDialog();
-        }
-
-        private void DoAdminLogin_Click(object o, RoutedEventArgs e)
-        {
-            var ButtonEvent = e.OriginalSource as Button;
-            if (ButtonEvent != null)
-                MainWindow.Content = new View.AdminUC();
         }
 
         //private void ShowStatistic()

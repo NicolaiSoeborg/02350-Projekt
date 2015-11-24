@@ -16,6 +16,11 @@ namespace OLProgram.ViewModel
 {
     public class AdminVM : BaseVM
     {
+        public string TxtAdminPassword {
+            get { return ""; }
+            set { if (value != null && value.Equals("OLP")) MainWindow.Content = new View.AdminUC(); }
+        }
+
         public RelayCommand AddProductToGlobalCommand { get; }
         public RelayCommand AddUserCommand { get; }
         public RelayCommand CloseApplicationCommand { get; }
