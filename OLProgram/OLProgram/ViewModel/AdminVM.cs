@@ -20,6 +20,8 @@ namespace OLProgram.ViewModel
        // public RelayCommand AddUserCommand { get; }
         public RelayCommand CloseApplicationCommand { get; }
 
+        public static ObservableCollection<User> SelectedUser { get; set; } 
+
         public AdminVM()
         {
             // Intet skal initialiseres når Admin ViewModel laves (ud over commands)?
@@ -28,6 +30,8 @@ namespace OLProgram.ViewModel
             AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
             //AddUserCommand = new RelayCommand(AddUser);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
+
+            SelectedUser = new ObservableCollection<User>() { new User(0,"") };
         }
 
         private void AddProductToGlobal() { } // TODO

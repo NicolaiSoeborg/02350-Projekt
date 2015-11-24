@@ -29,9 +29,9 @@
             <Grid Grid.Row="0">
                 <TextBlock FontSize="40"> Edit User</TextBlock>
             </Grid>
-            <DockPanel Grid.Row="1">
+            <DockPanel Grid.Row="1" Margin="5">
                 <TextBlock DockPanel.Dock="Top">UserName</TextBlock>
-                <TextBox DockPanel.Dock="Top"></TextBox>
+                <TextBox DockPanel.Dock="Top" Text="{Binding SelectedUser.ElementAt(0).Name}" ></TextBox>
                 <TextBlock DockPanel.Dock="Top">PassWord</TextBlock>
                 <TextBox DockPanel.Dock="Top"></TextBox>
                 <TextBlock DockPanel.Dock="Top">Barcode</TextBlock>
@@ -51,15 +51,12 @@
             </Grid.RowDefinitions>
 
             <TextBlock FontSize="40" Grid.Row="0">UserList</TextBlock>
-            <ScrollViewer Name="UserList" Grid.Row="1">
-                <ItemsControl ItemsSource="{Binding Users}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
+
+            <ListView x:Name="UserList" ItemsSource="{Binding Users}" Grid.Row="1" SelectionChanged="UserList_SelectionChanged">
+                
+            </ListView>
+
+
 
         </Grid>
 

@@ -1,13 +1,15 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OLProgram.OLModel
 {
-    public class User
+    public class User 
     {
         public int UserID { get; set; }
         public string Name { get; set; }
@@ -34,9 +36,10 @@ namespace OLProgram.OLModel
             product.Bought += amountBought;
         }
 
-        public String toString()
+        override
+        public String ToString()
         {
-            return String.Format("[%4d] %s", this.UserID, this.Name);
+            return ("" + this.UserID + " " + this.Name) ;
         }
     }
 }

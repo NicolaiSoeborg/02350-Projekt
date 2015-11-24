@@ -12,17 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OLProgram.ViewModel;
+using OLProgram.OLModel;
 
 namespace OLProgram.View
 {
     /// <summary>
     /// Interaction logic for AddUserUC.xaml
     /// </summary>
-    public partial class AddUserUC : UserControl
+    public partial class AddUserUC : UserControl 
     {
         public AddUserUC()
         {
             InitializeComponent();
+        }
+
+        private void UserList_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        {
+            /*ViewModel.AdminVM.SelectedUser.RemoveAt(0);
+            ViewModel.AdminVM.SelectedUser.Insert(0, ((sender as ListBox).SelectedItem as User));*/
         }
     }
 }
