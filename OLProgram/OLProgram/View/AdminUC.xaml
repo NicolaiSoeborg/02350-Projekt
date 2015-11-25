@@ -12,7 +12,7 @@
         <ViewModel:AdminVM />
     </UserControl.DataContext>
 
-    <Grid x:Name="grid1">
+    <Grid x:Name="MainAdminGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="18" />
             <RowDefinition Height="4*" />
@@ -51,7 +51,7 @@
                 <ColumnDefinition Width="100*" />
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="grid" Grid.Column="0">
+            <Grid x:Name="UserGrid" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100*" />
                     <RowDefinition Height="10*" />
@@ -74,37 +74,44 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20*"/>
                             <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
                         </Grid.ColumnDefinitions>
 
                         <Button  Grid.Column="0" Command="{Binding addNewUserCommand}">Add New User</Button>
                         <Button Grid.Column="1" Command = "{Binding DeleteSelectedUserCommand}" CommandParameter ="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
-                        <Button Grid.Column="2" Command="{Binding ChangeToAdminCommand}" >Back</Button>
                     </Grid>
                 </Grid>
-                
-                
-                <Grid x:Name="grid2" Grid.Column="2">
+
+
+            <Grid x:Name="ProductGrid" Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10*" />
                     <RowDefinition Height="100*" />
+                    <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0">
-                    <TextBlock FontSize="16" Text="Products" />
-                    <TextBox x:Name="searchProducts" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
+                <StackPanel Grid.Row="0" Margin="2" >
+                    <GroupBox  Header="Edit Products">
+                        <StackPanel>
+                            <DataGrid x:Name="ProductControl" Height="400" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding ProductId }" Header="ProductId" Width="10*"/>
+                                    <DataGridTextColumn Binding="{Binding ProductName}" Header="ProductName" Width="20*"/>
+                                    <DataGridTextColumn Binding="{Binding Stock}" Header="Stock" Width="11*"/>
+                                    <DataGridTextColumn Binding="{Binding Stock}" Header="Bought" Width="11*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </GroupBox>
                 </StackPanel>
 
-                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
-                    <StackPanel>
-                        <TextBlock Text="Product1" />
-                        <TextBlock Text="Product2" />
-                        <TextBlock Text="Product3" />
-                        <TextBlock Text="Product4" />
-                        <TextBlock></TextBlock>
-                        <Button  >Manage Users</Button>
-                    </StackPanel>
-                </Border>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button  Grid.Column="0" Command="{Binding AddNewProductCommand}">Add New Product</Button>
+                    <Button Grid.Column="1" Command = "{Binding DeleteSelectedProductCommand}" CommandParameter ="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
+                </Grid>
             </Grid>
 
             <Grid x:Name="grid3" Grid.Column="4">

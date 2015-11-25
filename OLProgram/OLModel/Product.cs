@@ -13,8 +13,8 @@ namespace OLProgram.OLModel
         // Overvej at slette, da den ikke bliver genmt ned i XML og derved potentielt kan fucke det op
         private static int ProductIdCounter = 0;
 
-        public int ProductId { get; }
-        public string ProductName { get; } // TODO: Skal der være en setter? Nej, vel? Eller kan man så ikke ændre navn fra admin panel?
+        public int ProductId { get; set; }
+        public string ProductName { get; set; } // TODO: Skal der være en setter? Nej, vel? Eller kan man så ikke ændre navn fra admin panel?
         public string ImageFileName { get; }
         public int Stock { get; set; }
         public int Bought { get; set; }
@@ -35,6 +35,11 @@ namespace OLProgram.OLModel
             ProductId = ProductIdCounter++;
             this.ProductName = ProductName;
             this.ImageFileName = ImageFileName;
+        }
+
+        public override string ToString()
+        {
+            return ("" + this.ProductId + " " + this.ProductName);
         }
     }
 
@@ -91,5 +96,9 @@ namespace OLProgram.OLModel
             }
             return 0;
         }
+
+       
     }
+
+
 }
