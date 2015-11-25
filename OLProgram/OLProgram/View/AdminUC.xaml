@@ -88,8 +88,8 @@
                     <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Margin="2" >
-                    <GroupBox  Header="Edit Products">
+                <StackPanel Grid.Row="0" Margin="2">
+                    <GroupBox Header="Edit Products">
                         <StackPanel>
                             <DataGrid x:Name="ProductControl" Height="400" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
                                 <DataGrid.Columns>
@@ -109,8 +109,8 @@
                         <ColumnDefinition Width="20*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button  Grid.Column="0" Command="{Binding AddNewProductCommand}">Add New Product</Button>
-                    <Button Grid.Column="1" Command = "{Binding DeleteSelectedProductCommand}" CommandParameter ="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
+                    <Button Grid.Column="0" Command="{Binding AddNewProductCommand}">Add New Product</Button>
+                    <Button Grid.Column="1" Command="{Binding DeleteSelectedProductCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
                 </Grid>
             </Grid>
 

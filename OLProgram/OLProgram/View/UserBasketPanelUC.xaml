@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:View="clr-namespace:OLProgram.View"
              xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     
     <Grid>
         <Grid.RowDefinitions>

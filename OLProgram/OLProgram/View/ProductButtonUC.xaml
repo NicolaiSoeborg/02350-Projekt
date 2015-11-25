@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
              xmlns:View="clr-namespace:OLProgram.View"
-             >
-    
+             mc:Ignorable="d" d:DesignHeight="50" d:DesignWidth="50">
+
     <UserControl.Resources>
         <ControlTemplate x:Key="pbtn" TargetType="{x:Type Button}">
             <ContentPresenter Content="{TemplateBinding Content}"/>
@@ -15,7 +15,6 @@
             <!--<Setter Property="Width" Value="90"/>
             <Setter Property="Height" Value="90"/>-->
             <!--<Setter Property="Template" Value="{StaticResource pbtn}"/>-->
-            
         </Style>
     </UserControl.Resources>
 

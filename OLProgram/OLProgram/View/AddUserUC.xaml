@@ -6,22 +6,21 @@
              xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
              xmlns:View="clr-namespace:OLProgram.View"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="500">
 
     <UserControl.DataContext>
         <ViewModel:AdminVM />
     </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-    
-    
-    <StackPanel Grid.Row="0" Margin="2" >
-                <GroupBox FontSize="20" Header="Edit Users">
-                    <StackPanel>
+
+        <StackPanel Grid.Row="0" Margin="2" >
+            <GroupBox FontSize="20" Header="Edit Users">
+                <StackPanel>
                     <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
@@ -29,8 +28,8 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
-                </GroupBox>
-            </StackPanel>
+            </GroupBox>
+        </StackPanel>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -40,8 +39,8 @@
             </Grid.ColumnDefinitions>
 
             <Button FontSize="20" Grid.Column="0" Command="{Binding addNewUserCommand}">Add New User</Button>
-            <Button FontSize="20" Grid.Column="1" Command = "{Binding DeleteSelectedUserCommand}" CommandParameter ="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
-            <Button FontSize="20" Grid.Column="2" Command="{Binding ChangeToAdminCommand}" >Back</Button>
+            <Button FontSize="20" Grid.Column="1" Command="{Binding DeleteSelectedUserCommand}" CommandParameter="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
+            <Button FontSize="20" Grid.Column="2" Command="{Binding ChangeToAdminCommand}">Back</Button>
         </Grid>
     </Grid>
 

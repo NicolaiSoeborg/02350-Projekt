@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:View="clr-namespace:OLProgram.View"
              xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
-             mc:Ignorable="d">
+             mc:Ignorable="d" d:DesignHight="35" d:DesignWidth="250">
 
     <UserControl.Resources>
         <Style x:Key="Style1" TargetType="{x:Type Button}">
@@ -19,7 +19,6 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
             <Setter Property="Margin" Value="2" />
-            
         </Style>
 
         <Style x:Key="TB1" TargetType="{x:Type TextBlock}">
@@ -29,7 +28,6 @@
             <Setter Property="FontSize" Value="18" />
             <Setter Property="Margin" Value="2" />
             <Setter Property="FontWeight" Value="DemiBold" />
-
         </Style>
     </UserControl.Resources>
 

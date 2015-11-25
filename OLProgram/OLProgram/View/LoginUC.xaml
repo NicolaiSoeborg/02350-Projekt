@@ -6,6 +6,7 @@
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800">
+    
     <UserControl.DataContext>
         <ViewModel:MainVM />
     </UserControl.DataContext>
@@ -27,15 +28,15 @@
             <!-- top venstre grid -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40*"/>
-                    <RowDefinition Height="100*" />
-                    <RowDefinition Height="35" />
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="60*" />
+                    <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
 
                 <!-- top venstre top -->
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Event Name" FontSize="40" Margin="10,10,0,0"/>
-                </Grid>
+                <!--<Grid Grid.Row="0">
+                    <TextBlock Text="OVERSKRIFT?" FontSize="40" Margin="10,10,0,0"/>
+                </Grid>-->
                 <!-- /top venstre top -->
 
                 <!-- top venstre bund -->
@@ -44,16 +45,16 @@
                     <!--Midter grid -->
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="70*"/>
-                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="30*"/>
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="20*"/>
-                                <RowDefinition Height="60*"/>
-                                <RowDefinition Height="20*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="80*"/>
+                                <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
 
                             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2">
@@ -82,11 +83,11 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*"/>
-                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="80*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Latest Purchase" FontSize="30" />
+                    <TextBlock Text="Latest Purchase" FontSize="30" Margin="5" />
                 </Grid>
 
                 <Grid Grid.Row="1">
@@ -110,7 +111,7 @@
 
         <!-- Bund grid -->
         <Grid Grid.Row="1">
-            <TextBlock FontSize="40" Text=" Statistics"/>
+            <TextBlock FontSize="40" Text="Statistics" Margin="5" />
             <Rectangle Fill="#0000FF" Height="120" Margin="10,70,10,10" Stroke="Black" />
             <Ellipse Fill="#FF0000" Height="120" Margin="650,70,10,10" Stroke="Black" />
         </Grid>
