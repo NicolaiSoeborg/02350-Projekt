@@ -31,7 +31,7 @@
                     <MenuItem Command="Paste" />
                 </MenuItem>
                 <MenuItem Header="Add">
-                    <MenuItem Header="_Add User" />
+                    <MenuItem Header="_Add User" Command="{Binding addNewUserCommand}"/>
                     <MenuItem Header="_Add Product" Command="{Binding AddProductToGlobalCommand}" />
                 </MenuItem>
             </Menu>
