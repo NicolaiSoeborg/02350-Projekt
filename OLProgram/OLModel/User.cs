@@ -1,21 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OLProgram.OLModel
 {
-    public class User
+    public class User : NotifyBase
     {
         public int UserID { get; set; }
         public string Name { get; set; }
         public Dictionary<int,int> ProductsBought { get; }
+        public static int UserIDCounter = 2000;
         
         public User(int UserID, string Name)
         {
-            this.UserID = UserID;
+            if(UserID == -1)
+            {
+                this.UserID = UserIDCounter++;
+            }
+            else { this.UserID = UserID; }
+
             this.Name = Name;
             this.ProductsBought = new Dictionary<int, int>();
         }
@@ -32,6 +34,12 @@ namespace OLProgram.OLModel
 
             // Add "amount bought" to product
             product.Bought += amountBought;
+        }
+
+        override
+        public String ToString()
+        {
+            return ("" + this.UserID + " " + this.Name) ;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using OLModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Diagnostics;
 
 namespace OLProgram.ViewModel
 {
@@ -22,6 +23,8 @@ namespace OLProgram.ViewModel
 
         public ICommand LoginCommand { get { return new RelayCommand(DoLogin); } }
         public ICommand ChangeToAdminCommand { get { return new RelayCommand(ShowAdminLoginGUI); } }
+        public ICommand ChangeToMainCommand { get { return new RelayCommand(ShowMainLoginGUI);  } }
+        public ICommand ChangeToAddUserCommand { get { return new RelayCommand(ShowAddUserGUI); } }
 
         public MainVM()
         {
@@ -38,6 +41,16 @@ namespace OLProgram.ViewModel
         private void ShowAdminLoginGUI()
         {
             (new View.AdminLoginWindow()).ShowDialog();
+        }
+
+        private void ShowMainLoginGUI()
+        {
+                MainWindow.Content = new View.LoginUC();
+        }
+
+        private void ShowAddUserGUI()
+        {
+            MainWindow.Content = new View.AddUserUC();
         }
 
         //private void ShowStatistic()
