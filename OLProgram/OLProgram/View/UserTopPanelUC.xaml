@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OLProgram.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
         <Style x:Key="Style1" TargetType="{x:Type Button}">
@@ -20,9 +19,8 @@
             <Setter Property="Padding" Value="5"/>
         </Style>
     </UserControl.Resources>
-    
-    <Menu VerticalAlignment="Stretch">
 
+    <Menu VerticalAlignment="Stretch">
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
                 <DockPanel HorizontalAlignment="Stretch"/>
@@ -46,8 +44,11 @@
                 <Button Style="{StaticResource Style1}" Margin="5" Command="{Binding RedoCommand}" ToolTip="Redo last undo">Redo &#xE10D;</Button>
             </MenuItem.Header>
         </MenuItem>
-        <MenuItem HorizontalAlignment="Center" FontWeight="Light">
-            <TextBlock Text="{Binding HelloTxtUsername}" />
+        <MenuItem FontWeight="Light">
+            <MenuItem.Header>
+                <TextBlock Text="{Binding HelloTxtUsername}" FontSize="30" />
+            </MenuItem.Header>
+            
         </MenuItem>
         <MenuItem HorizontalAlignment="Right">
             <MenuItem.Header>

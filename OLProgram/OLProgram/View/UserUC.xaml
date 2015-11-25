@@ -11,13 +11,10 @@
         <ViewModel:UserVM/>
     </UserControl.DataContext>
 
+    <!-- TODO: Hvilke specifikke keybindings skal views have? Globale keybindings (Undo/Redo) er defineret i MainWindow
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding TODO_SomeCommand}" Gesture="CTRL+T" />
-        <!--
-            TODO: Hvilke specifikke keybindings skal views have?
-            Globale keybindings (Undo/Redo) er defineret i MainWindow
-        -->
-    </UserControl.InputBindings>
+    </UserControl.InputBindings>-->
 
     <DockPanel>
         <View:UserTopPanelUC DockPanel.Dock="Top" />
