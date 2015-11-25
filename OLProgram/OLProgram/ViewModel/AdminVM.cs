@@ -24,8 +24,7 @@ namespace OLProgram.ViewModel
             set { if (value != null && TestAdminPassword(value)) MainWindow.Content = new View.AdminUC(); }
         }
 
-        public RelayCommand AddProductToGlobalCommand { get; }
-        // public RelayCommand AddUserCommand { get; }
+        // Global commands for Admins
         public RelayCommand CloseApplicationCommand { get; }
 
         // Admin Commands for Users
@@ -34,6 +33,7 @@ namespace OLProgram.ViewModel
         public RelayCommand addNewUserCommand { get; }
 
         //Admin Commands for Prodcuts
+        public RelayCommand AddProductToGlobalCommand { get; }
         public RelayCommand<Product> DeleteSelectedProductCommand { get; }
         public RelayCommand AddNewProductCommand { get; }
 
@@ -50,7 +50,6 @@ namespace OLProgram.ViewModel
 
             // Commands:
             AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
-            //AddUserCommand = new RelayCommand(AddUser);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
 
             // Admin Commands for Users
@@ -78,25 +77,25 @@ namespace OLProgram.ViewModel
             }
             else
             {
-                MessageBox.Show("No Product Selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No product selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void AddNewProduct()
         {
-            Products.Add(new Product("New Product", "../Images/tuborg.png"));
+            Products.Add(new Product("New product"));
         }
 
         private void addNewUser()
         {
-            Users.Add(new User("new User"));
+            Users.Add(new User("New user"));
         }
 
         private bool TestAdminPassword(string pwd)
         {
             try
             {
-                byte[] salt = new byte[] { 0x4F, 0x4C, 0x50, 0x72, 0x6F, 0x67, 0x72, 0x61, 0x6D }; // "OLProgram" (must be 8 bytes or larger)
+                byte[] salt = new byte[] { 0x4F, 0x4C, 0x50, 0x72, 0x6F, 0x67, 0x72, 0x61, 0x6D }; // (must be 8 bytes or larger)
                 int iterations = 10000; // default is 1000
                 Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(pwd, salt, iterations); // PBKDF2
 
@@ -134,7 +133,7 @@ namespace OLProgram.ViewModel
             }
             else
             {
-                MessageBox.Show("No User Selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No user selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
            
