@@ -28,7 +28,6 @@ namespace OLProgram.OLModel
             else
                 ProductsBought.Add(product.ProductId, amountBought);
             
-
             // Add "amount bought" to product
             product.Bought += amountBought;
         }
@@ -37,7 +36,6 @@ namespace OLProgram.OLModel
         public String ToString()
         {
             return String.Format("{0}: {1}", UserID, Name);
-            //return ("" + this.UserID + " " + this.Name) ;
         }
     }
 }
