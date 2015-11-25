@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OLProgram.Interfaces
+﻿namespace OLProgram.Interfaces
 {
     // Recommendations for Abstract Classes vs. Interfaces
     // https://msdn.microsoft.com/en-us/library/scsyfw1d(v=vs.71).aspx

@@ -89,7 +89,7 @@
     <Compile Include="View\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\IUser.cs" />
+    <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="ViewModel\AdminVM.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
