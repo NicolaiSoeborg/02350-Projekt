@@ -85,6 +85,7 @@
     <Compile Include="Command\IUndoRedoCommand.cs" />
     <Compile Include="Command\UndoRedoController.cs" />
     <Compile Include="Interfaces\IProduct.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="View\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>
     </Compile>

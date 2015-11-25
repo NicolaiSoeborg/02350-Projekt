@@ -19,7 +19,6 @@ namespace OLProgram.ViewModel
 {
     public class AdminVM : BaseVM
     {
-        private static string ADMIN_PASSWORD = "R4JrVIuzP2DEGtCkcrpX8bJUhOfmAow2wpH2XgOfL5o="; // "OLProgram"
         public string TxtAdminPassword {
             get { return ""; }
             set { if (value != null && TestAdminPassword(value)) MainWindow.Content = new View.AdminUC(); }
@@ -34,7 +33,7 @@ namespace OLProgram.ViewModel
         public RelayCommand<User> SaveCurrentUserInformationCommand { get; }
         public RelayCommand addNewUserCommand { get; }
 
-        public ICommand ChangeToAdminCommand { get { return new RelayCommand(ShowAdminLoginGUI); } }
+        public RelayCommand ChangeToAdminCommand { get { return new RelayCommand(ShowAdminLoginGUI); } }
 
         private void ShowAdminLoginGUI()
         {
@@ -74,7 +73,8 @@ namespace OLProgram.ViewModel
                 Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(pwd, salt, iterations); // PBKDF2
 
                 // hash.Equals(byte[] sameBytes) => giver altid false ...
-                if (Convert.ToBase64String(hash.GetBytes(32)).Equals(ADMIN_PASSWORD))
+                string adminpw = Properties.Settings.Default.adminpwd;
+                if (Convert.ToBase64String(hash.GetBytes(32)).Equals(adminpw))
                     return true;
                 
             }
