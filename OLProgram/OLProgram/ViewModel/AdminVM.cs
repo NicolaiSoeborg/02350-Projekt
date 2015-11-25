@@ -89,7 +89,7 @@ namespace OLProgram.ViewModel
 
         private void addNewUser()
         {
-            Users.Add(new User(-1, "new User"));
+            Users.Add(new User("new User"));
         }
 
         private bool TestAdminPassword(string pwd)

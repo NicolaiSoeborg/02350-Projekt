@@ -34,7 +34,7 @@ namespace OLProgram.ViewModel
         private void DoLogin()
         {
             // TODO: Check login
-            loggedInUser = new User(0, _txtUsername); // TODO: Load user
+            loggedInUser = new User(_txtUsername); // TODO: Load user
             MainWindow.Content = new View.UserUC();
         }
 

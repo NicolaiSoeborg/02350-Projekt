@@ -9,15 +9,12 @@ namespace OLProgram.OLModel
         public string Name { get; set; }
         public Dictionary<int,int> ProductsBought { get; }
         public static int UserIDCounter = 2000;
-        
+
+        public User(string Name) : this(UserIDCounter++, Name) { }
+
         public User(int UserID, string Name)
         {
-            if(UserID == -1)
-            {
-                this.UserID = UserIDCounter++;
-            }
-            else { this.UserID = UserID; }
-
+            this.UserID = UserID;
             this.Name = Name;
             this.ProductsBought = new Dictionary<int, int>();
         }
@@ -39,7 +36,8 @@ namespace OLProgram.OLModel
         override
         public String ToString()
         {
-            return ("" + this.UserID + " " + this.Name) ;
+            return String.Format("{0}: {1}", UserID, Name);
+            //return ("" + this.UserID + " " + this.Name) ;
         }
     }
 }
