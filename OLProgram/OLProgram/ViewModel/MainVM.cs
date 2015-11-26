@@ -20,14 +20,14 @@ namespace OLProgram.ViewModel
             set { _txtUsername = value; }
         }
 
-        public ICommand LoginCommand { get { return new RelayCommand(DoLogin); } }
-        public ICommand ChangeToAdminCommand { get; } = new RelayCommand(ShowAdminLoginGUI);
-        public ICommand ChangeToMainCommand { get; } = new RelayCommand(ShowMainLoginGUI);
-        public ICommand ChangeToAddUserCommand { get; } = new RelayCommand(ShowAddUserGUI);
+        public ICommand LoginCommand { get; }
 
         public MainVM()
         {
             // Nothing to initialize when creating the MainWM?
+
+            // Commands:
+            LoginCommand = new RelayCommand(DoLogin);
         }
 
         private void DoLogin()
@@ -35,21 +35,6 @@ namespace OLProgram.ViewModel
             // TODO: Check login
             loggedInUser = new User(_txtUsername); // TODO: Load user
             MainWindow.Content = new View.UserUC();
-        }
-
-        private static void ShowAdminLoginGUI()
-        {
-            (new View.AdminLoginWindow()).ShowDialog();
-        }
-
-        private static void ShowMainLoginGUI()
-        {
-                MainWindow.Content = new View.LoginUC();
-        }
-
-        private static void ShowAddUserGUI()
-        {
-            MainWindow.Content = new View.AddUserUC();
         }
 
         //private void ShowStatistic()

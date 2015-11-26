@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using OLProgram.Command;
 using OLProgram.OLModel;
 using System;
@@ -30,14 +29,12 @@ namespace OLProgram.ViewModel
         // Admin Commands for Users
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
         public RelayCommand<User> SaveCurrentUserInformationCommand { get; }
-        public RelayCommand addNewUserCommand { get; }
+        public RelayCommand AddNewUserCommand { get; }
 
         //Admin Commands for Prodcuts
         public RelayCommand AddProductToGlobalCommand { get; }
         public RelayCommand<Product> DeleteSelectedProductCommand { get; }
         public RelayCommand AddNewProductCommand { get; }
-
-        public RelayCommand ChangeToAdminCommand { get { return new RelayCommand(ShowAdminLoginGUI); } }
 
         private void ShowAdminLoginGUI()
         {
@@ -54,16 +51,13 @@ namespace OLProgram.ViewModel
 
             // Admin Commands for Users
             DeleteSelectedUserCommand = new RelayCommand<User> (DeleteSelectedUser);
-            addNewUserCommand = new RelayCommand(addNewUser);
+            AddNewUserCommand = new RelayCommand(AddNewUser);
+            //SaveCurrentUserInformationCommand = new RelayCommand<User, String>(saveCurrentUserInformation);
 
             // Admin Commands for Products
             DeleteSelectedProductCommand = new RelayCommand<Product>(DeleteSelectedProduct);
             AddNewProductCommand = new RelayCommand(AddNewProduct);
-
-
-
-            //SaveCurrentUserInformationCommand = new RelayCommand<User, String>(saveCurrentUserInformation);
-
+            
 
         }
 
@@ -71,13 +65,9 @@ namespace OLProgram.ViewModel
         {
             if (SelectedProduct != null)
             {
-                var response = MessageBox.Show("Do you really want to delete Product " + SelectedProduct.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                var response = MessageBox.Show("Do you really want to delete Product " + SelectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
                     Products.Remove(SelectedProduct);
-            }
-            else
-            {
-                MessageBox.Show("No product selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -86,7 +76,7 @@ namespace OLProgram.ViewModel
             Products.Add(new Product("New product"));
         }
 
-        private void addNewUser()
+        private void AddNewUser()
         {
             Users.Add(new User("New user"));
         }
@@ -103,9 +93,7 @@ namespace OLProgram.ViewModel
                 string adminpw = Properties.Settings.Default.adminpwd;
                 if (Convert.ToBase64String(hash.GetBytes(32)).Equals(adminpw))
                     return true;
-                
-            }
-            catch { MessageBox.Show("Fejl i TestAdminPassword"); }
+            } catch { MessageBox.Show("Fejl i TestAdminPassword"); }
             return false;
         }
 
@@ -131,13 +119,6 @@ namespace OLProgram.ViewModel
                 if (response == MessageBoxResult.Yes)
                     Users.Remove(selectedUser);
             }
-            else
-            {
-                MessageBox.Show("No user selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-           
         }
-
     }
 }

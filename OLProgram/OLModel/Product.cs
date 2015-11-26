@@ -39,7 +39,7 @@ namespace OLProgram.OLModel
 
         public override string ToString()
         {
-            return ("" + this.ProductId + " " + this.ProductName);
+            return String.Format("{0} {1}", ProductId, ProductName);
         }
     }
 
@@ -47,21 +47,21 @@ namespace OLProgram.OLModel
     {
         public int Count { get; set; }
 
-        private String _CountAndName;
-        public String CountAndName { get { return _CountAndName; } set { _CountAndName = value; NotifyPropertyChanged(); } }
+        private String _countAndName;
+        public String CountAndName { get { return _countAndName; } set { _countAndName = value; NotifyPropertyChanged(); } }
 
         public BasketItem(Product Product) : this(Product, 1) { }
 
         public BasketItem(Product Product, int Amount) : base(Product)
         {
             Count = Math.Max(Amount, 1);
-            CountAndName = "" + Count + " x " + Product.ProductName;
+            CountAndName = String.Format("{0} x {1}", Count, Product.ProductName);
         }
 
         public void SetCount(int NewCount)
         {
             Count = NewCount;
-            CountAndName = "" + Count + " x " + ProductName;
+            CountAndName = String.Format("{0} x {1}", Count, ProductName);
         }
     }
 
@@ -96,9 +96,7 @@ namespace OLProgram.OLModel
             }
             return 0;
         }
-
        
     }
-
 
 }
