@@ -113,7 +113,7 @@ namespace OLProgram.ViewModel
 
         private void AddUser()
         {
-            undoRedoController.AddAndExecute(new AddUserCommand(Users, new User(123, "TODO")));
+            undoRedoController.AddAndExecute(new AddUserCommand(Users, new User("TODO")));
         }
 
         private void CloseApplication()

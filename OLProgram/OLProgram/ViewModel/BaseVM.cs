@@ -43,7 +43,7 @@ namespace OLProgram.ViewModel
             
 
             // TODO: Skal ikke være med i den endelige version (load fra OLModel?):
-            if (Products == null) Products = new ObservableCollection<Product>() { new Product("Grøn Tuborg", "../Images/tuborg.png"), new Product("Guld Tuborg", "../Images/guldtuborg.png"), new Product("Grøn Tuborg2", "../Images/tuborg.png"), new Product("Grøn Tuborg3", "../Images/tuborg.png"), new Product("Guld Tuborg2", "../Images/guldtuborg.png") };
+            if (Products == null) Products = new ObservableCollection<Product>() { new Product("Grøn Tuborg", "../Images/tuborg.png"), new Product("Guld Tuborg", "../Images/guldtuborg.png"), new Product("Royal Pils"), new Product("Somersby", "../Images/somersby.png"), new Product("Rochefort 10") };
             if (Users == null) Users = new ObservableCollection<User>() { new User(1001, "Rasmus"), new User(1002, "Nicolai"), new User(1003, "Silas"), new User(1004, "Greven") };
         }
 

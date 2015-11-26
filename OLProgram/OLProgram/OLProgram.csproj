@@ -288,10 +288,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Beer.png" />
-    <Resource Include="Images\guldtuborg.jpg" />
     <Resource Include="Images\guldtuborg.png" />
-    <Resource Include="Images\tuborg.jpg" />
     <Resource Include="Images\tuborg.png" />
+    <Resource Include="Images\somersby.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OLModel\OLModel.csproj">
