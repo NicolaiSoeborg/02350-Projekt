@@ -38,6 +38,9 @@
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Resource Include="AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -78,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings.cs" />
     <Compile Include="Command\AddProductToBasketCommand.cs" />
     <Compile Include="Command\AddUserCommand.cs" />
     <Compile Include="Command\DeleteSelectedUserCommand.cs" />
@@ -85,14 +89,15 @@
     <Compile Include="Command\IUndoRedoCommand.cs" />
     <Compile Include="Command\UndoRedoController.cs" />
     <Compile Include="Interfaces\IProduct.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="View\AddUserUC.xaml.cs">
-      <DependentUpon>AddUserUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="ViewModel\AdminVM.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
+    <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AddUserUC.xaml.cs">
+      <DependentUpon>AddUserUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AdminLoginWindow.xaml.cs">
       <DependentUpon>AdminLoginWindow.xaml</DependentUpon>
     </Compile>
@@ -123,8 +128,6 @@
     <Compile Include="View\UserUC.xaml.cs">
       <DependentUpon>UserUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainVM.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="View\AdminLoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -288,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Beer.png" />
+    <Resource Include="Images\default.png" />
     <Resource Include="Images\guldtuborg.png" />
     <Resource Include="Images\tuborg.png" />
     <Resource Include="Images\somersby.png" />
@@ -297,9 +301,6 @@
       <Project>{5b81d2ba-b856-4402-a7cd-e0d7738ae45a}</Project>
       <Name>OLModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="AppIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\ReadMe.txt" />
