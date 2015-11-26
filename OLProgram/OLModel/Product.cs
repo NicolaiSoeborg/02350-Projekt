@@ -19,7 +19,7 @@ namespace OLProgram.OLModel
         public int Stock { get; set; }
         public int Bought { get; set; }
 
-        public Product(string ProductName) : this(ProductName, "default.png") { }
+        public Product(string ProductName) : this(ProductName, "../Images/default.png") { }
 
         // This Constructor is used for making basketitems, making clone of the parameter Product
         public Product(Product Product)
