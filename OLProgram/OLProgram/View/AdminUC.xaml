@@ -12,6 +12,8 @@
         <ViewModel:AdminVM />
     </UserControl.DataContext>
 
+    <!-- TODO: Unbind Ctrl+K (ChangeToAdminCommand) -->
+
     <Grid x:Name="MainAdminGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="18" />

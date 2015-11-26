@@ -22,6 +22,7 @@ namespace OLProgram.View
     {
         public AdminLoginWindow()
         {
+            OLProgram.ViewModel.AdminVM._adminLoginWindow = this;
             InitializeComponent();
         }
 

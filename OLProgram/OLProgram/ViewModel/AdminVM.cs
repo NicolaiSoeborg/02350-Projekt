@@ -22,9 +22,11 @@ namespace OLProgram.ViewModel
             get { return ""; }
             set { if (value != null && TestAdminPassword(value)) MainWindow.Content = new View.AdminUC(); }
         }
+        public static Window _adminLoginWindow = null;
 
         // Global commands for Admins
         public RelayCommand CloseApplicationCommand { get; }
+        public RelayCommand CloseAdminLoginCommand { get; }
 
         // Admin Commands for Users
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
@@ -48,6 +50,7 @@ namespace OLProgram.ViewModel
             // Commands:
             AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
+            CloseAdminLoginCommand = new RelayCommand(CloseLoginWindow);
 
             // Admin Commands for Users
             DeleteSelectedUserCommand = new RelayCommand<User> (DeleteSelectedUser);
@@ -109,6 +112,12 @@ namespace OLProgram.ViewModel
             var response = MessageBox.Show("Do you really want to exit?", "Exiting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (response == MessageBoxResult.Yes)
                 Environment.Exit(0); // TODO: More graceful shutdown? Call OLModel.save() first ?
+        }
+
+        private void CloseLoginWindow()
+        {
+            if (_adminLoginWindow != null)
+                _adminLoginWindow.Close();
         }
         
         private void DeleteSelectedUser(User selectedUser)
