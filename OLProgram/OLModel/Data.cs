@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace OLProgram.OLModel
 {
+    [Serializable]
     public class Data
     {
+        
         public List<User> Users { get; set; }
         public List<Product> Products { get; set; }
     }

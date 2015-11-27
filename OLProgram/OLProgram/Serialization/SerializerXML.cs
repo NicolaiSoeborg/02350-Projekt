@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 
 namespace OLProgram.Serialization
-{   
+{
     public class SerializerXML
     {
         public static SerializerXML Instance { get; } = new SerializerXML();
@@ -68,38 +68,6 @@ namespace OLProgram.Serialization
 
             return stringBuilder.ToString();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         public async void ASyncSaveUser(User user)
