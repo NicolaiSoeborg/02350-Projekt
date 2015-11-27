@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OLProgram.OLModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-// TODO: Currently only for users
-namespace OLProgram.OLModel
+
+namespace OLProgram.Serialization
 {   
     public class SerializerXML
     {
@@ -16,6 +17,90 @@ namespace OLProgram.OLModel
         private SerializerXML() { }
         private static string USER_PATH = "users";
         private static string PRODUCT_PATH = "products";
+
+
+
+
+        public Task<Data> AsyncDeserializeFromFile(string path)
+        {
+            return Task.Run(() => DeserializeFromFile(path));
+        }
+
+        private Data DeserializeFromFile(string path)
+        {
+            using (FileStream stream = File.OpenRead(path))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Data));
+                Data data = serializer.Deserialize(stream) as Data;
+
+                return data;
+            }
+        }
+
+        public Task<string> AsyncSerializeToString(Data data)
+        {
+            return Task.Run(() => SerializeToString(data));
+        }
+
+        public async void AsyncSerializeToFile(Data data, string path)
+        {
+            await Task.Run(() => SerializeToFile(data, path));
+        }
+
+        private void SerializeToFile(Data data, string path)
+        {
+            using (FileStream stream = File.Create(path))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Data));
+                serializer.Serialize(stream, data);
+            }
+        }
+
+        private string SerializeToString(Data data)
+        {
+            var stringBuilder = new StringBuilder();
+
+            using (TextWriter stream = new StringWriter(stringBuilder))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Data));
+                serializer.Serialize(stream, data);
+            }
+
+            return stringBuilder.ToString();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public async void ASyncSaveUser(User user)
         {

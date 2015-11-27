@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Security.Cryptography;
-
+using OLProgram.Serialization;
 
 namespace OLProgram.ViewModel
 {
@@ -28,15 +28,23 @@ namespace OLProgram.ViewModel
         public RelayCommand CloseApplicationCommand { get; }
         public RelayCommand CloseAdminLoginCommand { get; }
 
-        // Admin Commands for Users
+        // Admin Commands for UsersVM
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
         public RelayCommand<User> SaveCurrentUserInformationCommand { get; }
         public RelayCommand AddNewUserCommand { get; }
 
-        //Admin Commands for Prodcuts
+        //Admin Commands for Products
         public RelayCommand AddProductToGlobalCommand { get; }
         public RelayCommand<Product> DeleteSelectedProductCommand { get; }
         public RelayCommand AddNewProductCommand { get; }
+
+        // Admin commands for Load, Save and New
+        public RelayCommand SaveDataCommand { get; }
+        public RelayCommand LoadDataCommand { get; }
+        public RelayCommand NewDataCommand { get; }
+
+        // For load, Save and new 
+        public DialogViews dialogVM { get; set; }
 
         private void ShowAdminLoginGUI()
         {
@@ -57,17 +65,24 @@ namespace OLProgram.ViewModel
             CloseApplicationCommand = new RelayCommand(CloseApplication);
             CloseAdminLoginCommand = new RelayCommand(CloseLoginWindow);
 
-            // Admin Commands for Users
+            // Admin Commands for UsersVM
             DeleteSelectedUserCommand = new RelayCommand<User> (DeleteSelectedUser);
             AddNewUserCommand = new RelayCommand(AddNewUser);
             //SaveCurrentUserInformationCommand = new RelayCommand<User, String>(saveCurrentUserInformation);
 
-            // Admin Commands for Products
+            // Admin Commands for ProductsVM
             DeleteSelectedProductCommand = new RelayCommand<Product>(DeleteSelectedProduct);
             AddNewProductCommand = new RelayCommand(AddNewProduct);
-            
 
-        }
+            // Admin commands for Load, Save and New
+            SaveDataCommand = new RelayCommand(SaveCurrentData);
+            LoadDataCommand = new RelayCommand(LoadExistingData);
+            NewDataCommand = new RelayCommand(NewData);
+
+            dialogVM = new DialogViews();
+
+
+    }
 
         private void DeleteSelectedProduct(Product SelectedProduct)
         {
@@ -107,11 +122,6 @@ namespace OLProgram.ViewModel
 
         private void AddProductToGlobal() { } // TODO
 
-        private void AddUser()
-        {
-            undoRedoController.AddAndExecute(new AddUserCommand(Users, new User("TODO")));
-        }
-
         private void CloseApplication()
         {
             var response = MessageBox.Show("Do you really want to exit?", "Exiting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
@@ -134,5 +144,41 @@ namespace OLProgram.ViewModel
                     Users.Remove(selectedUser);
             }
         }
+
+        private async void LoadExistingData()
+        {
+            string path = dialogVM.ShowOpen();
+            if (path != null)
+            {
+                // Load Users and Products from xml file
+                Data DataToLoad = await SerializerXML.Instance.AsyncDeserializeFromFile(path);
+
+                // Clear current useres and add the loaded users
+                Users.Clear();
+                DataToLoad.Users.ForEach(x => Users.Add(x));
+                Products.Clear();
+                DataToLoad.Products.ForEach(x => Products.Add(x));
+            }
+        }
+
+        private void SaveCurrentData()
+        {
+            string path = dialogVM.ShowSave();
+            if (path != null)
+            {
+                Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList() };
+                SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
+            }
+        }
+
+        private void NewData()
+        {
+            if (dialogVM.ShowNew())
+            {
+                Users.Clear();
+                Products.Clear();
+            }
+        }
+
     }
 }

@@ -23,7 +23,9 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Command="New" />
+                    <MenuItem Header="New" Command="{Binding NewDataCommand}"/>
+                    <MenuItem Header="Save" Command="{Binding SaveDataCommand}"/>
+                    <MenuItem Header="Load" Command="{Binding LoadDataCommand}"/>
                     <Separator />
                     <MenuItem Header="_Exit" x:Name="exit" Command="{Binding CloseApplicationCommand}" />
                 </MenuItem>
@@ -78,7 +80,7 @@
                             <ColumnDefinition Width="20*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button  Grid.Column="0" Command="{Binding addNewUserCommand}">Add New User</Button>
+                        <Button  Grid.Column="0" Command="{Binding AddNewUserCommand}">Add New User</Button>
                         <Button Grid.Column="1" Command = "{Binding DeleteSelectedUserCommand}" CommandParameter ="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
                     </Grid>
                 </Grid>

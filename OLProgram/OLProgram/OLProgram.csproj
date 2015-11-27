@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Serialization\SerializerXML.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Command\AddProductToBasketCommand.cs" />
     <Compile Include="Command\AddUserCommand.cs" />
@@ -92,8 +93,9 @@
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="ViewModel\AdminVM.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
+    <Compile Include="ViewModel\DialogViews.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
-    <Compile Include="ViewModel\UserVM.cs" />
+    <Compile Include="ViewModel\BasketVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>

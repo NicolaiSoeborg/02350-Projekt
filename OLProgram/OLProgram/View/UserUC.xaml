@@ -8,7 +8,7 @@
         mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800">
 
     <UserControl.DataContext>
-        <ViewModel:UserVM/>
+        <ViewModel:BasketVM/>
     </UserControl.DataContext>
 
     <!-- TODO: Hvilke specifikke keybindings skal views have? Globale keybindings (Undo/Redo) er defineret i MainWindow
