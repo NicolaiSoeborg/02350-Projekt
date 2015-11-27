@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace OLProgram.OLModel
 {
@@ -7,9 +11,10 @@ namespace OLProgram.OLModel
     {
         public int UserID { get; set; }
         public string Name { get; set; }
-        public Dictionary<int,int> ProductsBought { get; }
+        [XmlIgnore] public Dictionary<int,int> ProductsBought { get; } // TODO: NOT XmlSerializer-able...
         public static int UserIDCounter = 2000;
 
+        internal User() : this(0, "") { } // Used by serializer
         public User(string Name) : this(UserIDCounter++, Name) { }
 
         public User(int UserID, string Name)
@@ -32,8 +37,21 @@ namespace OLProgram.OLModel
             product.Bought += amountBought;
         }
 
-        override
-        public String ToString()
+        public MemoryStream Serialize()
+        {
+            var stream = new MemoryStream();
+            XmlSerializer serializer = new XmlSerializer(typeof(User));
+            serializer.Serialize(stream, this);
+            return stream;
+        }
+
+        public static User Deserialize(Stream serialization)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(User));
+            return serializer.Deserialize(serialization) as User; // TODO: What if we can't deserialize.
+        }
+
+        public override String ToString()
         {
             return String.Format("{0}: {1}", UserID, Name);
         }

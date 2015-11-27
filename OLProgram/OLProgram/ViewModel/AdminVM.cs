@@ -47,6 +47,11 @@ namespace OLProgram.ViewModel
         {
             // Intet skal initialiseres når Admin ViewModel laves (ud over commands)?
 
+            /*SerializerXML test = OLModel.SerializerXML.Instance;
+            User a = new User("Nicolai");
+            test.ASyncSaveUser(a);*/
+
+
             // Commands:
             AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
             CloseApplicationCommand = new RelayCommand(CloseApplication);

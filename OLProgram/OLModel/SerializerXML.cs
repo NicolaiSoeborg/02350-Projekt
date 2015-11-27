@@ -1,5 +1,4 @@
-﻿using OLProgram.OLModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,77 +7,64 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 // TODO: Currently only for users
-namespace OLProgram.Serialization
+namespace OLProgram.OLModel
 {   
     public class SerializerXML
     {
         public static SerializerXML Instance { get; } = new SerializerXML();
 
         private SerializerXML() { }
+        private static string USER_PATH = "users";
+        private static string PRODUCT_PATH = "products";
 
-        // Asynchronical in order to avoid conflicts with main program
-        public async void AsyncSerializeToFile(User user, string path)
+        public async void ASyncSaveUser(User user)
         {
-            await Task.Run(() => SerializeToFile(user, path));
+            await Task.Run(() => SaveDataToFile(user.Serialize(), USER_PATH, user.Name));
         }
 
-        private void SerializeToFile(User user, string path)
+        public async void ASyncSaveProduct(Product product)
         {
-            using (FileStream stream = File.Create(path))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(User));
-                serializer.Serialize(stream, user);
-            }
+            await Task.Run(() => SaveDataToFile(product.Serialize(), PRODUCT_PATH, product.ProductName));
         }
 
-        public Task<User> AsyncDeserializeFromFile(string path)
+        private void SaveDataToFile(MemoryStream xml, string path, string name)
         {
-            return Task.Run(() => DeserializeFromFile(path));
+            string filename = String.Format("{0}/{1}.xml", path, name);
+
+            if (File.Exists(filename))
+                File.Delete(filename); // TODO: better handling? Move?
+
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            using (Stream file = File.Create(filename))
+                xml.CopyTo(file);
         }
 
-        private User DeserializeFromFile(string path)
+        public User LoadUser(string name)
         {
-            using (FileStream stream = File.OpenRead(path))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(User));
-                User user = serializer.Deserialize(stream) as User;
-
-                return user;
-            }
+            MemoryStream xml = LoadDataFromFile(USER_PATH, name);
+            return User.Deserialize(xml);
         }
 
-        public Task<string> AsyncSerializeToString(User user)
+        public Product LoadProduct(string name)
         {
-            return Task.Run(() => SerializeToString(user));
+            MemoryStream xml = LoadDataFromFile(PRODUCT_PATH, name);
+            return Product.Deserialize(xml);
         }
 
-        private string SerializeToString(User user)
+        private MemoryStream LoadDataFromFile(string path, string name)
         {
-            var stringBuilder = new StringBuilder();
+            string filename = String.Format("{0}/{1}.xml", path, name);
 
-            using (TextWriter stream = new StringWriter(stringBuilder))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(User));
-                serializer.Serialize(stream, user);
-            }
+            if (!File.Exists(filename))
+                return null;
 
-            return stringBuilder.ToString();
-        }
+            MemoryStream data = new MemoryStream();
+            using (Stream file = File.Open(filename, FileMode.Open))
+                data.CopyTo(data);
 
-        public Task<User> AsyncDeserializeFromString(string xml)
-        {
-            return Task.Run(() => DeserializeFromString(xml));
-        }
-
-        private User DeserializeFromString(string xml)
-        {
-            using (TextReader stream = new StringReader(xml))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(User));
-                User user = serializer.Deserialize(stream) as User;
-
-                return user;
-            }
+            return data;
         }
     }
 }
