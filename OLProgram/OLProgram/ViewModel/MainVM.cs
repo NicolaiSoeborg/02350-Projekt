@@ -1,13 +1,7 @@
 using System;
-using GalaSoft.MvvmLight;
+using OLModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
-using OLProgram.OLModel;
-using OLProgram.Command;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Diagnostics;
 
 namespace OLProgram.ViewModel
 {

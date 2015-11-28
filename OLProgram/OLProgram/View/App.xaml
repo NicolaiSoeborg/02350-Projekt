@@ -5,7 +5,7 @@
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d1p1:Ignorable="d"
              xmlns:View="clr-namespace:OLProgram.View"
-             xmlns:Model="clr-namespace:OLProgram.OLModel;assembly=OLModel"
+             xmlns:Model="clr-namespace:OLModel;assembly=OLModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

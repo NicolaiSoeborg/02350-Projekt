@@ -1,7 +1,6 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using OLProgram.Command;
-using OLProgram.OLModel;
+using OLModel;
 using System;
 using System.Windows.Input;
 

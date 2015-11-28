@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Windows;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Serialization;
+using System.Collections.ObjectModel;
 
-namespace OLProgram.OLModel
+namespace OLModel
 {
     public class Product : NotifyBase
     {
@@ -40,11 +35,6 @@ namespace OLProgram.OLModel
             this.ProductName = ProductName;
             this.ImageFileName = ImageFileName;
         }
-
-        /*public Task<MemoryStream> AsyncSerialize()
-        {
-            return new Task<MemoryStream>(() => Serialize());
-        }*/
 
         public MemoryStream Serialize()
         {

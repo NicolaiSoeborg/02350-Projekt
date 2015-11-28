@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace OLProgram.OLModel
+namespace OLModel
 {
         public class Basket
         {

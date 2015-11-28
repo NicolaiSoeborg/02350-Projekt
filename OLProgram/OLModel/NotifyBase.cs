@@ -1,16 +1,9 @@
-﻿//Denne fil bruges ikke endnu
-
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OLProgram.OLModel
+namespace OLModel // Bruges KUN af Product.cs
 {
     // Do not worry to much about this class, as the functionality is normally given by MVVM Frameworks.
     // This is an abstract base class that is used to define INotifyPropertyChanged functionality used by all Model classes, so they do not have to.

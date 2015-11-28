@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OLProgram.OLModel
+namespace OLModel
 {
-    public class User : NotifyBase
+    public class User //: NotifyBase
     {
         public int UserID { get; set; }
         public string Name { get; set; }
-        [XmlIgnore] public Dictionary<int,int> ProductsBought { get; } // TODO: NOT XmlSerializer-able...
+        [XmlIgnore] public Dictionary<int,int> ProductsBought { get; } // TODO: NOT XmlSerializer-able!
         public static int UserIDCounter = 2000;
 
         internal User() : this(0, "") { } // Used by serializer
