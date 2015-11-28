@@ -83,6 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\SerializerXML.cs" />
+    <Compile Include="Interfaces\IBasket.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Command\AddProductToBasketCommand.cs" />
     <Compile Include="Command\AddUserCommand.cs" />
