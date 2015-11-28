@@ -14,32 +14,26 @@
     <!-- baggrund grid -->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="60*"/>
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="60*" />
         </Grid.RowDefinitions>
 
         <!-- top grid -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="35*" />
             </Grid.ColumnDefinitions>
 
             <!-- top venstre grid -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*" />
                     <RowDefinition Height="60*" />
                     <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
 
-                <!-- top venstre top -->
-                <!--<Grid Grid.Row="0">
-                    <TextBlock Text="OVERSKRIFT?" FontSize="40" Margin="10,10,0,0"/>
-                </Grid>-->
-                <!-- /top venstre top -->
-
-                <!-- top venstre bund -->
+                <!-- top venstre -->
                 <Grid Grid.Row="1">
 
                     <!--Midter grid -->
@@ -57,7 +51,8 @@
                                 <RowDefinition Height="10*"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2">
+                            <!-- High ZIndex value, so content is above other objects -->
+                            <Border Panel.ZIndex="-1" MaxHeight="180" Grid.Row="1" BorderBrush="Black" BorderThickness="2">
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" FocusManager.FocusedElement="{Binding ElementName=UserTxtBox}">
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
@@ -66,7 +61,6 @@
                                     <PasswordBox x:Name="PasswordTxtBox" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
                                     <TextBlock x:Name="TODOSpaceHackSoBtnIsntToCloseToPwdBox" Height="16" />
                                     <Button x:Name="LoginButton" Command="{Binding LoginCommand}" IsDefault="true">Login</Button>
-                                    <!-- Vigtigt at IsDefault="true", så "Enter" bliver fanget i textboxen -->
                                 </StackPanel>
                             </Border>
 
@@ -74,7 +68,7 @@
 
                     </Grid>
                 </Grid>
-                <!-- /top venstre bund -->
+                <!-- /top venstre -->
 
             </Grid>
             <!-- /top venstre grid -->
