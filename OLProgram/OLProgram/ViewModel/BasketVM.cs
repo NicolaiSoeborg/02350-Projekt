@@ -16,6 +16,7 @@ namespace OLProgram.ViewModel
         public ICommand DecreaseBasketItemCommand { get; }
         public ICommand DeleteBasketItemCommand { get; }
         public ICommand ClearBasketCommand { get; }
+        public RelayCommand CheckOutCommand { get; }
 
         public BasketVM()
         {
@@ -26,8 +27,14 @@ namespace OLProgram.ViewModel
             DecreaseBasketItemCommand = new RelayCommand<Product>(DecreaseBasketItem);
             DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
             ClearBasketCommand = new RelayCommand(ClearBasket);
+            CheckOutCommand = new RelayCommand(CheckOutBasket);
         }
-       
+
+        private void CheckOutBasket()
+        {
+            MainWindow.Content = new View.LoginUC();
+        }
+
         private void AddProductToBasket(Product Product)
         {
             undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, 1));

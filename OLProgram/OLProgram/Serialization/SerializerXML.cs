@@ -19,8 +19,6 @@ namespace OLProgram.Serialization
         private static string PRODUCT_PATH = "products";
 
 
-
-
         public Task<Data> AsyncDeserializeFromFile(string path)
         {
             return Task.Run(() => DeserializeFromFile(path));

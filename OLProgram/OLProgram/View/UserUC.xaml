@@ -26,7 +26,7 @@
             </Grid.ColumnDefinitions>
 
             <View:ProductSelectionUC Grid.Column="0" />
-            <View:UserBasketPanelUC Grid.Column="1" />
+            <View:UserBasketPanelUC Grid.Column="1" Loaded="UserBasketPanelUC_Loaded" />
             
         </Grid>
     </DockPanel>

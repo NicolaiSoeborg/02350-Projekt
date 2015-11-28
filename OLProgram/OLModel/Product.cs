@@ -23,8 +23,6 @@ namespace OLProgram.OLModel
 
         internal Product() : this("", "") { } // Used by serializer
 
-
-
         public Product(string ProductName) : this(ProductName, "../Images/default.png") { }
 
         // This Constructor is used for making basketitems, making clone of the parameter Product
@@ -66,62 +64,6 @@ namespace OLProgram.OLModel
         {
             return String.Format("{0} {1}", ProductId, ProductName);
         }
-    }
-
-    public class BasketItem : Product
-    {
-        public int Count { get; set; }
-
-        private String _countAndName;
-        public String CountAndName { get { return _countAndName; } set { _countAndName = value; NotifyPropertyChanged(); } }
-
-        public BasketItem(Product Product) : this(Product, 1) { }
-
-        public BasketItem(Product Product, int Amount) : base(Product)
-        {
-            Count = Math.Max(Amount, 1);
-            CountAndName = String.Format("{0} x {1}", Count, Product.ProductName);
-        }
-
-        public void SetCount(int NewCount)
-        {
-            Count = NewCount;
-            CountAndName = String.Format("{0} x {1}", Count, ProductName);
-        }
-    }
-
-    public class Basket
-    {
-        public ObservableCollection<BasketItem> BasketItems { get; set; }
-
-        public Basket()
-        {
-            BasketItems = new ObservableCollection<BasketItem>();
-        }
-
-        public void Increase(Product product, int count)
-        {
-            foreach (BasketItem item in BasketItems)
-            {
-                if (item.ProductId == product.ProductId)
-                {
-                    item.SetCount(item.Count + count);
-                    return;
-                }
-            }
-            BasketItems.Add(new BasketItem(product, count));
-        }
-
-        public int getCount(Product product)
-        {
-            foreach(BasketItem bItem in BasketItems)
-            {
-                if (bItem.ProductId == product.ProductId)
-                    return bItem.Count;
-            }
-            return 0;
-        }
-       
-    }
+    }    
 
 }
