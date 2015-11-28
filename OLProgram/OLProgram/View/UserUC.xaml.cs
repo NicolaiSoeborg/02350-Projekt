@@ -23,10 +23,5 @@ namespace OLProgram.View
         {
             InitializeComponent();
         }
-
-        private void UserBasketPanelUC_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
