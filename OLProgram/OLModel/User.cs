@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace OLModel
 {
-    public class User //: NotifyBase
+    public class User
     {
         public int UserID { get; set; }
         public string Name { get; set; }
