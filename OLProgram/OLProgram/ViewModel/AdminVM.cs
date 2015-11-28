@@ -12,21 +12,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Security.Cryptography;
-using OLProgram.Serialization;
+using OLProgram.Helpers;
 
 namespace OLProgram.ViewModel
 {
     public class AdminVM : BaseVM
     {
-        public string TxtAdminPassword {
-            get { return ""; }
-            set { if (value != null && TestAdminPassword(value)) MainWindow.Content = new View.AdminUC(); }
-        }
+        public string TxtAdminPassword { get; set; }
         public static Window _adminLoginWindow = null;
 
         // Global commands for Admins
         public RelayCommand CloseApplicationCommand { get; }
-        public RelayCommand CloseAdminLoginCommand { get; }
+        public RelayCommand AdminLoginCommand { get; }
 
         // Admin Commands for UsersVM
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
@@ -53,17 +50,10 @@ namespace OLProgram.ViewModel
 
         public AdminVM()
         {
-            // Intet skal initialiseres når Admin ViewModel laves (ud over commands)?
-
-            /*SerializerXML test = OLModel.SerializerXML.Instance;
-            User a = new User("Nicolai");
-            test.ASyncSaveUser(a);*/
-
-
             // Commands:
             AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
+            AdminLoginCommand = new RelayCommand(DoAdminLogin);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
-            CloseAdminLoginCommand = new RelayCommand(CloseLoginWindow);
 
             // Admin Commands for UsersVM
             DeleteSelectedUserCommand = new RelayCommand<User> (DeleteSelectedUser);
@@ -80,8 +70,6 @@ namespace OLProgram.ViewModel
             NewDataCommand = new RelayCommand(NewData);
 
             dialogVM = new DialogViews();
-
-
     }
 
         private void DeleteSelectedProduct(Product SelectedProduct)
@@ -104,22 +92,6 @@ namespace OLProgram.ViewModel
             Users.Add(new User("New user"));
         }
 
-        private bool TestAdminPassword(string pwd)
-        {
-            try
-            {
-                byte[] salt = new byte[] { 0x4F, 0x4C, 0x50, 0x72, 0x6F, 0x67, 0x72, 0x61, 0x6D }; // (must be 8 bytes or larger)
-                int iterations = 10000; // default is 1000
-                Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(pwd, salt, iterations); // PBKDF2
-
-                // hash.Equals(byte[] sameBytes) => giver altid false ...
-                string adminpw = Properties.Settings.Default.adminpwd;
-                if (Convert.ToBase64String(hash.GetBytes(32)).Equals(adminpw))
-                    return true;
-            } catch { MessageBox.Show("Fejl i TestAdminPassword"); }
-            return false;
-        }
-
         private void AddProductToGlobal() { } // TODO
 
         private void CloseApplication()
@@ -129,10 +101,34 @@ namespace OLProgram.ViewModel
                 Environment.Exit(0); // TODO: More graceful shutdown? Call OLModel.save() first ?
         }
 
-        private void CloseLoginWindow()
+        private string HashPassword(string pwd)
         {
-            if (_adminLoginWindow != null)
-                _adminLoginWindow.Close();
+            if (String.IsNullOrEmpty(TxtAdminPassword)) return null;
+            byte[] salt = new byte[] { 0x4F, 0x4C, 0x50, 0x72, 0x6F, 0x67, 0x72, 0x61, 0x6D }; // (must be 8 bytes or larger)
+            int iterations = 10000; // default is 1000
+            try
+            {
+                Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(TxtAdminPassword, salt, iterations); // PBKDF2
+                return Convert.ToBase64String(hash.GetBytes(32));
+            }
+            catch { MessageBox.Show("Error while hashing password!"); }
+            return null; // "null" => en fejl ikke skal give et "korrekt" formatteret password hash
+        }
+
+        private void DoAdminLogin()
+        {
+            string inputPassword = HashPassword(TxtAdminPassword);
+            if (_adminLoginWindow != null && inputPassword != null)
+            {
+                string adminpw = Properties.Settings.Default.adminpwd;
+                if (inputPassword.Equals(adminpw))
+                {
+                    // Login korrekt!
+                    TxtAdminPassword = ""; // Clear saved password
+                    MainWindow.Content = new View.AdminUC();
+                    _adminLoginWindow.Close();
+                }
+            }
         }
         
         private void DeleteSelectedUser(User selectedUser)

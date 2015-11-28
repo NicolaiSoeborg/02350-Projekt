@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 
-namespace OLProgram.Serialization
+namespace OLProgram.Helpers
 {
     public class SerializerXML
     {

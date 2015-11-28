@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
+             xmlns:local="clr-namespace:OLProgram.Helpers"
              Height="100" Width="300" Title="Admin Login"
              WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
 
@@ -12,12 +13,12 @@
     </Window.DataContext>
 
     <Window.InputBindings>
-        <KeyBinding Command="{Binding CloseAdminLoginCommand}" Gesture="ESC" />
+        <KeyBinding Command="{Binding AdminLoginCommand}" Gesture="ENTER" />
     </Window.InputBindings>
 
-    <DockPanel LastChildFill="True" FocusManager.FocusedElement="{Binding ElementName=TxtBox}">
+    <DockPanel LastChildFill="True" FocusManager.FocusedElement="{Binding ElementName=PwdBox}">
         <TextBlock DockPanel.Dock="Top" Text="Admin Password:" />
-        <TextBox Name="TxtBox" DockPanel.Dock="Top" Text="{Binding TxtAdminPassword}" FontFamily="Wingdings" />
-        <Button Content="Login" IsDefault="true" Click="AdminLogin_Click" />
+        <PasswordBox DockPanel.Dock="Top" Name="PwdBox" local:PasswordHelper.Attach="True" local:PasswordHelper.Password="{Binding TxtAdminPassword, Mode=TwoWay}" />
+        <Button Content="Login" IsDefault="true" Command="{Binding AdminLoginCommand}" />
     </DockPanel>
 </Window>
