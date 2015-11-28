@@ -34,19 +34,19 @@ namespace OLProgram.ViewModel
             MainWindow.Content = new View.LoginUC();
         }
 
-        private void AddProductToBasket(Product Product)
+        private void AddProductToBasket(Product product)
         {
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, 1));
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
         }
 
-        private void DecreaseBasketItem(Product Product)
+        private void DecreaseBasketItem(Product product)
         {
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, -1));
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, -1));
         }
-        private void DeleteBasketItem(Product Product)
+        private void DeleteBasketItem(Product product)
         {
-            int Count = Basket.getCount(Product);
-            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, Product, -Count));
+            int count = Basket.getCount(product);
+            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, -count));
         }
 
         private void ClearBasket()

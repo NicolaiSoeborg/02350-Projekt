@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace OLProgram.ViewModel
 {
-    public class DialogViews
+    public class DialogVM
     {
         private static OpenFileDialog openDialog = new OpenFileDialog() { Title = "Open Database", Filter = "XML Document (.xml)|*.xml", DefaultExt = "xml", InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), CheckFileExists = true };
         private static SaveFileDialog saveDialog = new SaveFileDialog() { Title = "Save Database", Filter = "XML Document (.xml)|*.xml", DefaultExt = "xml", InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) };

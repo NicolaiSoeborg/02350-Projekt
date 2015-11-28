@@ -81,21 +81,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\PasswordHelper.cs" />
-    <Compile Include="Helpers\SerializerXML.cs" />
-    <Compile Include="Interfaces\IBasket.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Command\AddProductToBasketCommand.cs" />
     <Compile Include="Command\AddUserCommand.cs" />
-    <Compile Include="Command\DeleteSelectedUserCommand.cs" />
     <Compile Include="Command\ClearBasketCommand.cs" />
     <Compile Include="Command\IUndoRedoCommand.cs" />
     <Compile Include="Command\UndoRedoController.cs" />
-    <Compile Include="Interfaces\IProduct.cs" />
-    <Compile Include="Interfaces\IUser.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\SerializerXML.cs" />
     <Compile Include="ViewModel\AdminVM.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
-    <Compile Include="ViewModel\DialogViews.cs" />
+    <Compile Include="ViewModel\DialogVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\BasketVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

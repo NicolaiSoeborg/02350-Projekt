@@ -18,22 +18,22 @@ namespace OLModel
 
         internal Product() : this("", "") { } // Used by serializer
 
-        public Product(string ProductName) : this(ProductName, "../Images/default.png") { }
+        public Product(string productName) : this(productName, "../Images/default.png") { }
 
         // This Constructor is used for making basketitems, making clone of the parameter Product
-        public Product(Product Product)
+        public Product(Product product)
         {
-            ProductId = Product.ProductId;
-            ProductName = Product.ProductName;
-            ImageFileName = Product.ImageFileName;
+            ProductId = product.ProductId;
+            ProductName = product.ProductName;
+            ImageFileName = product.ImageFileName;
         }
 
-        public Product(string ProductName, string ImageFileName)
+        public Product(string productName, string imageFileName)
         {
             ProductIdCounter++;
             ProductId = ProductIdCounter++;
-            this.ProductName = ProductName;
-            this.ImageFileName = ImageFileName;
+            this.ProductName = productName;
+            this.ImageFileName = imageFileName;
         }
 
         public MemoryStream Serialize()

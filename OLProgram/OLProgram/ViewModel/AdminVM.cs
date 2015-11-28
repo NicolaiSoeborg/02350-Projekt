@@ -33,7 +33,7 @@ namespace OLProgram.ViewModel
         public RelayCommand NewDataCommand { get; }
 
         // For load, Save and new 
-        public DialogViews dialogVM { get; set; }
+        public DialogVM dialogVM { get; set; }
 
         private void ShowAdminLoginGUI()
         {
@@ -61,16 +61,16 @@ namespace OLProgram.ViewModel
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
 
-            dialogVM = new DialogViews();
+            dialogVM = new DialogVM();
     }
 
-        private void DeleteSelectedProduct(Product SelectedProduct)
+        private void DeleteSelectedProduct(Product selectedProduct)
         {
-            if (SelectedProduct != null)
+            if (selectedProduct != null)
             {
-                var response = MessageBox.Show("Do you really want to delete Product " + SelectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                var response = MessageBox.Show("Do you really want to delete Product " + selectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
-                    Products.Remove(SelectedProduct);
+                    Products.Remove(selectedProduct);
             }
         }
 

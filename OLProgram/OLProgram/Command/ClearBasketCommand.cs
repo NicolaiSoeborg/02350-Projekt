@@ -4,15 +4,9 @@ namespace OLProgram.Command
 {
     public class ClearBasketCommand : IUndoRedoCommand
     {
-        #region Fields
-
         private Basket _basket;
         private BasketItem[] _clearedItemsBackup;
         
-        #endregion
-
-        #region Constructor 
-
         public ClearBasketCommand(Basket basket)
         {
             _basket = basket;
@@ -20,10 +14,6 @@ namespace OLProgram.Command
             basket.BasketItems.CopyTo(_clearedItemsBackup, 0);
         }
     
-        #endregion
-
-        #region Methods
-
         public void Execute()
         {
             while (_basket.BasketItems.Count > 0)
@@ -32,13 +22,10 @@ namespace OLProgram.Command
 
         public void UnExecute()
         {
-            for(int i = 0; i < _clearedItemsBackup.Length; i++)
+            for (int i = 0; i < _clearedItemsBackup.Length; i++)
             {
                 _basket.BasketItems.Add(_clearedItemsBackup[i]);
             }
         }
-
-        #endregion
-
     }
 }

@@ -13,12 +13,12 @@ namespace OLModel
         public static int UserIDCounter = 2000;
 
         internal User() : this(0, "") { } // Used by serializer
-        public User(string Name) : this(UserIDCounter++, Name) { }
+        public User(string name) : this(UserIDCounter++, name) { }
 
-        public User(int UserID, string Name)
+        public User(int userID, string name)
         {
-            this.UserID = UserID;
-            this.Name = Name;
+            this.UserID = userID;
+            this.Name = name;
             this.ProductsBought = new Dictionary<int, int>();
         }
 
