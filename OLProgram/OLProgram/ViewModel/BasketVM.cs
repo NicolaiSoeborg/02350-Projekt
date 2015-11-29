@@ -31,7 +31,7 @@ namespace OLProgram.ViewModel
 
         private void CheckOutBasket()
         {
-            undoRedoController.AddAndExecute(new ClearBasketCommand(Basket));
+            new ClearBasketCommand(Basket).Execute();
             undoRedoController.ClearUndoRedoStacks();
             MainWindow.Content = new View.LoginUC();
         }
@@ -45,6 +45,7 @@ namespace OLProgram.ViewModel
         {
             undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, -1));
         }
+
         private void DeleteBasketItem(Product product)
         {
             int count = Basket.getCount(product);
