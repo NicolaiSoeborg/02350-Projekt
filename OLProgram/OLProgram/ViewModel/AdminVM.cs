@@ -135,9 +135,7 @@ namespace OLProgram.ViewModel
                     Log.Add(getTimeStamp(DateTime.Now) + " - User " + selectedUser.ToString() + " was deleted. ");
                     Users.Remove(selectedUser);
                 }
-                   
             }
-
         }
 
         private async void LoadExistingData()
@@ -177,10 +175,6 @@ namespace OLProgram.ViewModel
                 Products.Clear();
                 Log.Add(getTimeStamp(DateTime.Now) + " - Data was deleted");
             }
-        }
-        public static String getTimeStamp(DateTime value)
-        {
-            return value.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
     }

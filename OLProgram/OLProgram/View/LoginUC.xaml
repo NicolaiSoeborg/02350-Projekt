@@ -56,11 +56,11 @@
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" FocusManager.FocusedElement="{Binding ElementName=UserTxtBox}">
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
-                                    <TextBox x:Name="UserTxtBox" Text="{Binding TxtUsername}" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
+                                    <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}"/>
                                     <TextBlock Text="Password:" />
                                     <PasswordBox x:Name="PasswordTxtBox" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
                                     <TextBlock x:Name="TODOSpaceHackSoBtnIsntToCloseToPwdBox" Height="16" />
-                                    <Button x:Name="LoginButton" Command="{Binding LoginCommand}" IsDefault="true">Login</Button>
+                                    <Button x:Name="LoginButton" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox}" IsDefault="true">Login</Button>
                                 </StackPanel>
                             </Border>
 

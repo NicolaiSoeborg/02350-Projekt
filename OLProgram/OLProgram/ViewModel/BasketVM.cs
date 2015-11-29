@@ -31,6 +31,24 @@ namespace OLProgram.ViewModel
 
         private void CheckOutBasket()
         {
+
+            foreach (BasketItem basketItem in Basket.BasketItems) {
+
+                Users[Users.IndexOf(loggedInUser)].BuyProducts(basketItem.ProductId, basketItem.Count);
+                Log.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " Bought " + basketItem.Count + " of productID " + basketItem.ProductId);
+
+                // Virkelig ineffektivt
+                foreach (Product product in Products)
+                {
+                    if (product.ProductId == basketItem.ProductId)
+                    {
+                        product.Stock -= basketItem.Count;
+                        product.Bought -= basketItem.Count;
+                    }
+                }
+            }
+            
+
             new ClearBasketCommand(Basket).Execute();
             undoRedoController.ClearUndoRedoStacks();
             MainWindow.Content = new View.LoginUC();

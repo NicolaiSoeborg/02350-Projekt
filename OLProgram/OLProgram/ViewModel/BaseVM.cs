@@ -66,6 +66,11 @@ namespace OLProgram.ViewModel
             MainWindow.Content = new View.LoginUC();
         }
 
+        public static String getTimeStamp(DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
 
     }
 }

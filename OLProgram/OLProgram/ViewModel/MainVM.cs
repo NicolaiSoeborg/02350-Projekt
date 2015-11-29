@@ -2,6 +2,7 @@ using System;
 using OLModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
+using System.Windows;
 
 namespace OLProgram.ViewModel
 {
@@ -9,26 +10,47 @@ namespace OLProgram.ViewModel
     {
         // Tekstbox på LoginUC:
         private string _txtUsername = "";
-        public string TxtUsername {
+
+        public string TxtUsername
+        {
             get { if (loggedInUser == null) return _txtUsername; /*else*/ return loggedInUser.Name; }
             set { _txtUsername = value; }
         }
 
-        public ICommand LoginCommand { get; }
+        public RelayCommand<String> LoginCommand { get; }
 
         public MainVM()
         {
             // Nothing to initialize when creating the MainWM?
 
             // Commands:
-            LoginCommand = new RelayCommand(DoLogin);
+            LoginCommand = new RelayCommand<String>(DoLogin);
         }
 
-        private void DoLogin()
+        private void DoLogin(String BarCode)
         {
-            // TODO: Check login
-            loggedInUser = new User(_txtUsername); // TODO: Load user
-            MainWindow.Content = new View.UserUC();
+            
+            int currentBarCodeValue;
+            if (int.TryParse(BarCode, out currentBarCodeValue) && BarCode.Length == 4)
+            {
+                foreach (User user in Users)
+                {
+                    if (user.UserID == currentBarCodeValue)
+                    {
+                        loggedInUser = user;
+                        MainWindow.Content = new View.UserUC();
+                        break;
+                    }
+                }
+                if(loggedInUser == null)
+                    MessageBox.Show("Selected user does not exist in database", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                MessageBox.Show("Not a valid Barcode", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+            }
+
         }
 
         //private void ShowStatistic()

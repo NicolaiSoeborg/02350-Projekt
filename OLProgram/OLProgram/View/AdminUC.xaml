@@ -68,7 +68,8 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
                                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
-                                    </DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding ProductsCount}" Header="Bought" Width="10*"/> 
+                                </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
                         </GroupBox>
