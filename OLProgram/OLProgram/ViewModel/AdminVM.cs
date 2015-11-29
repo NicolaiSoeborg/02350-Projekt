@@ -43,7 +43,6 @@ namespace OLProgram.ViewModel
         public AdminVM()
         {
             // Commands:
-            AddProductToGlobalCommand = new RelayCommand(AddProductToGlobal);
             AdminLoginCommand = new RelayCommand(DoAdminLogin);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
 
@@ -70,21 +69,24 @@ namespace OLProgram.ViewModel
             {
                 var response = MessageBox.Show("Do you really want to delete Product " + selectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
-                    Products.Remove(selectedProduct);
+                   
+                Log.Add(getTimeStamp(DateTime.Now) + " - Product " + selectedProduct.ProductName + " was deleted. ");
+                Products.Remove(selectedProduct);
+
             }
         }
 
         private void AddNewProduct()
         {
             Products.Add(new Product("New product"));
+            Log.Add(getTimeStamp(DateTime.Now) + " - New Product added to Products");
         }
 
         private void AddNewUser()
         {
             Users.Add(new User("New user"));
+            Log.Add(getTimeStamp(DateTime.Now) + " - New User added to Users");
         }
-
-        private void AddProductToGlobal() { } // TODO
 
         private void CloseApplication()
         {
@@ -129,8 +131,13 @@ namespace OLProgram.ViewModel
             {
                 var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
+                {
+                    Log.Add(getTimeStamp(DateTime.Now) + " - User " + selectedUser.ToString() + " was deleted. ");
                     Users.Remove(selectedUser);
+                }
+                   
             }
+
         }
 
         private async void LoadExistingData()
@@ -146,6 +153,8 @@ namespace OLProgram.ViewModel
                 DataToLoad.Users.ForEach(x => Users.Add(x));
                 Products.Clear();
                 DataToLoad.Products.ForEach(x => Products.Add(x));
+
+                Log.Add(getTimeStamp(DateTime.Now) + " - Existing data loaded");
             }
         }
 
@@ -156,6 +165,7 @@ namespace OLProgram.ViewModel
             {
                 Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList() };
                 SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
+                
             }
         }
 
@@ -165,7 +175,12 @@ namespace OLProgram.ViewModel
             {
                 Users.Clear();
                 Products.Clear();
+                Log.Add(getTimeStamp(DateTime.Now) + " - Data was deleted");
             }
+        }
+        public static String getTimeStamp(DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
     }

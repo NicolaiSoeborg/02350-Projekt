@@ -64,7 +64,7 @@
                 <StackPanel Grid.Row="0" Margin="2" >
                         <GroupBox  Header="Edit Users">
                             <StackPanel>
-                                <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                                <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
                                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
@@ -95,7 +95,7 @@
                 <StackPanel Grid.Row="0" Margin="2">
                     <GroupBox Header="Edit Products">
                         <StackPanel>
-                            <DataGrid x:Name="ProductControl" Height="400" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                            <DataGrid x:Name="ProductControl" Height="400" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding ProductId }" Header="ProductId" Width="10*"/>
                                     <DataGridTextColumn Binding="{Binding ProductName}" Header="ProductName" Width="20*"/>
@@ -118,27 +118,12 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="grid3" Grid.Column="4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="10*" />
-                    <RowDefinition Height="100*" />
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0">
-                    <TextBlock FontSize="16" Text="Log" />
-                    <TextBox x:Name="searchLog" Text="Search" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" />
-                </StackPanel>
-                <!-- TODO: De 3 "Search" TextBox skal ikke have teksten "Search", det skal være en placeholder -->
-
-                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
-                    <StackPanel>
-                        <TextBlock Text="Product1" />
-                        <TextBlock Text="Product2" />
-                        <TextBlock Text="Product3" />
-                        <TextBlock Text="Product4" />
-                    </StackPanel>
-                </Border>
-            </Grid>
+            <GroupBox  Grid.Column="4" Header="Log">
+                <ListView  ItemsSource="{Binding Log}"/>
+            </GroupBox>
+              
+            
+           
         </Grid>
     </Grid>
 </UserControl>
