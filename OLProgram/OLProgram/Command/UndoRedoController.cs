@@ -37,6 +37,12 @@ namespace OLProgram.Command
         //  }
         public static UndoRedoController Instance { get; } = new UndoRedoController();
 
+        public void ClearUndoRedoStacks()
+        {
+            undoStack.Clear();
+            redoStack.Clear();
+        }
+
         #endregion
 
         #region Constructor

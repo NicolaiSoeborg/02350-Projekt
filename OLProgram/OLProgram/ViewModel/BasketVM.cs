@@ -31,6 +31,8 @@ namespace OLProgram.ViewModel
 
         private void CheckOutBasket()
         {
+            undoRedoController.AddAndExecute(new ClearBasketCommand(Basket));
+            undoRedoController.ClearUndoRedoStacks();
             MainWindow.Content = new View.LoginUC();
         }
 
