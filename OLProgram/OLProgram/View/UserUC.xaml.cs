@@ -68,9 +68,6 @@ namespace OLProgram.View
             else if(e.Key == Key.D9)
             {
                 keyToSend = 9;
-            }else if(e.Key == Key.Enter)
-            {
-                BasketVM.enterInput();
             }
             else
             {
@@ -78,7 +75,7 @@ namespace OLProgram.View
             }
             if(keyToSend != -1)
             {
-                BasketVM.writeInput(keyToSend);
+                
             }
             
 
