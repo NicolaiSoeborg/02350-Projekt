@@ -42,7 +42,7 @@
         </DockPanel>
         <Grid Grid.Row="1">
             <Grid.Background>
-                <ImageBrush ImageSource="/Images/beer.png" Stretch="Uniform" TileMode="Tile" />
+                <ImageBrush ImageSource="/Images/Beer.png" Stretch="Uniform" TileMode="Tile" />
             </Grid.Background>
         </Grid>
 
@@ -64,11 +64,11 @@
                 <StackPanel Grid.Row="0" Margin="2" >
                         <GroupBox  Header="Edit Users">
                             <StackPanel>
-                                <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
                                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
-                                        <DataGridTextColumn Binding="{Binding ProductsCount}" Header="Bought" Width="10*"/> 
+                                        <DataGridTextColumn Binding="{Binding ProductsCount}"  Header="Bought" Width="10*"/> 
                                 </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>

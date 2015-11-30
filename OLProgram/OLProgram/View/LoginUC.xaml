@@ -6,13 +6,16 @@
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800">
-    
+
     <UserControl.DataContext>
         <ViewModel:MainVM />
     </UserControl.DataContext>
 
     <!-- baggrund grid -->
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/BeerBottles.jpg" Stretch="Fill"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*" />
             <RowDefinition Height="60*" />
@@ -52,7 +55,7 @@
                             </Grid.RowDefinitions>
 
                             <!-- High ZIndex value, so content is above other objects -->
-                            <Border Panel.ZIndex="-1" MaxHeight="180" Grid.Row="1" BorderBrush="Black" BorderThickness="2">
+                            <Border Panel.ZIndex="-1" MaxHeight="180" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="#FFF6F9FF">
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" FocusManager.FocusedElement="{Binding ElementName=UserTxtBox}">
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
@@ -74,40 +77,20 @@
             <!-- /top venstre grid -->
 
             <!-- top højre grid -->
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20*"/>
-                    <RowDefinition Height="80*"/>
-                </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Latest Purchase" FontSize="30" Margin="5" />
-                </Grid>
 
-                <Grid Grid.Row="1">
-                    <StackPanel x:Name="LastestPurchaseStackPanel">
-                        <TextBlock Text="Christine purchased: 2 Cider" />
-                        <TextBlock Text="Lars purchased: 30 Beer" />
-                        <TextBlock Text="Peter purchased: 1 Beer" />
-                        <TextBlock Text="Christine purchased: 4 Soda" />
-                        <TextBlock Text="Christine purchased: 2 Cider" />
-                        <TextBlock Text="Christine purchased: 2 Cider" />
-                        <TextBlock Text="Christine purchased: 2 Cider" />
-                        <TextBlock Text="Christine purchased: 2 Cider" />
-                        <TextBlock Text="Christine purchased: 2 Cider" />
-                    </StackPanel>
-                </Grid>
-                
-            </Grid>
+            <GroupBox Grid.Column="1" Header="Log">
+                <ListView  ItemsSource="{Binding LogForUsers}" BorderBrush="AliceBlue" Background="#FFF6F9FF" />
+            </GroupBox>
+
+
             <!-- /top højre grid -->
         </Grid>
         <!-- /top grid -->
 
         <!-- Bund grid -->
         <Grid Grid.Row="1">
-            <TextBlock FontSize="40" Text="Statistics" Margin="5" />
-            <Rectangle Fill="#0000FF" Height="120" Margin="10,70,10,10" Stroke="Black" />
-            <Ellipse Fill="#FF0000" Height="120" Margin="650,70,10,10" Stroke="Black" />
+
         </Grid>
 
     </Grid>

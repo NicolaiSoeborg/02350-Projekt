@@ -174,6 +174,8 @@ namespace OLProgram.ViewModel
                 Users.Clear();
                 Products.Clear();
                 Log.Add(getTimeStamp(DateTime.Now) + " - Data was deleted");
+                OLModel.User.UserIDCounter = 2000;
+                OLModel.Product.ProductIdCounter = 0;
             }
         }
 

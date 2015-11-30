@@ -8,7 +8,7 @@ namespace OLModel
     public class Product : NotifyBase
     {
         // Overvej at slette, da den ikke bliver genmt ned i XML og derved potentielt kan fucke det op
-        private static int ProductIdCounter = 0;
+        public static int ProductIdCounter = 0;
 
         public int ProductId { get; set; }
         public string ProductName { get; set; }
@@ -30,7 +30,6 @@ namespace OLModel
 
         public Product(string productName, string imageFileName)
         {
-            ProductIdCounter++;
             ProductId = ProductIdCounter++;
             this.ProductName = productName;
             this.ImageFileName = imageFileName;

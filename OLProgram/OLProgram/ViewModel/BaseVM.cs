@@ -32,6 +32,7 @@ namespace OLProgram.ViewModel
         public static ObservableCollection<User> Users { get; set; }
         public static ObservableCollection<Product> Products { get; set; }
         public static ObservableCollection<String> Log { get; set; }
+        public static ObservableCollection<String> LogForUsers { get; set; }
         public static User loggedInUser { get; set; }
 
         // Ref til MainWindow, brug MainWindow.Content = new View.ViewUC(); for at skrifte UC.
@@ -47,6 +48,7 @@ namespace OLProgram.ViewModel
             if (Products == null) Products = new ObservableCollection<Product>() { new Product("Grøn Tuborg", "../Images/tuborg.png"), new Product("Guld Tuborg", "../Images/guldtuborg.png"), new Product("Royal Pils"), new Product("Somersby", "../Images/somersby.png"), new Product("Rochefort 10") };
             if (Users == null) Users = new ObservableCollection<User>() { new User(1001, "Rasmus"), new User(1002, "Nicolai"), new User(1003, "Silas"), new User(1004, "Greven") };
             if (Log == null) Log = new ObservableCollection<string>() { };
+            if (LogForUsers == null) LogForUsers = new ObservableCollection<string>() { };
 
 
             // Commands
