@@ -26,6 +26,7 @@ namespace OLProgram.Command
         public void Execute(object parameter)
         {
             StringBuilder csv = new StringBuilder();
+            csv.AppendFormat("{0}\t{1}\r\n", "Name", "Bought Total");
 
             var result = (
                 from user in Users
@@ -36,7 +37,7 @@ namespace OLProgram.Command
             ).ToList();
             
             foreach (var user in result)
-                csv.AppendFormat("{0},{1}\r\n", trimCSV(user.name), user.sum);
+                csv.AppendFormat("{0}\t{1}\r\n", trimCSV(user.name), user.sum);
             
             File.WriteAllText(_billPath, csv.ToString());
         }
@@ -53,6 +54,7 @@ namespace OLProgram.Command
 
             foreach (var p in productsBought) {
                 Product prod = Products.First(x => x.ProductId.Equals(p.Key));
+                System.Windows.MessageBox.Show("Product " + prod.ProductName + " bought: " + prod.Bought);
                 sum += prod.Price * p.Value; 
             }
             return sum + svindPerUser;
