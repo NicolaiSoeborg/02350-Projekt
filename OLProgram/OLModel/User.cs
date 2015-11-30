@@ -10,9 +10,8 @@ namespace OLModel
         public int UserID { get; set; }
         public string Name { get; set; }
         public int ProductsCount { get; set; } = 0;
-        [XmlIgnore] public Dictionary<int,int> ProductsBought { get; } // TODO: NOT XmlSerializer-able!
+        [XmlIgnore] public Dictionary<string,int> ProductsBought { get; } // TODO: NOT XmlSerializer-able!
         public static int UserIDCounter = 2000;
-        
 
         internal User() : this(0, "") { } // Used by serializer
         public User(string name) : this(UserIDCounter++, name) { }
@@ -21,25 +20,17 @@ namespace OLModel
         {
             this.UserID = userID;
             this.Name = name;
-            this.ProductsBought = new Dictionary<int, int>();
+            this.ProductsBought = new Dictionary<string, int>();
         }
 
         // Product is added to the users list and bought is incremented 
-        public void BuyProducts(String ProductID, int amountBought)
+        public void BuyProducts(string ProductID, int amountBought)
         {
-            int ProductIDIndex;
-
-            if(!int.TryParse(ProductID, out ProductIDIndex))
-            {
-                throw new NotImplementedException();
-            }
-
-
             // Add "product*amount" to user
-            if (ProductsBought.ContainsKey(ProductIDIndex))
-                ProductsBought[ProductIDIndex] += amountBought;
+            if (ProductsBought.ContainsKey(ProductID))
+                ProductsBought[ProductID] += amountBought;
             else
-                ProductsBought.Add(ProductIDIndex, amountBought);
+                ProductsBought.Add(ProductID, amountBought);
 
             ProductsCount += amountBought;
         }
