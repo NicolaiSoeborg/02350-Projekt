@@ -7,16 +7,7 @@
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
     <GroupBox Header="Edit Products" Margin="2">
-        <DockPanel x:Name="ProductDockPanel" LastChildFill="False">
-            <DataGrid DockPanel.Dock="Top" x:Name="ProductControl" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ProductId" Binding="{Binding ProductId}" Width="10*"/>
-                        <DataGridTextColumn Header="ProductName" Binding="{Binding ProductName}" Width="20*"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="11*"/>
-                        <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="11*"/>
-                        <DataGridTextColumn Header="Bought" Binding="{Binding Bought}" Width="11*" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-            </DataGrid>
+        <DockPanel x:Name="ProductDockPanel" LastChildFill="true">
             <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*" />
@@ -26,6 +17,15 @@
                 <Button Grid.Column="0" Command="{Binding AddNewProductCommand}">Add New Product</Button>
                 <Button Grid.Column="2" Command="{Binding DeleteSelectedProductCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
             </Grid>
+            <DataGrid DockPanel.Dock="Top" x:Name="ProductControl" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ProductId" Binding="{Binding ProductId}" Width="10*"/>
+                    <DataGridTextColumn Header="ProductName" Binding="{Binding ProductName}" Width="20*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="11*"/>
+                    <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="11*"/>
+                    <DataGridTextColumn Header="Bought" Binding="{Binding Bought}" Width="11*" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </DockPanel>
     </GroupBox>
 
