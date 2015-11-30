@@ -12,12 +12,13 @@ namespace OLProgram.ViewModel
     {
         public string TxtAdminPassword { get; set; }
         public static Window _adminLoginWindow = null;
+        public static string billPath { get; set; }
 
         // Global commands for Admins
         public RelayCommand CloseApplicationCommand { get; }
-        public RelayCommand AdminLoginCommand { get; }
+        public RelayCommand AdminLoginCommand { get; } // Benyttes gennem AdminLoginWindow "Login" knappen
 
-        // Admin Commands for UsersVM
+        // Admin Commands for Users
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
         public RelayCommand<User> SaveCurrentUserInformationCommand { get; }
         public RelayCommand AddNewUserCommand { get; }
@@ -31,6 +32,11 @@ namespace OLProgram.ViewModel
         public RelayCommand SaveDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
         public RelayCommand NewDataCommand { get; }
+        public RelayCommand GenerateBillCommand { get; }
+        public System.Windows.Input.ICommand ReSaveBillCommand
+        { // ICommand as we want to block "(Re)Save" bill untill a GenerateBill has occured
+            get { return new Command.ReSaveBillCommand(); }
+        } 
 
         // For load, Save and new 
         public DialogVM dialogVM { get; set; }
@@ -59,9 +65,22 @@ namespace OLProgram.ViewModel
             SaveDataCommand = new RelayCommand(SaveCurrentData);
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
+            GenerateBillCommand = new RelayCommand(GenerateBill); // TODO
 
             dialogVM = new DialogVM();
-    }
+        }
+
+        private void GenerateBill()
+        {
+            string path = dialogVM.ShowSaveBill();
+            if (path != null)
+            {
+                billPath = path;
+                if (ReSaveBillCommand.CanExecute(null))
+                    ReSaveBillCommand.Execute(null);
+            }
+            RaisePropertyChanged(() => ReSaveBillCommand);
+        }
 
         private void DeleteSelectedProduct(Product selectedProduct)
         {
@@ -72,7 +91,6 @@ namespace OLProgram.ViewModel
                    
                 Log.Add(getTimeStamp(DateTime.Now) + " - Product " + selectedProduct.ProductName + " was deleted. ");
                 Products.Remove(selectedProduct);
-
             }
         }
 
@@ -127,7 +145,7 @@ namespace OLProgram.ViewModel
         
         private void DeleteSelectedUser(User selectedUser)
         {
-            if(selectedUser != null)
+            if (selectedUser != null)
             {
                 var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)

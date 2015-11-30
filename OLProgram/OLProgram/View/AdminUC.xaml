@@ -40,7 +40,7 @@
                 </MenuItem>
                 <MenuItem Header="Generate _Bill">
                     <MenuItem Header="_Generate bill" Command="{Binding GenerateBillCommand}" />
-                    <MenuItem Header="Re_save bill" Command="{Binding SaveBillCommand}" />
+                    <MenuItem Header="Re_save bill" Command="{Binding ReSaveBillCommand}" />
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -126,8 +126,6 @@
             <GroupBox Grid.Column="4" Header="Log">
                 <ListView ItemsSource="{Binding Log}"/>
             </GroupBox>
-            
-            
             
         </Grid>
     </Grid>
