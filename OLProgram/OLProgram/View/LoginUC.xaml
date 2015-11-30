@@ -60,7 +60,11 @@
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" >
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
-                                    <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}"/>
+                                    <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}" FocusManager.FocusedElement="{Binding UserTxtBox}">
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox }"/>
+                                        </TextBox.InputBindings>
+                                    </TextBox>
                                     <TextBlock></TextBlock>
                                     <Button x:Name="LoginButton" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox}" IsDefault="true">Login</Button>
                                 </StackPanel>

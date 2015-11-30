@@ -18,7 +18,6 @@
         <KeyBinding Command="{Binding RedoCommand}" Gesture="CTRL+Y" />
         <KeyBinding Command="{Binding ChangeToAdminCommand}" Gesture="CTRL+K" />
         <KeyBinding Command="{Binding ChangeToMainCommand}" Gesture="Esc" />
-        <KeyBinding Command="{Binding EnterPressedCommand}" Gesture="Enter" />
     </Window.InputBindings>
 
     <View:LoginUC />

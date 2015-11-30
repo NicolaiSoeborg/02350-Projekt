@@ -19,7 +19,13 @@
 
     <DockPanel>
         <View:UserTopPanelUC DockPanel.Dock="Top" />
+        <TextBox x:Name="ScannerBox"  DockPanel.Dock="Top" Text="{Binding Path=inputBasket.inputGetSetter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Focusable="True" >
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding EnterCommand}" CommandParameter="{Binding Text, ElementName=ScannerBox}"  />
+            </TextBox.InputBindings> 
+        </TextBox>
         
+
         <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65*"/>
@@ -27,9 +33,11 @@
             </Grid.ColumnDefinitions>
 
             <View:ProductSelectionUC Grid.Column="0" />
+            
             <View:UserBasketPanelUC Grid.Column="1" />
             
         </Grid>
+        
     </DockPanel>
 
 </UserControl>

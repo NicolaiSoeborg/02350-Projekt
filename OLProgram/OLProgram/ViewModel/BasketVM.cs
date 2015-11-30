@@ -3,6 +3,7 @@ using OLProgram.Command;
 using OLModel;
 using System;
 using System.Windows.Input;
+using System.Windows;
 
 namespace OLProgram.ViewModel
 {
@@ -11,16 +12,20 @@ namespace OLProgram.ViewModel
         public static Basket Basket { get; set; }
         public string HelloTxtUsername { get { return loggedInUser == null ? "NoUserLoggedIn" : String.Format("Velkommen {0}!", loggedInUser.Name); } }
         public static String inputForBasket { get; set; }
+        public static inputHandler inputBasket { get; set; }
 
         public ICommand AddProductToBasketCommand { get; }
         public ICommand DecreaseBasketItemCommand { get; }
         public ICommand DeleteBasketItemCommand { get; }
         public ICommand ClearBasketCommand { get; }
         public RelayCommand CheckOutCommand { get; }
+        public RelayCommand<String> EnterCommand { get; }
 
         public BasketVM()
         {
             if (Basket == null) Basket = new Basket();
+            if (inputBasket == null) inputBasket = new inputHandler();
+            inputBasket.inputGetSetter = "";
 
             // Commands to access from UI:
             AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
@@ -28,18 +33,43 @@ namespace OLProgram.ViewModel
             DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
             ClearBasketCommand = new RelayCommand(ClearBasket);
             CheckOutCommand = new RelayCommand(CheckOutBasket);
+            EnterCommand = new RelayCommand<string>(enterInput);
         }
 
-        public static void writeInput(int input)
+        public void writeInput(int input)
         {
             inputForBasket += input.ToString();
         }
 
-        public static void enterInput()
-        {
-            if (inputForBasket.Equals("5741000002476"))
+        public void enterInput(String input)
+        {            
+            if (input != null)
             {
-                   
+
+                foreach(Product product in Products)
+                {
+                    if (input.Equals(product.ProductId))
+                    {
+                        undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
+                        inputBasket.inputGetSetter = string.Empty;
+                        RaisePropertyChanged("inputGetSetter");
+                        return;
+                    }
+                }
+                int userID;
+                
+                if(int.TryParse(input, out userID))
+                {
+                    foreach (User user in Users)
+                    {
+                        if (user.UserID == userID)
+                        {
+                            inputForBasket = string.Empty;
+                            CheckOutBasket();
+                            return;
+                        }
+                    }
+                }
             }
         }
 
@@ -90,4 +120,5 @@ namespace OLProgram.ViewModel
             undoRedoController.AddAndExecute(new ClearBasketCommand(Basket));
         }
     }
+
 }

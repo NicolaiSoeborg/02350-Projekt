@@ -55,6 +55,7 @@
     <Compile Include="Basket.cs" />
     <Compile Include="BasketItem.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="inputHandler.cs" />
     <Compile Include="NotifyBase.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
