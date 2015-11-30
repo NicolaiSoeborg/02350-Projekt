@@ -23,20 +23,24 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="New" Command="{Binding NewDataCommand}"/>
-                    <MenuItem Header="Save" Command="{Binding SaveDataCommand}"/>
-                    <MenuItem Header="Load" Command="{Binding LoadDataCommand}"/>
+                    <MenuItem Header="_New" Command="{Binding NewDataCommand}" />
+                    <MenuItem Header="_Save" Command="{Binding SaveDataCommand}" />
+                    <MenuItem Header="_Load" Command="{Binding LoadDataCommand}" />
                     <Separator />
                     <MenuItem Header="_Exit" x:Name="exit" Command="{Binding CloseApplicationCommand}" />
                 </MenuItem>
                 <MenuItem Header="_Edit">
-                    <MenuItem Command="Cut" />
-                    <MenuItem Command="Copy" />
-                    <MenuItem Command="Paste" />
+                    <MenuItem Header="C_ut" Command="Cut" />
+                    <MenuItem Header="_Copy" Command="Copy" />
+                    <MenuItem Header="_Paste" Command="Paste" />
                 </MenuItem>
-                <MenuItem Header="Add">
-                    <MenuItem Header="_Add User" Command="{Binding AddNewUserCommand}"/>
-                    <MenuItem Header="_Add Product" Command="{Binding AddProductToGlobalCommand}" />
+                <MenuItem Header="_Add">
+                    <MenuItem Header="Add _User" Command="{Binding AddNewUserCommand}" />
+                    <MenuItem Header="Add _Product" Command="{Binding AddProductToGlobalCommand}" />
+                </MenuItem>
+                <MenuItem Header="Generate _Bill">
+                    <MenuItem Header="_Generate bill" Command="{Binding GenerateBillCommand}" />
+                    <MenuItem Header="Re_save bill" Command="{Binding SaveBillCommand}" />
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -62,14 +66,14 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Margin="2" >
-                        <GroupBox  Header="Edit Users">
+                        <GroupBox Header="Edit Users">
                             <StackPanel>
                                 <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
                                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
-                                        <DataGridTextColumn Binding="{Binding ProductsCount}"  Header="Bought" Width="10*"/> 
-                                </DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding ProductsCount}" Header="Bought" Width="10*"/> 
+                                    </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
                         </GroupBox>
@@ -77,12 +81,12 @@
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="20*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button  Grid.Column="0" Command="{Binding AddNewUserCommand}">Add New User</Button>
-                        <Button Grid.Column="1" Command = "{Binding DeleteSelectedUserCommand}" CommandParameter ="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
+                        <Button Grid.Column="0" Command="{Binding AddNewUserCommand}">Add New User</Button>
+                        <Button Grid.Column="1" Command="{Binding DeleteSelectedUserCommand}" CommandParameter="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
                     </Grid>
                 </Grid>
 
@@ -119,12 +123,12 @@
                 </Grid>
             </Grid>
 
-            <GroupBox  Grid.Column="4" Header="Log">
-                <ListView  ItemsSource="{Binding Log}"/>
+            <GroupBox Grid.Column="4" Header="Log">
+                <ListView ItemsSource="{Binding Log}"/>
             </GroupBox>
-              
             
-           
+            
+            
         </Grid>
     </Grid>
 </UserControl>
