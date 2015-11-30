@@ -49,11 +49,13 @@ namespace OLProgram.Command
         private int calcSum(Dictionary<int, int> productsBought) // productsBought<Product.ProductId, Amount>, TODO: Korrekt?
         {
             int sum = 0;
+            int svindPerUser = 0; // TODO: Regner ikke svind med!
+
             foreach (var p in productsBought) {
                 Product prod = Products.First(x => x.ProductId.Equals(p.Key));
-                sum += prod.Price * p.Value; // TODO: Regner ikke svind med!
+                sum += prod.Price * p.Value; 
             }
-            return sum;
+            return sum + svindPerUser;
         }
     }
 }

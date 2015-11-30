@@ -39,7 +39,7 @@ namespace OLProgram.ViewModel
         } 
 
         // For load, Save and new 
-        public DialogVM dialogVM { get; set; }
+        public DialogHelper dialogHelper { get; } = new DialogHelper();
 
         private void ShowAdminLoginGUI()
         {
@@ -67,12 +67,12 @@ namespace OLProgram.ViewModel
             NewDataCommand = new RelayCommand(NewData);
             GenerateBillCommand = new RelayCommand(GenerateBill); // TODO
 
-            dialogVM = new DialogVM();
+            //dialogHelper 
         }
 
         private void GenerateBill()
         {
-            string path = dialogVM.ShowSaveBill();
+            string path = dialogHelper.ShowSaveBill();
             if (path != null)
             {
                 billPath = path;
@@ -157,7 +157,7 @@ namespace OLProgram.ViewModel
 
         private async void LoadExistingData()
         {
-            string path = dialogVM.ShowOpen();
+            string path = dialogHelper.ShowOpen();
             if (path != null)
             {
                 // Load Users and Products from xml file
@@ -175,7 +175,7 @@ namespace OLProgram.ViewModel
 
         private void SaveCurrentData()
         {
-            string path = dialogVM.ShowSave();
+            string path = dialogHelper.ShowSave();
             if (path != null)
             {
                 Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList() };
@@ -185,7 +185,7 @@ namespace OLProgram.ViewModel
 
         private void NewData()
         {
-            if (dialogVM.ShowNew())
+            if (dialogHelper.ShowNew())
             {
                 Users.Clear();
                 Products.Clear();

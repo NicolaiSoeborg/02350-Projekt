@@ -108,7 +108,7 @@
     <Compile Include="Helpers\SerializerXML.cs" />
     <Compile Include="ViewModel\AdminVM.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
-    <Compile Include="ViewModel\DialogVM.cs" />
+    <Compile Include="Helpers\DialogHelper.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\BasketVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

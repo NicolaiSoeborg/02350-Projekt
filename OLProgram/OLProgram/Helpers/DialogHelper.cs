@@ -1,14 +1,10 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
+using Microsoft.Win32;
 
-namespace OLProgram.ViewModel
+namespace OLProgram.Helpers
 {
-    public class DialogVM
+    public class DialogHelper
     {
         private static OpenFileDialog openXmlDialog = new OpenFileDialog() { Title = "Open Database", Filter = "XML Document (.xml)|*.xml", DefaultExt = "xml", InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), CheckFileExists = true };
         private static SaveFileDialog saveXmlDialog = new SaveFileDialog() { Title = "Save Database", Filter = "XML Document (.xml)|*.xml", DefaultExt = "xml", InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) };
