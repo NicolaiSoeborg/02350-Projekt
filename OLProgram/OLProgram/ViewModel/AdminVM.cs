@@ -33,10 +33,9 @@ namespace OLProgram.ViewModel
         public RelayCommand LoadDataCommand { get; }
         public RelayCommand NewDataCommand { get; }
         public RelayCommand GenerateBillCommand { get; }
-        public System.Windows.Input.ICommand ReSaveBillCommand
-        { // ICommand as we want to block "(Re)Save" bill untill a GenerateBill has occured
-            get { return new Command.ReSaveBillCommand(); }
-        } 
+        
+        // ICommand as we want to block "(Re)Save" bill untill a GenerateBill has occured
+        public System.Windows.Input.ICommand ReSaveBillCommand { get; } 
 
         // For load, Save and new 
         public DialogHelper dialogHelper { get; } = new DialogHelper();
@@ -66,8 +65,7 @@ namespace OLProgram.ViewModel
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
             GenerateBillCommand = new RelayCommand(GenerateBill); // TODO
-
-            //dialogHelper 
+            ReSaveBillCommand = new Command.ReSaveBillCommand();
         }
 
         private void GenerateBill()
