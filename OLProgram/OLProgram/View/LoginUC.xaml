@@ -10,12 +10,16 @@
     <UserControl.DataContext>
         <ViewModel:MainVM />
     </UserControl.DataContext>
+    
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Images/BeerBottles.jpg" Stretch="Fill" />
+    </UserControl.Background>
 
     <!-- baggrund grid -->
     <Grid>
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="/Images/BeerBottles.jpg" Stretch="Fill"/>
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="100*" />
             <RowDefinition Height="60*" />
