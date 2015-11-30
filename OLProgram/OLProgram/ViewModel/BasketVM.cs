@@ -37,16 +37,8 @@ namespace OLProgram.ViewModel
 
         public static void enterInput()
         {
-
             if (inputForBasket.Equals("5741000002476"))
             {
-                if (true)
-                {
-
-                }else
-                {
-                    if (true) { }
-                }
                    
             }
         }

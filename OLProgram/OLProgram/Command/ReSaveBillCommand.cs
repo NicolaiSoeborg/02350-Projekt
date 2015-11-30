@@ -16,7 +16,9 @@ namespace OLProgram.Command
         public ObservableCollection<User> Users { get { return OLProgram.ViewModel.BaseVM.Users; } }
         public ObservableCollection<Product> Products { get { return OLProgram.ViewModel.BaseVM.Products; } }
 
+#pragma warning disable
         public event EventHandler CanExecuteChanged;
+#pragma warning restore
 
         public bool CanExecute(object parameter)
         {
