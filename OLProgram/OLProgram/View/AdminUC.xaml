@@ -44,6 +44,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
+        
         <Grid Grid.Row="1">
             <Grid.Background>
                 <ImageBrush ImageSource="/Images/Beer.png" Stretch="Uniform" TileMode="Tile" />
@@ -59,69 +60,9 @@
                 <ColumnDefinition Width="100*" />
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="UserGrid" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100*" />
-                    <RowDefinition Height="10*" />
-                </Grid.RowDefinitions>
+            <View:AddUserUC Grid.Column="0" />
 
-                <StackPanel Grid.Row="0" Margin="2" >
-                        <GroupBox Header="Edit Users">
-                            <StackPanel>
-                                <DataGrid x:Name="UsersControl" Height="400" ItemsSource="{Binding Users}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
-                                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
-                                        <DataGridTextColumn Binding="{Binding ProductsCount}" Header="Bought" Width="10*"/> 
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </StackPanel>
-                        </GroupBox>
-                    </StackPanel>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="20*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Column="0" Command="{Binding AddNewUserCommand}">Add New User</Button>
-                        <Button Grid.Column="1" Command="{Binding DeleteSelectedUserCommand}" CommandParameter="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
-                    </Grid>
-                </Grid>
-
-
-            <Grid x:Name="ProductGrid" Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100*" />
-                    <RowDefinition Height="10*" />
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0" Margin="2">
-                    <GroupBox Header="Edit Products">
-                        <StackPanel>
-                            <DataGrid x:Name="ProductControl" Height="400" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding ProductId }" Header="ProductId" Width="10*"/>
-                                    <DataGridTextColumn Binding="{Binding ProductName}" Header="ProductName" Width="20*"/>
-                                    <DataGridTextColumn Binding="{Binding Stock}" Header="Stock" Width="11*"/>
-                                    <DataGridTextColumn Binding="{Binding Stock}" Header="Bought" Width="11*"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="20*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Button Grid.Column="0" Command="{Binding AddNewProductCommand}">Add New Product</Button>
-                    <Button Grid.Column="1" Command="{Binding DeleteSelectedProductCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
-                </Grid>
-            </Grid>
+            <View:AddProductUC Grid.Column="2" />
 
             <GroupBox Grid.Column="4" Header="Log">
                 <ListView ItemsSource="{Binding Log}"/>

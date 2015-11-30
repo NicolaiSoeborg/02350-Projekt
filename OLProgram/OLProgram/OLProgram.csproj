@@ -112,6 +112,9 @@
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\BasketVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AddProductUC.xaml.cs">
+      <DependentUpon>AddProductUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
     <Compile Include="View\UserUC.xaml.cs">
       <DependentUpon>UserUC.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddProductUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminLoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
