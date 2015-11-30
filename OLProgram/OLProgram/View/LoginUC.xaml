@@ -11,12 +11,11 @@
         <ViewModel:MainVM />
     </UserControl.DataContext>
 
-    <UserControl.Background>
-        <ImageBrush ImageSource="/Images/BeerBottles.jpg" Stretch="Fill" />
-    </UserControl.Background>
-
     <!-- baggrund grid -->
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/BeerBottles.jpg" Stretch="Fill"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*" />
             <RowDefinition Height="60*" />
@@ -60,7 +59,7 @@
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" >
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
-                                    <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}" FocusManager.FocusedElement="{Binding UserTxtBox}">
+                                    <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}">
                                         <TextBox.InputBindings>
                                             <KeyBinding Key="Enter" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox }"/>
                                         </TextBox.InputBindings>

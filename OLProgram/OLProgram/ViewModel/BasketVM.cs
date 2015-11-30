@@ -44,6 +44,8 @@ namespace OLProgram.ViewModel
         public void enterInput(String input)
         {            
             if (input != null)
+            inputBasket.inputGetSetter = string.Empty;
+            RaisePropertyChanged("inputGetSetter");
             {
 
                 foreach(Product product in Products)
@@ -51,8 +53,6 @@ namespace OLProgram.ViewModel
                     if (input.Equals(product.ProductId))
                     {
                         undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
-                        inputBasket.inputGetSetter = string.Empty;
-                        RaisePropertyChanged("inputGetSetter");
                         return;
                     }
                 }
@@ -64,7 +64,6 @@ namespace OLProgram.ViewModel
                     {
                         if (user.UserID == userID)
                         {
-                            inputForBasket = string.Empty;
                             CheckOutBasket();
                             return;
                         }
