@@ -18,6 +18,8 @@ namespace OLModel
                     if (item.ProductId.Equals(product.ProductId))
                     {
                         item.SetCount(item.Count + count);
+                        if (item.Count <= 0)
+                            BasketItems.Remove(item);
                         return;
                     }
                 }
