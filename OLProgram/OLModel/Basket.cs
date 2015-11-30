@@ -15,7 +15,7 @@ namespace OLModel
             {
                 foreach (BasketItem item in BasketItems)
                 {
-                    if (item.ProductId == product.ProductId)
+                    if (item.ProductId.Equals(product.ProductId))
                     {
                         item.SetCount(item.Count + count);
                         return;
@@ -28,7 +28,7 @@ namespace OLModel
             {
                 foreach (BasketItem bItem in BasketItems)
                 {
-                    if (bItem.ProductId == product.ProductId)
+                    if (bItem.ProductId.Equals(product.ProductId))
                         return bItem.Count;
                 }
                 return 0;

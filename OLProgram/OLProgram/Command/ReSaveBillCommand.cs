@@ -34,7 +34,7 @@ namespace OLProgram.Command
                     name = user.Name,
                     sum = calcSum(user.ProductsBought)
                 }
-            ).ToList();
+            );
             
             foreach (var user in result)
                 csv.AppendFormat("{0}\t{1}\r\n", trimCSV(user.name), user.sum);
@@ -47,7 +47,7 @@ namespace OLProgram.Command
             return csv.Replace(@"\", @"\\").Replace(",", @"\"); // TODO: Much better!
         }
 
-        private int calcSum(Dictionary<int, int> productsBought) // productsBought<Product.ProductId, Amount>, TODO: Korrekt?
+        private int calcSum(Dictionary<string, int> productsBought) // productsBought<Product.ProductId, Amount>
         {
             int sum = 0;
             int svindPerUser = 0; // TODO: Regner ikke svind med!
