@@ -76,8 +76,7 @@ namespace OLProgram.ViewModel
             if (path != null)
             {
                 billPath = path;
-                if (ReSaveBillCommand.CanExecute(null))
-                    ReSaveBillCommand.Execute(null);
+                ReSaveBillCommand.Execute(null);
             }
             RaisePropertyChanged(() => ReSaveBillCommand);
         }

@@ -20,23 +20,35 @@ namespace OLProgram.Command
 
         public bool CanExecute(object parameter)
         {
-            return _billPath != null;// && File.Exists(_billPath);
+            return _billPath != null && File.Exists(_billPath);
         }
 
         public void Execute(object parameter)
         {
             StringBuilder csv = new StringBuilder();
+
+            var result = (
+                from user in Users
+                select new {
+                    name = user.Name,
+                    sum = calcSum(user.ProductsBought)
+                }
+            ).ToList();
             
-
-            /*csv.AppendFormat("{0},\t{1}", );
-
-            Products.ElementAt(0);
-                Users.Where(
-                    x => 
-                ).ToString()
-            );*/
-
+            foreach (var user in result)
+                csv.AppendFormat("{0},\t{1}\r\n", user.name, user.sum);
             
+            File.WriteAllText(_billPath, csv.ToString());
+        }
+
+        private int calcSum(Dictionary<int, int> productsBought) // productsBought<Product.ProductId, Amount>, TODO: Korrekt?
+        {
+            int sum = 0;
+            foreach (var p in productsBought) {
+                Product prod = Products.First(x => x.ProductId == p.Key);
+                sum += prod.Price * p.Value; // TODO: Regner ikke svind med!
+            }
+            return sum;
         }
     }
 }

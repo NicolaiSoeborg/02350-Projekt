@@ -15,6 +15,7 @@ namespace OLModel
         public string ImageFileName { get; }
         public int Stock { get; set; }
         public int Bought { get; set; }
+        public int Price { get; set; }
 
         internal Product() : this("", "") { } // Used by serializer
 
