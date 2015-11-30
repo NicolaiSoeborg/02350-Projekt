@@ -36,16 +36,21 @@ namespace OLProgram.Command
             ).ToList();
             
             foreach (var user in result)
-                csv.AppendFormat("{0},\t{1}\r\n", user.name, user.sum);
+                csv.AppendFormat("{0},{1}\r\n", trimCSV(user.name), user.sum);
             
             File.WriteAllText(_billPath, csv.ToString());
+        }
+
+        private string trimCSV(string csv)
+        {
+            return csv.Replace(@"\", @"\\").Replace(",", @"\"); // TODO: Much better!
         }
 
         private int calcSum(Dictionary<int, int> productsBought) // productsBought<Product.ProductId, Amount>, TODO: Korrekt?
         {
             int sum = 0;
             foreach (var p in productsBought) {
-                Product prod = Products.First(x => x.ProductId == p.Key);
+                Product prod = Products.First(x => x.ProductId.Equals(p.Key));
                 sum += prod.Price * p.Value; // TODO: Regner ikke svind med!
             }
             return sum;
