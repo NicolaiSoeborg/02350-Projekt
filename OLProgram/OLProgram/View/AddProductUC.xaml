@@ -6,36 +6,27 @@
              xmlns:local="clr-namespace:OLProgram.View"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
-    <Grid x:Name="ProductGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*" />
-            <RowDefinition Height="10*" />
-        </Grid.RowDefinitions>
+    <GroupBox Header="Edit Products" Margin="2">
+        <DockPanel x:Name="ProductDockPanel" LastChildFill="False">
+            <DataGrid DockPanel.Dock="Top" x:Name="ProductControl" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ProductId" Binding="{Binding ProductId}" Width="10*"/>
+                        <DataGridTextColumn Header="ProductName" Binding="{Binding ProductName}" Width="20*"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="11*"/>
+                        <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="11*"/>
+                        <DataGridTextColumn Header="Bought" Binding="{Binding Bought}" Width="11*" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+            </DataGrid>
+            <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Command="{Binding AddNewProductCommand}">Add New Product</Button>
+                <Button Grid.Column="2" Command="{Binding DeleteSelectedProductCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
+            </Grid>
+        </DockPanel>
+    </GroupBox>
 
-        <StackPanel Grid.Row="0" Margin="2">
-            <GroupBox Header="Edit Products">
-                <StackPanel>
-                    <DataGrid x:Name="ProductControl" Height="400" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ProductId" Binding="{Binding ProductId}" Width="10*"/>
-                            <DataGridTextColumn Header="ProductName" Binding="{Binding ProductName}" Width="20*"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="11*"/>
-                            <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="11*"/>
-                            <DataGridTextColumn Header="Bought" Binding="{Binding Bought}" Width="11*" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </GroupBox>
-        </StackPanel>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="20*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Command="{Binding AddNewProductCommand}">Add New Product</Button>
-            <Button Grid.Column="1" Command="{Binding DeleteSelectedProductCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
-        </Grid>
-    </Grid>
 </UserControl>
