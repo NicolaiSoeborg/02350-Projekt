@@ -79,7 +79,7 @@
             <!-- top højre grid -->
 
 
-            <GroupBox Grid.Column="1" Header="Log">
+            <GroupBox Grid.Column="1" Header="History " BorderBrush="Black" BorderThickness="2">
                 <ListView  ItemsSource="{Binding LogForUsers}" BorderBrush="AliceBlue" Background="#FFF6F9FF" />
             </GroupBox>
 
