@@ -24,10 +24,5 @@ namespace OLProgram.View
         {
             InitializeComponent();
         }
-
-        private void EnterTextbox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-
-        }
     }
 }

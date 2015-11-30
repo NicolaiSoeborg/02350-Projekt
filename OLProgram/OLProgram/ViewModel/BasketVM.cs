@@ -10,6 +10,7 @@ namespace OLProgram.ViewModel
     {
         public static Basket Basket { get; set; }
         public string HelloTxtUsername { get { return loggedInUser == null ? "NoUserLoggedIn" : String.Format("Velkommen {0}!", loggedInUser.Name); } }
+        public static String inputForBasket { get; set; }
 
         public ICommand AddProductToBasketCommand { get; }
         public ICommand DecreaseBasketItemCommand { get; }
@@ -27,8 +28,7 @@ namespace OLProgram.ViewModel
             DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
             ClearBasketCommand = new RelayCommand(ClearBasket);
             CheckOutCommand = new RelayCommand(CheckOutBasket);
-    }
-
+        }
 
         public static void writeInput(int input)
         {
