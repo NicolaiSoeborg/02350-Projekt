@@ -7,7 +7,7 @@
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800"
         Title="ØL-program bby" WindowStartupLocation="CenterScreen">
-    <!-- WindowStyle="None" ResizeMode="NoResize" -->
+    <!-- WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized" -->
 
     <Window.DataContext>
         <ViewModel:MainVM />

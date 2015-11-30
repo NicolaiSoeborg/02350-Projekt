@@ -20,7 +20,6 @@ namespace OLProgram.View
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             ViewModel.BaseVM.MainWindow = this;
