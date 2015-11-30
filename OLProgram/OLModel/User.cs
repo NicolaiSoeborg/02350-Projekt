@@ -25,13 +25,21 @@ namespace OLModel
         }
 
         // Product is added to the users list and bought is incremented 
-        public void BuyProducts(int ProductID, int amountBought)
+        public void BuyProducts(String ProductID, int amountBought)
         {
+            int ProductIDIndex;
+
+            if(!int.TryParse(ProductID, out ProductIDIndex))
+            {
+                throw new NotImplementedException();
+            }
+
+
             // Add "product*amount" to user
-            if (ProductsBought.ContainsKey(ProductID))
-                ProductsBought[ProductID] += amountBought;
+            if (ProductsBought.ContainsKey(ProductIDIndex))
+                ProductsBought[ProductIDIndex] += amountBought;
             else
-                ProductsBought.Add(ProductID, amountBought);
+                ProductsBought.Add(ProductIDIndex, amountBought);
 
             ProductsCount += amountBought;
         }

@@ -10,7 +10,7 @@ namespace OLModel
         // Overvej at slette, da den ikke bliver genmt ned i XML og derved potentielt kan fucke det op
         public static int ProductIdCounter = 0;
 
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
         public string ProductName { get; set; }
         public string ImageFileName { get; }
         public int Stock { get; set; }
@@ -30,7 +30,8 @@ namespace OLModel
 
         public Product(string productName, string imageFileName)
         {
-            ProductId = ProductIdCounter++;
+            ProductIdCounter++;
+            ProductId = ProductIdCounter.ToString();
             this.ProductName = productName;
             this.ImageFileName = imageFileName;
         }

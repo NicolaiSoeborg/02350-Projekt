@@ -38,6 +38,17 @@ namespace OLProgram.ViewModel
         public static void enterInput()
         {
 
+            if (inputForBasket.Equals("5741000002476"))
+            {
+                if (true)
+                {
+
+                }else
+                {
+                    if (true) { }
+                }
+                   
+            }
         }
 
         private void CheckOutBasket()
@@ -59,8 +70,8 @@ namespace OLProgram.ViewModel
                     }
                 }
             }
-            
 
+            loggedInUser = null;
             new ClearBasketCommand(Basket).Execute();
             undoRedoController.ClearUndoRedoStacks();
             MainWindow.Content = new View.LoginUC();

@@ -56,7 +56,7 @@
 
                             <!-- High ZIndex value, so content is above other objects -->
                             <Border Panel.ZIndex="-1" MaxHeight="150" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="#FFF6F9FF">
-                                <StackPanel x:Name="LoginStackPanel" Margin="9" FocusManager.FocusedElement="{Binding ElementName=UserTxtBox}">
+                                <StackPanel x:Name="LoginStackPanel" Margin="9" >
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
                                     <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}"/>
