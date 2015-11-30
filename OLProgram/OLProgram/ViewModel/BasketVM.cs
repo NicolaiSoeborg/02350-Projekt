@@ -27,6 +27,17 @@ namespace OLProgram.ViewModel
             DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
             ClearBasketCommand = new RelayCommand(ClearBasket);
             CheckOutCommand = new RelayCommand(CheckOutBasket);
+    }
+
+
+        public static void writeInput(int input)
+        {
+            inputForBasket += input.ToString();
+        }
+
+        public static void enterInput()
+        {
+
         }
 
         private void CheckOutBasket()

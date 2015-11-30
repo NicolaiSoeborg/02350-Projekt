@@ -181,7 +181,6 @@ namespace OLProgram.ViewModel
             {
                 Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList() };
                 SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
-                
             }
         }
 

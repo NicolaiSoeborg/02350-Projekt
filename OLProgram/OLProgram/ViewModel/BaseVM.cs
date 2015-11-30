@@ -34,6 +34,7 @@ namespace OLProgram.ViewModel
         public static ObservableCollection<String> Log { get; set; }
         public static ObservableCollection<String> LogForUsers { get; set; }
         public static User loggedInUser { get; set; }
+        public static String inputForBasket { get; set; }
 
         // Ref til MainWindow, brug MainWindow.Content = new View.ViewUC(); for at skrifte UC.
         public static Window MainWindow { get; set; }

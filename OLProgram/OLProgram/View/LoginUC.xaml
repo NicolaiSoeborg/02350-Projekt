@@ -55,14 +55,12 @@
                             </Grid.RowDefinitions>
 
                             <!-- High ZIndex value, so content is above other objects -->
-                            <Border Panel.ZIndex="-1" MaxHeight="180" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="#FFF6F9FF">
+                            <Border Panel.ZIndex="-1" MaxHeight="150" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="#FFF6F9FF">
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" FocusManager.FocusedElement="{Binding ElementName=UserTxtBox}">
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
                                     <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}"/>
-                                    <TextBlock Text="Password:" />
-                                    <PasswordBox x:Name="PasswordTxtBox" Width="{Binding ActualWidth, ElementName=LoginStackPanel, Mode=OneWay}" />
-                                    <TextBlock x:Name="TODOSpaceHackSoBtnIsntToCloseToPwdBox" Height="16" />
+                                    <TextBlock></TextBlock>
                                     <Button x:Name="LoginButton" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox}" IsDefault="true">Login</Button>
                                 </StackPanel>
                             </Border>

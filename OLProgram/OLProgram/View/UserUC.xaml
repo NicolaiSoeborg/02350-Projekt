@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
-        mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800">
+        mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800"
+        Keyboard.KeyUp="KeyUpEventHandler">
 
     <UserControl.DataContext>
         <ViewModel:BasketVM/>

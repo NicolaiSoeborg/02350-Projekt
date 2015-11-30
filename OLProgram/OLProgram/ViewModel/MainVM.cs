@@ -8,6 +8,11 @@ namespace OLProgram.ViewModel
 {
     public class MainVM : BaseVM
     {
+
+        
+
+
+
         // Tekstbox på LoginUC:
         private string _txtUsername = "";
 
@@ -18,6 +23,8 @@ namespace OLProgram.ViewModel
         }
 
         public RelayCommand<String> LoginCommand { get; }
+        public RelayCommand<int> keyPressedCommand { get; }
+        public RelayCommand EnterPressedCommand { get; }
 
         public MainVM()
         {
@@ -25,6 +32,16 @@ namespace OLProgram.ViewModel
 
             // Commands:
             LoginCommand = new RelayCommand<String>(DoLogin);
+            EnterPressedCommand = new RelayCommand(EnterPressed);
+        }
+
+        private void EnterPressed()
+        {
+            // toDO 
+            if (true)
+            {
+
+            }
         }
 
         private void DoLogin(String BarCode)
