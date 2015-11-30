@@ -42,7 +42,7 @@
         <!-- Image -->
         <Image DockPanel.Dock="Top" Source="/Images/Beer.png" Stretch="Uniform"></Image>
 
-        <UniformGrid DockPanel.Dock="Bottom" Columns="3">
+        <UniformGrid DockPanel.Dock="Bottom" Columns="3" Rows="1">
             <View:AddUserUC />
             <View:AddProductUC />
             <GroupBox Header="Log">
