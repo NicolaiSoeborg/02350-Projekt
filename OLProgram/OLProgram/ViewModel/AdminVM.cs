@@ -65,7 +65,7 @@ namespace OLProgram.ViewModel
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
             GenerateBillCommand = new RelayCommand(GenerateBill); // TODO
-            ReSaveBillCommand = new Command.ReSaveBillCommand();
+            ReSaveBillCommand = new Command.ReSaveBillCommand();    
         }
 
         private void GenerateBill()

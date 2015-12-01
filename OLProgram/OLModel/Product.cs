@@ -15,7 +15,7 @@ namespace OLModel
         public string ImageFileName { get; }
         public int Stock { get; set; }
         public int Bought { get; set; }
-        public int Price { get { return 1; } }
+        public int Price { get; set; } 
 
         internal Product() : this("", "") { } // Used by serializer
 
@@ -27,6 +27,7 @@ namespace OLModel
             ProductId = product.ProductId;
             ProductName = product.ProductName;
             ImageFileName = product.ImageFileName;
+            Price = 0;
         }
 
         public Product(string productName, string imageFileName)

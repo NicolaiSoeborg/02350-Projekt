@@ -20,6 +20,7 @@ namespace OLProgram.ViewModel
         public ICommand ClearBasketCommand { get; }
         public RelayCommand CheckOutCommand { get; }
         public RelayCommand<String> EnterCommand { get; }
+        public RelayCommand<int> writeInputCommand { get; }
 
         public BasketVM()
         {
@@ -34,11 +35,13 @@ namespace OLProgram.ViewModel
             ClearBasketCommand = new RelayCommand(ClearBasket);
             CheckOutCommand = new RelayCommand(CheckOutBasket);
             EnterCommand = new RelayCommand<string>(enterInput);
+            writeInputCommand = new RelayCommand<int>(writeInput);
         }
 
         public void writeInput(int input)
         {
-            inputForBasket += input.ToString();
+            inputBasket.inputGetSetter += input.ToString();
+            RaisePropertyChanged("inputGetSetter");
         }
 
         public void enterInput(String input)
@@ -87,7 +90,7 @@ namespace OLProgram.ViewModel
                     if (product.ProductId == basketItem.ProductId)
                     {
                         product.Stock -= basketItem.Count;
-                        product.Bought -= basketItem.Count;
+                        product.Bought += basketItem.Count;
                     }
                 }
             }

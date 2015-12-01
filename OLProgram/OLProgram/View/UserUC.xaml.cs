@@ -23,63 +23,54 @@ namespace OLProgram.View
         public UserUC()
         {
             InitializeComponent();
+            
         }
 
         private void KeyUpEventHandler(object sender, KeyEventArgs e)
         {
-            int keyToSend = -1;
-
+            /*
+            ViewModel.BasketVM VM = this.DataContext as ViewModel.BasketVM;
             if (e.Key == Key.D0)
             {
-                keyToSend = 0;
+                ScannerBox.Text += 0;
             }
             else if (e.Key == Key.D1)
             {
-                keyToSend = 1;
+                ScannerBox.Text += 1;
             }
-            else if(e.Key == Key.D2)
+            else if (e.Key == Key.D2)
             {
-                keyToSend = 2;
+                ScannerBox.Text += 2;
             }
-            else if(e.Key == Key.D3)
+            else if (e.Key == Key.D3)
             {
-                keyToSend = 3;
+                ScannerBox.Text += 3;
             }
-            else if(e.Key == Key.D4)
+            else if (e.Key == Key.D4)
             {
-                keyToSend = 4;
+                ScannerBox.Text += 4;
             }
-            else if(e.Key == Key.D5)
+            else if (e.Key == Key.D5)
             {
-                keyToSend = 5;
+                ScannerBox.Text += 5;
             }
-            else if(e.Key == Key.D6)
+            else if (e.Key == Key.D6)
             {
-                keyToSend = 6;
+                ScannerBox.Text += 6;
             }
-            else if(e.Key == Key.D7)
+            else if (e.Key == Key.D7)
             {
-                keyToSend = 7;
+                ScannerBox.Text += 7;
             }
-            else if(e.Key == Key.D8)
+            else if (e.Key == Key.D8)
             {
-                keyToSend = 8;
+                ScannerBox.Text += 8;
             }
-            else if(e.Key == Key.D9)
+            else if (e.Key == Key.D9)
             {
-                keyToSend = 9;
-            }
-            else
-            {
-                
-            }
-            if(keyToSend != -1)
-            {
-                
-            }
-            
-
-
+                ScannerBox.Text += 9;
+            } */
+           
         }
     }
 }
