@@ -3,36 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
         mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800"
-        Keyboard.KeyUp="KeyUpEventHandler">
+        Focusable="True"
+        >
 
     <UserControl.DataContext>
         <ViewModel:BasketVM/>
     </UserControl.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="KeyUp">
+            <cmd:EventToCommand Command="{Binding writeInputCommand}" PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <!-- TODO: Hvilke specifikke keybindings skal views have? Globale keybindings (Undo/Redo) er defineret i MainWindow
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding TODO_SomeCommand}" Gesture="CTRL+T" />
     </UserControl.InputBindings>-->
 
-    <DockPanel>
+    <DockPanel x:Name="FocusPanel">
         <View:UserTopPanelUC DockPanel.Dock="Top" />
-        <TextBox x:Name="ScannerBox"  DockPanel.Dock="Top" Text="{Binding Path=inputBasket.inputGetSetter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Focusable="True" >
-            <TextBox.InputBindings>
-                <KeyBinding Key="Enter" Command="{Binding EnterCommand}" CommandParameter="{Binding Text, ElementName=ScannerBox}"  />
-            </TextBox.InputBindings> 
-        </TextBox>
-        
-
         <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65*"/>
                 <ColumnDefinition Width="35*"/>
             </Grid.ColumnDefinitions>
 
-            <View:ProductSelectionUC Grid.Column="0" />
+            <View:ProductSelectionUC Grid.Column="0"/>
             
             <View:UserBasketPanelUC Grid.Column="1" />
             

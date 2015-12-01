@@ -22,6 +22,7 @@ namespace OLProgram.View
         public LoginUC()
         {
             InitializeComponent();
+            UserTxtBox.Focus();
         }
     }
 }

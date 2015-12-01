@@ -19,63 +19,117 @@ namespace OLProgram.ViewModel
         public ICommand DeleteBasketItemCommand { get; }
         public ICommand ClearBasketCommand { get; }
         public RelayCommand CheckOutCommand { get; }
-        public RelayCommand<String> EnterCommand { get; }
-        public RelayCommand<int> writeInputCommand { get; }
+        public RelayCommand EnterCommand { get; }
+        public RelayCommand<KeyEventArgs> writeInputCommand { get; }
         public RelayCommand homeCommand { get; }
 
         public BasketVM()
         {
             if (Basket == null) Basket = new Basket();
-            if (inputBasket == null) inputBasket = new inputHandler();
-            inputBasket.inputGetSetter = "";
-
+            if (inputBasket == null)
+            {
+                inputBasket = new inputHandler();
+                inputBasket.inputGetSetter = "";
+            }
             // Commands to access from UI:
+            inputForBasket = "";
             AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
             DecreaseBasketItemCommand = new RelayCommand<Product>(DecreaseBasketItem);
             DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
             ClearBasketCommand = new RelayCommand(ClearBasket);
             CheckOutCommand = new RelayCommand(CheckOutBasket);
-            EnterCommand = new RelayCommand<string>(enterInput);
-            writeInputCommand = new RelayCommand<int>(writeInput);
+            EnterCommand = new RelayCommand(enterInput);
+            writeInputCommand = new RelayCommand<KeyEventArgs>(writeInput);
             homeCommand = new RelayCommand(homeButton);
 
         }
 
-        public void writeInput(int input)
+        private void writeInput(KeyEventArgs e)
         {
-            inputBasket.inputGetSetter += input.ToString();
-            RaisePropertyChanged("inputGetSetter");
+
+
+            if (e.Key == Key.D0)
+            {
+                inputForBasket += "0";
+            }
+            else if (e.Key == Key.D1)
+            {
+                inputForBasket += "1";
+            }
+            else if (e.Key == Key.D2)
+            {
+                inputForBasket += "2";
+            }
+            else if (e.Key == Key.D3)
+            {
+                inputForBasket += "3";
+            }
+            else if (e.Key == Key.D4)
+            {
+                inputForBasket += "4";
+            }
+            else if (e.Key == Key.D5)
+            {
+                inputForBasket += "5";
+            }
+            else if (e.Key == Key.D6)
+            {
+                inputForBasket += "6";
+            }
+            else if (e.Key == Key.D7)
+            {
+                inputForBasket += "7";
+            }
+            else if (e.Key == Key.D8)
+            {
+                inputForBasket += "8";
+            }
+            else if (e.Key == Key.D9)
+            {
+                inputForBasket += "9";
+            }
+            else if(e.Key == Key.Enter)
+            {
+                enterInput();
+            }
         }
 
-        public void enterInput(String input)
+        // Kræver optimeringer
+        public void enterInput()
         {            
-            if (input != null)
-            inputBasket.inputGetSetter = string.Empty;
-            RaisePropertyChanged("inputGetSetter");
-            {
+            if (inputForBasket != null)
+            { 
+                if(inputForBasket.Length == 4)
+                {
+                    int userID;
 
-                foreach(Product product in Products)
-                {
-                    if (input.Equals(product.ProductId))
+                    if (int.TryParse(inputForBasket, out userID))
                     {
-                        undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
-                        return;
-                    }
-                }
-                int userID;
-                
-                if(int.TryParse(input, out userID))
-                {
-                    foreach (User user in Users)
-                    {
-                        if (user.UserID == userID)
+                        foreach (User user in Users)
                         {
-                            CheckOutBasket();
+                            if (user.UserID == userID)
+                            {
+                                CheckOutBasket();
+                                return;
+                            }
+                        }
+                    }
+                } else
+                {
+
+                    foreach (Product product in Products)
+                    {
+                        if (inputForBasket.Equals(product.ProductId))
+                        {
+                            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
+                            inputForBasket = string.Empty;
                             return;
                         }
                     }
                 }
             }
+            inputForBasket = string.Empty;
+
         }
 
         private void CheckOutBasket()

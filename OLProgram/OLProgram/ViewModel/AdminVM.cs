@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace OLProgram.ViewModel
 {
@@ -167,7 +168,36 @@ namespace OLProgram.ViewModel
                 Products.Clear();
                 DataToLoad.Products.ForEach(x => Products.Add(x));
 
-                Log.Add(getTimeStamp(DateTime.Now) + " - Existing data loaded");
+                // Load each users dictionary 
+                int DictionaryCounter = 0;
+                int Counter = 0;
+                int currentIndex = 0;
+                foreach (User user in Users)
+                {
+                    Counter = 0;
+                    foreach(String temp in DataToLoad.ProductKeys)
+                    {
+                        if (DataToLoad.ProductsForEachUser[currentIndex] != 0)
+                        {
+                            user.ProductsBought.Add(DataToLoad.ProductKeys[DictionaryCounter], DataToLoad.AmountBought[DictionaryCounter]);
+                            DictionaryCounter++;
+                            Counter++;
+
+                            if (DataToLoad.ProductsForEachUser[currentIndex] == Counter)
+                            {
+                                currentIndex++;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            currentIndex++;
+                            break;
+                        }
+                  }
+             }
+                    Log.Add(getTimeStamp(DateTime.Now) + " - Existing data loaded");
+
             }
         }
 
@@ -176,7 +206,24 @@ namespace OLProgram.ViewModel
             string path = dialogHelper.ShowSave();
             if (path != null)
             {
-                Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList() };
+                List<String> tempProductKeys = new List<string>();
+                List<int> tempAmountBought = new List<int>();
+                List<int> tempProductsForEachUser = new List<int>();
+                int Counter;
+                foreach(User user in Users)
+                {
+                    Counter = 0;
+                    
+                    foreach(var item in user.ProductsBought)
+                    {
+                        tempProductKeys.Add(item.Key);
+                        tempAmountBought.Add(item.Value);
+                        Counter++;
+                    }
+                    tempProductsForEachUser.Add(Counter);
+                }
+
+                Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList(), AmountBought = tempAmountBought, ProductKeys = tempProductKeys, ProductsForEachUser = tempProductsForEachUser};
                 SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
             }
         }

@@ -8,5 +8,8 @@ namespace OLModel
     {
         public List<User> Users { get; set; }
         public List<Product> Products { get; set; }
+        public List<String> ProductKeys { get; set; }
+        public List<int> AmountBought { get; set; }
+        public List<int> ProductsForEachUser { get; set; }
     }
 }

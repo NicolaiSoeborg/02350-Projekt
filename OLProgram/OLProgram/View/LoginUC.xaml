@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
-        mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800">
+        mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800" Focusable="True">
 
     <UserControl.DataContext>
         <ViewModel:MainVM />
@@ -63,13 +63,13 @@
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" >
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
-                                    <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}">
+                                    <TextBox x:Name="UserTxtBox"  Width="{Binding ActualWidth, ElementName=LoginStackPanel}" Text="{Binding loginTextBox.inputGetSetter }">
                                         <TextBox.InputBindings>
                                             <KeyBinding Key="Enter" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox }"/>
                                         </TextBox.InputBindings>
                                     </TextBox>
                                     <TextBlock></TextBlock>
-                                    <Button x:Name="LoginButton" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox}" IsDefault="true">Login</Button>
+                                    <Button x:Name="LoginButton" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox}" Focusable="False" IsDefault="true">Login</Button>
                                 </StackPanel>
                             </Border>
 
@@ -85,8 +85,8 @@
             <!-- top højre grid -->
 
 
-            <GroupBox Grid.Column="1" Header="History " BorderBrush="Black" BorderThickness="2">
-                <ListView  ItemsSource="{Binding LogForUsers}" BorderBrush="AliceBlue" Background="#FFF6F9FF" />
+            <GroupBox Grid.Column="1" Header="History " BorderBrush="Black" BorderThickness="2" Focusable="False">
+                <ListView  ItemsSource="{Binding LogForUsers}" BorderBrush="AliceBlue" Background="#FFF6F9FF" Focusable="False"/>
             </GroupBox>
 
 

@@ -56,7 +56,6 @@ namespace OLProgram.Command
 
             foreach (var p in productsBought) {
                 Product prod = Products.First(x => x.ProductId.Equals(p.Key));
-                System.Windows.MessageBox.Show("Product " + prod.ProductName + " bought: " + prod.Bought);
                 sum += prod.Price * p.Value; 
             }
             return sum + svindPerUser;

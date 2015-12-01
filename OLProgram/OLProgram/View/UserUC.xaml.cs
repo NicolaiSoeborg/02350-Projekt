@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using OLProgram.ViewModel;
+using System.Windows.Threading;
 
 namespace OLProgram.View
 {
@@ -23,54 +24,8 @@ namespace OLProgram.View
         public UserUC()
         {
             InitializeComponent();
-            
+            this.Focus();
         }
 
-        private void KeyUpEventHandler(object sender, KeyEventArgs e)
-        {
-            /*
-            ViewModel.BasketVM VM = this.DataContext as ViewModel.BasketVM;
-            if (e.Key == Key.D0)
-            {
-                ScannerBox.Text += 0;
-            }
-            else if (e.Key == Key.D1)
-            {
-                ScannerBox.Text += 1;
-            }
-            else if (e.Key == Key.D2)
-            {
-                ScannerBox.Text += 2;
-            }
-            else if (e.Key == Key.D3)
-            {
-                ScannerBox.Text += 3;
-            }
-            else if (e.Key == Key.D4)
-            {
-                ScannerBox.Text += 4;
-            }
-            else if (e.Key == Key.D5)
-            {
-                ScannerBox.Text += 5;
-            }
-            else if (e.Key == Key.D6)
-            {
-                ScannerBox.Text += 6;
-            }
-            else if (e.Key == Key.D7)
-            {
-                ScannerBox.Text += 7;
-            }
-            else if (e.Key == Key.D8)
-            {
-                ScannerBox.Text += 8;
-            }
-            else if (e.Key == Key.D9)
-            {
-                ScannerBox.Text += 9;
-            } */
-           
-        }
     }
 }
