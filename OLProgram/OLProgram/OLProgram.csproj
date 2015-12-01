@@ -321,6 +321,8 @@
     <Resource Include="Images\tuborg.png" />
     <Resource Include="Images\somersby.png" />
     <Resource Include="Images\BeerBottles.jpg" />
+    <Resource Include="Images\color-beer-bottles.png" />
+    <Resource Include="Images\Ale No16.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OLModel\OLModel.csproj">
@@ -345,9 +347,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\color-beer-bottles.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
