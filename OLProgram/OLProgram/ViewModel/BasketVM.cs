@@ -21,6 +21,7 @@ namespace OLProgram.ViewModel
         public RelayCommand CheckOutCommand { get; }
         public RelayCommand<String> EnterCommand { get; }
         public RelayCommand<int> writeInputCommand { get; }
+        public RelayCommand homeCommand { get; }
 
         public BasketVM()
         {
@@ -36,6 +37,8 @@ namespace OLProgram.ViewModel
             CheckOutCommand = new RelayCommand(CheckOutBasket);
             EnterCommand = new RelayCommand<string>(enterInput);
             writeInputCommand = new RelayCommand<int>(writeInput);
+            homeCommand = new RelayCommand(homeButton);
+
         }
 
         public void writeInput(int input)
@@ -95,6 +98,14 @@ namespace OLProgram.ViewModel
                 }
             }
 
+            loggedInUser = null;
+            new ClearBasketCommand(Basket).Execute();
+            undoRedoController.ClearUndoRedoStacks();
+            MainWindow.Content = new View.LoginUC();
+        }
+
+        private void homeButton()
+        {
             loggedInUser = null;
             new ClearBasketCommand(Basket).Execute();
             undoRedoController.ClearUndoRedoStacks();

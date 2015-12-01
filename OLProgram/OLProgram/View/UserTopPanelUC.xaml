@@ -29,7 +29,7 @@
         <MenuItem>
             <MenuItem.Header>
                 <!--TODO MAKE GO HOME COMMAND-->
-                <Button  Style="{StaticResource Style1}" Command="{Binding GoHomeCommand}" ToolTip="Go to homescreen">Home &#xE10F;</Button>
+                <Button  Style="{StaticResource Style1}" Command="{Binding homeCommand}" ToolTip="Go to homescreen">Home &#xE10F;</Button>
             </MenuItem.Header>
         </MenuItem>
         <MenuItem>
@@ -50,11 +50,11 @@
             </MenuItem.Header>
             
         </MenuItem>
-        <MenuItem HorizontalAlignment="Right">
+        <!--<MenuItem HorizontalAlignment="Right">
             <MenuItem.Header>
-                <!--TODO Make go to profilCommand-->
-                <Button Style="{StaticResource Style1}" Margin="5" Command="{Binding GoToProfilCommand}" ToolTip="Go to profile info">Profile &#xE13D;</Button>
+                
+                <Button Style="{StaticResource Style1}" Margin="5" Command="{Binding GoToProfilCommand}" ToolTip="Go to profile info">Profile &#xE13D;</Button>>
             </MenuItem.Header>
-        </MenuItem>
+        </MenuItem>-->
     </Menu>
 </UserControl>

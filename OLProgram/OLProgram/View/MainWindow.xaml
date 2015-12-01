@@ -3,16 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800"
-        Title="ØL-program bby" WindowStartupLocation="CenterScreen">
-    <!-- WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized" -->
-
+        Content="{Binding currentView}"
+        Title="ØL-program bby" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized" >
+      
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ViewModel:MainVM}">
+            <View:LoginUC/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:BasketVM}">
+            <View:UserUC/>
+        </DataTemplate>
+    </Window.Resources>
     <Window.DataContext>
         <ViewModel:MainVM />
     </Window.DataContext>
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="KeyUp">
+            <cmd:EventToCommand Command="{Binding DataContext.MouseDownShapeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.InputBindings>
         <KeyBinding Command="{Binding UndoCommand}" Gesture="CTRL+Z" />
         <KeyBinding Command="{Binding RedoCommand}" Gesture="CTRL+Y" />

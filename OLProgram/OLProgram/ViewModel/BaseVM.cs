@@ -25,6 +25,10 @@ namespace OLProgram.ViewModel
         // Undo/Redo controller + commands that the UI can be bound to.
         public UndoRedoController undoRedoController = UndoRedoController.Instance;
 
+        
+        public object CurrentView { get { return HelperCurrentView.instance.CurrentView; } set { HelperCurrentView.instance.CurrentView = value; RaisePropertyChanged(); } }
+
+
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
 
@@ -47,7 +51,7 @@ namespace OLProgram.ViewModel
             // TODO: Skal ikke være med i den endelige version (load fra OLModel?):
             if (Products == null) {
                 Products = new ObservableCollection<Product>() { new Product("Grøn Tuborg", "../Images/tuborg.png"), new Product("Guld Tuborg", "../Images/guldtuborg.png"), new Product("Somersby", "../Images/somersby.png") };
-                Product svaneke = new Product("Svaneke Grunge IPA");
+                Product svaneke = new Product("Svaneke Grunge IPA", "../Images/svaneke.JPG");
                 svaneke.ProductId = "5708429004221";
                 Products.Add(svaneke);
             } 

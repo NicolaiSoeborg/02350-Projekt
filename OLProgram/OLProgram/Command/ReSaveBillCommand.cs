@@ -39,7 +39,7 @@ namespace OLProgram.Command
             );
             
             foreach (var user in result)
-                csv.AppendFormat("{0}\t{1}\r\n", trimCSV(user.name), user.sum);
+                csv.AppendFormat("{0};{1}\r\n", trimCSV(user.name), user.sum);
             
             File.WriteAllText(_billPath, csv.ToString());
         }
