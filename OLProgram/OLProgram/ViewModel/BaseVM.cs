@@ -75,11 +75,11 @@ namespace OLProgram.ViewModel
             MainWindow.Content = new View.LoginUC();
         }
 
+        // Bruges både i AdminVM og BasketVM, så defineres kun én gang her:
         public static String getTimeStamp(DateTime value)
         {
             return value.ToString("yyyy-MM-dd HH:mm:ss");
         }
-
 
     }
 }

@@ -182,7 +182,6 @@ namespace OLProgram.ViewModel
                             user.ProductsBought.Add(DataToLoad.ProductKeys[DictionaryCounter], DataToLoad.AmountBought[DictionaryCounter]);
                             DictionaryCounter++;
                             Counter++;
-
                             if (DataToLoad.ProductsForEachUser[currentIndex] == Counter)
                             {
                                 currentIndex++;
@@ -196,8 +195,7 @@ namespace OLProgram.ViewModel
                         }
                   }
              }
-                    Log.Add(getTimeStamp(DateTime.Now) + " - Existing data loaded");
-
+            Log.Add(getTimeStamp(DateTime.Now) + " - Existing data loaded");
             }
         }
 
@@ -222,7 +220,6 @@ namespace OLProgram.ViewModel
                     }
                     tempProductsForEachUser.Add(Counter);
                 }
-
                 Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList(), AmountBought = tempAmountBought, ProductKeys = tempProductKeys, ProductsForEachUser = tempProductsForEachUser};
                 SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
             }
