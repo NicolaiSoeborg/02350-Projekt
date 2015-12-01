@@ -4,6 +4,7 @@ using OLModel;
 using System;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace OLProgram.ViewModel
 {
@@ -31,8 +32,9 @@ namespace OLProgram.ViewModel
                 inputBasket = new inputHandler();
                 inputBasket.inputGetSetter = "";
             }
-            // Commands to access from UI:
             inputForBasket = "";
+
+            // Commands to access from UI:
             AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
             DecreaseBasketItemCommand = new RelayCommand<Product>(DecreaseBasketItem);
             DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
@@ -40,57 +42,19 @@ namespace OLProgram.ViewModel
             CheckOutCommand = new RelayCommand(CheckOutBasket);
             EnterCommand = new RelayCommand(enterInput);
             writeInputCommand = new RelayCommand<KeyEventArgs>(writeInput);
-            homeCommand = new RelayCommand(homeButton);
+            homeCommand = new RelayCommand(HomeButton);
 
         }
 
+        private Dictionary<Key, char> num2Char = new Dictionary<Key, char> { { Key.D0, '0' }, { Key.D1, '1' }, { Key.D2, '2' }, { Key.D3, '3' }, { Key.D4, '4' }, { Key.D5, '5' }, { Key.D6, '6' }, { Key.D7, '7' }, { Key.D8, '8' }, { Key.D9, '9' } };
         private void writeInput(KeyEventArgs e)
         {
-
-
-            if (e.Key == Key.D0)
-            {
-                inputForBasket += "0";
-            }
-            else if (e.Key == Key.D1)
-            {
-                inputForBasket += "1";
-            }
-            else if (e.Key == Key.D2)
-            {
-                inputForBasket += "2";
-            }
-            else if (e.Key == Key.D3)
-            {
-                inputForBasket += "3";
-            }
-            else if (e.Key == Key.D4)
-            {
-                inputForBasket += "4";
-            }
-            else if (e.Key == Key.D5)
-            {
-                inputForBasket += "5";
-            }
-            else if (e.Key == Key.D6)
-            {
-                inputForBasket += "6";
-            }
-            else if (e.Key == Key.D7)
-            {
-                inputForBasket += "7";
-            }
-            else if (e.Key == Key.D8)
-            {
-                inputForBasket += "8";
-            }
-            else if (e.Key == Key.D9)
-            {
-                inputForBasket += "9";
-            }
-            else if(e.Key == Key.Enter)
-            {
+            if (e.Key == Key.Enter)
                 enterInput();
+            else
+            {
+                if (num2Char.ContainsKey(e.Key))
+                    inputForBasket += num2Char[e.Key];
             }
         }
 
@@ -99,52 +63,53 @@ namespace OLProgram.ViewModel
         {            
             if (inputForBasket != null)
             { 
-                if(inputForBasket.Length == 4)
-                {
-                    int userID;
+                if(inputForBasket.Length == 4) {
+                    enterInput_User();
+                } else {
+                    enterInput_Product();
+                }
+            }
+            inputForBasket = "";
+        }
 
-                    if (int.TryParse(inputForBasket, out userID))
-                    {
-                        foreach (User user in Users)
-                        {
-                            if (user.UserID == userID)
-                            {
-                                CheckOutBasket();
-                                return;
-                            }
-                        }
-                    }
-                } else
+        private void enterInput_User()
+        {
+            int userID;
+            if (int.TryParse(inputForBasket, out userID))
+            {
+                foreach (User user in Users)
                 {
-
-                    foreach (Product product in Products)
+                    if (user.UserID == userID)
                     {
-                        if (inputForBasket.Equals(product.ProductId))
-                        {
-                            undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
-                            inputForBasket = string.Empty;
-                            return;
-                        }
+                        CheckOutBasket();
+                        return;
                     }
                 }
             }
-            inputForBasket = string.Empty;
+        }
 
+        private void enterInput_Product()
+        {
+            foreach (Product product in Products)
+            {
+                if (inputForBasket.Equals(product.ProductId))
+                {
+                    undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
+                    inputForBasket = "";
+                    return;
+                }
+            }
         }
 
         private void CheckOutBasket()
         {
-
             foreach (BasketItem basketItem in Basket.BasketItems) {
-
                 Users[Users.IndexOf(loggedInUser)].BuyProducts(basketItem.ProductId, basketItem.Count);
                 Log.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " Bought " + basketItem.Count + " of productID " + basketItem.ProductId);
                 LogForUsers.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " Bought " + basketItem.Count + " of productID " + basketItem.ProductId);
-
-                // Virkelig ineffektivt
                 foreach (Product product in Products)
                 {
-                    if (product.ProductId == basketItem.ProductId)
+                    if (product.ProductId.Equals(basketItem.ProductId))
                     {
                         product.Stock -= basketItem.Count;
                         product.Bought += basketItem.Count;
@@ -158,11 +123,11 @@ namespace OLProgram.ViewModel
             MainWindow.Content = new View.LoginUC();
         }
 
-        private void homeButton()
+        private void HomeButton()
         {
-            loggedInUser = null;
             new ClearBasketCommand(Basket).Execute();
             undoRedoController.ClearUndoRedoStacks();
+            loggedInUser = null;
             MainWindow.Content = new View.LoginUC();
         }
 

@@ -12,13 +12,8 @@
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <ScrollViewer Name="AvailableProducts" Grid.Column="0" >
-            <ItemsControl ItemsSource="{Binding Products}"  >
-                <ItemsControl.Resources>
-                    <Style TargetType="FrameworkElement">
-                        <Setter Property="Focusable"  Value="False" />
-                    </Style>
-                </ItemsControl.Resources>
 
+            <ItemsControl ItemsSource="{Binding Products}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4" Margin="2" />
