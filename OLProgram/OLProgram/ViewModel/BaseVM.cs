@@ -25,9 +25,6 @@ namespace OLProgram.ViewModel
         // Undo/Redo controller + commands that the UI can be bound to.
         public UndoRedoController undoRedoController = UndoRedoController.Instance;
 
-       
-
-
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
 
