@@ -168,6 +168,12 @@ namespace OLProgram.ViewModel
                 Products.Clear();
                 DataToLoad.Products.ForEach(x => Products.Add(x));
 
+                // Do the Logs
+                LogForUsers.Clear();
+                DataToLoad.UserLog.ForEach(x => LogForUsers.Add(x));
+
+                DataToLoad.AdminLog.ForEach(x => Log.Add(x));
+
                 // Load each users dictionary 
                 int DictionaryCounter = 0;
                 int Counter = 0;
@@ -223,7 +229,10 @@ namespace OLProgram.ViewModel
                     tempProductsForEachUser.Add(Counter);
                 }
 
-                Data DataToSave = new Data() { Users = Users.ToList(), Products = Products.ToList(), AmountBought = tempAmountBought, ProductKeys = tempProductKeys, ProductsForEachUser = tempProductsForEachUser};
+                Data DataToSave = new Data() { Users = Users.ToList(),
+                                                Products = Products.ToList(), AmountBought = tempAmountBought,
+                                                ProductKeys = tempProductKeys, ProductsForEachUser = tempProductsForEachUser,
+                                                AdminLog = Log.ToList(), UserLog = LogForUsers.ToList()};
                 SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
             }
         }
@@ -234,6 +243,7 @@ namespace OLProgram.ViewModel
             {
                 Users.Clear();
                 Products.Clear();
+                LogForUsers.Clear();
                 Log.Add(getTimeStamp(DateTime.Now) + " - Data was deleted");
                 OLModel.User.UserIDCounter = 2000;
                 OLModel.Product.ProductIdCounter = 0;

@@ -11,5 +11,7 @@ namespace OLModel
         public List<String> ProductKeys { get; set; }
         public List<int> AmountBought { get; set; }
         public List<int> ProductsForEachUser { get; set; }
+        public List<String> AdminLog { get; set; }
+        public List<String> UserLog { get; set; }
     }
 }

@@ -84,9 +84,15 @@
 
             <!-- top højre grid -->
 
-
+            
             <GroupBox Grid.Column="1" Header="History " BorderBrush="Black" BorderThickness="2" Focusable="False">
-                <ListView  ItemsSource="{Binding LogForUsers}" BorderBrush="AliceBlue" Background="#FFF6F9FF" Focusable="False"/>
+                <ListView  ItemsSource="{Binding LogForUsers}" BorderBrush="AliceBlue" Background="#FFF6F9FF" Focusable="False" >
+                    <ListView.Resources>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Focusable"  Value="False" />
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
             </GroupBox>
 
 

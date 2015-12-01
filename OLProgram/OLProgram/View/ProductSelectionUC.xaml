@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OLProgram.View"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="500" Focusable="False">
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="500" Focusable="False">   
     
     <Grid>
         <Grid.RowDefinitions>
@@ -13,6 +13,12 @@
         </Grid.RowDefinitions>
         <ScrollViewer Name="AvailableProducts" Grid.Column="0" >
             <ItemsControl ItemsSource="{Binding Products}"  >
+                <ItemsControl.Resources>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Focusable"  Value="False" />
+                    </Style>
+                </ItemsControl.Resources>
+
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4" Margin="2" />
