@@ -323,6 +323,7 @@
     <Resource Include="Images\BeerBottles.jpg" />
     <Resource Include="Images\color-beer-bottles.png" />
     <Resource Include="Images\Ale No16.png" />
+    <Resource Include="Images\svaneke.JPG" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OLModel\OLModel.csproj">
