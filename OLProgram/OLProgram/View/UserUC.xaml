@@ -35,11 +35,10 @@
             </Grid.ColumnDefinitions>
 
             <View:ProductSelectionUC Grid.Column="0"/>
-            
+
             <View:UserBasketPanelUC Grid.Column="1" />
             
         </Grid>
-        
     </DockPanel>
 
 </UserControl>

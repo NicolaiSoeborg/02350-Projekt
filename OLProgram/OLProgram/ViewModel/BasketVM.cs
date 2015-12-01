@@ -22,7 +22,7 @@ namespace OLProgram.ViewModel
         public RelayCommand CheckOutCommand { get; }
         public RelayCommand EnterCommand { get; }
         public RelayCommand<KeyEventArgs> writeInputCommand { get; }
-        public RelayCommand homeCommand { get; }
+        public RelayCommand HomeCommand { get; }
 
         public BasketVM()
         {
@@ -42,8 +42,7 @@ namespace OLProgram.ViewModel
             CheckOutCommand = new RelayCommand(CheckOutBasket);
             EnterCommand = new RelayCommand(enterInput);
             writeInputCommand = new RelayCommand<KeyEventArgs>(writeInput);
-            homeCommand = new RelayCommand(HomeButton);
-
+            HomeCommand = new RelayCommand(HomeButton);
         }
 
         private Dictionary<Key, char> num2Char = new Dictionary<Key, char> { { Key.D0, '0' }, { Key.D1, '1' }, { Key.D2, '2' }, { Key.D3, '3' }, { Key.D4, '4' }, { Key.D5, '5' }, { Key.D6, '6' }, { Key.D7, '7' }, { Key.D8, '8' }, { Key.D9, '9' } };
