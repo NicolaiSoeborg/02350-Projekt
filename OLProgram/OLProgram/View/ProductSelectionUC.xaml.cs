@@ -24,10 +24,5 @@ namespace OLProgram.View
         {
             InitializeComponent();
         }
-
-        private void AvailableProducts_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
     }
 }

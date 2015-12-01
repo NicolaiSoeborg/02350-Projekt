@@ -26,6 +26,5 @@ namespace OLProgram.View
             InitializeComponent();
             this.Focus();
         }
-
     }
 }

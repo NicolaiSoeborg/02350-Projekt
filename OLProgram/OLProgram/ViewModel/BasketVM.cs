@@ -40,7 +40,7 @@ namespace OLProgram.ViewModel
             CheckOutCommand = new RelayCommand(CheckOutBasket);
             EnterCommand = new RelayCommand(enterInput);
             writeInputCommand = new RelayCommand<KeyEventArgs>(writeInput);
-            homeCommand = new RelayCommand(homeButton);
+            homeCommand = new RelayCommand(HomeButton);
 
         }
 
@@ -134,17 +134,13 @@ namespace OLProgram.ViewModel
 
         private void CheckOutBasket()
         {
-
             foreach (BasketItem basketItem in Basket.BasketItems) {
-
                 Users[Users.IndexOf(loggedInUser)].BuyProducts(basketItem.ProductId, basketItem.Count);
                 Log.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " Bought " + basketItem.Count + " of productID " + basketItem.ProductId);
                 LogForUsers.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " Bought " + basketItem.Count + " of productID " + basketItem.ProductId);
-
-                // Virkelig ineffektivt
                 foreach (Product product in Products)
                 {
-                    if (product.ProductId == basketItem.ProductId)
+                    if (product.ProductId.Equals(basketItem.ProductId))
                     {
                         product.Stock -= basketItem.Count;
                         product.Bought += basketItem.Count;
@@ -158,11 +154,11 @@ namespace OLProgram.ViewModel
             MainWindow.Content = new View.LoginUC();
         }
 
-        private void homeButton()
+        private void HomeButton()
         {
-            loggedInUser = null;
             new ClearBasketCommand(Basket).Execute();
             undoRedoController.ClearUndoRedoStacks();
+            loggedInUser = null;
             MainWindow.Content = new View.LoginUC();
         }
 

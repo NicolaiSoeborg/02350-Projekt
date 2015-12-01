@@ -12,7 +12,7 @@
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <ScrollViewer Name="AvailableProducts" Grid.Column="0" >
-            <ItemsControl ItemsSource="{Binding Products}"  >
+            <ItemsControl ItemsSource="{Binding Products}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4" Margin="2" />
