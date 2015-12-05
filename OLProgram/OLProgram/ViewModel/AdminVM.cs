@@ -78,6 +78,8 @@ namespace OLProgram.ViewModel
                 ReSaveBillCommand.Execute(null);
             }
             RaisePropertyChanged(() => ReSaveBillCommand);
+
+            Log.Add(getTimeStamp(DateTime.Now) + " - Bill has been  generated. ");
         }
 
         private void DeleteSelectedProduct(Product selectedProduct)

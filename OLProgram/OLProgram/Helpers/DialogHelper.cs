@@ -11,7 +11,7 @@ namespace OLProgram.Helpers
         private static SaveFileDialog saveBillDialog = new SaveFileDialog() { Title = "Save Bill", Filter = "Comma-separated values (*.csv)|*.csv", DefaultExt = "csv", InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) };
 
         public bool ShowNew() => 
-            MessageBox.Show("Are you sure (bla bla)?", "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+            MessageBox.Show("Are you sure?", "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
 
         public string ShowOpen() => openXmlDialog.ShowDialog() == true ? openXmlDialog.FileName : null;
 
