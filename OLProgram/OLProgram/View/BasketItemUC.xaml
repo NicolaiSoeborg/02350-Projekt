@@ -37,20 +37,22 @@
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Orientation="Horizontal">
             <Image Source="{Binding ImageFileName}" Height="{Binding ActualHeight, ElementName=CartProductName, Mode=OneWay}" />
-            <TextBlock Style="{StaticResource TB1}" Name="CartProductName" Text="{Binding CountAndName, Mode=OneWay}" VerticalAlignment="Center" />
+            <TextBlock Style="{StaticResource TB1}" Name="CartProductName" Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" />
         </StackPanel>
 
         <Button Grid.Column="1" Style="{StaticResource Style1}"
-                Command="{Binding DataContext.AddProductToBasketCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" 
-                CommandParameter="{Binding Mode=OneWay}">&#57609;</Button>
-        <Button Grid.Column="2" Style="{StaticResource Style1}"
                 Command="{Binding DataContext.DecreaseBasketItemCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" 
                 CommandParameter="{Binding Mode=OneWay}">&#57608;</Button>
-        <Button Grid.Column="3"  Background="Red" Style="{StaticResource Style1}"
+        <TextBlock Grid.Column="2" x:Name="NoOfProducts" Text="{Binding Count, Mode=TwoWay}" Style="{StaticResource TB1}" HorizontalAlignment="Center"/>
+        <Button Grid.Column="3" Style="{StaticResource Style1}"
+                Command="{Binding DataContext.AddProductToBasketCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" 
+                CommandParameter="{Binding Mode=OneWay}">&#57609;</Button>
+        <Button Grid.Column="4"  Background="Red" Style="{StaticResource Style1}"
                 Command="{Binding DataContext.DeleteBasketItemCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}" 
                 CommandParameter="{Binding Mode=OneWay}">&#57607;</Button>
         <!--Margin="{Binding Margin, ElementName=AddButton}"-->
