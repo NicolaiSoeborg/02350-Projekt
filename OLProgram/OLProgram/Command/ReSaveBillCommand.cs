@@ -13,10 +13,12 @@ namespace OLProgram.Command
     public class ReSaveBillCommand : ICommand
     {
         private string _billPath { get { return OLProgram.ViewModel.AdminVM.billPath; } }
-        public ObservableCollection<User> Users { get { return OLProgram.ViewModel.BaseVM.Users; } }
-        public ObservableCollection<Product> Products { get { return OLProgram.ViewModel.BaseVM.Products; } }
+        private ObservableCollection<User> Users { get { return OLProgram.ViewModel.BaseVM.Users; } }
+        private ObservableCollection<Product> Products { get { return OLProgram.ViewModel.BaseVM.Products; } }
 
 #pragma warning disable
+        // Kræves af en ICommand. Vi bruger "CanExecute" i GUI.
+        // Fjern warning fra kompileren, da dette ikke er en fejl.
         public event EventHandler CanExecuteChanged;
 #pragma warning restore
 
@@ -28,7 +30,7 @@ namespace OLProgram.Command
         public void Execute(object parameter)
         {
             StringBuilder csv = new StringBuilder();
-            csv.AppendFormat("{0}\t{1}\r\n", "Name", "Bought Total");
+            csv.AppendFormat("{0};{1}\r\n", "Name", "Bought Total");
 
             var result = (
                 from user in Users
@@ -42,11 +44,15 @@ namespace OLProgram.Command
                 csv.AppendFormat("{0};{1}\r\n", trimCSV(user.name), user.sum);
             
             File.WriteAllText(_billPath, csv.ToString());
+
+            OLProgram.ViewModel.BaseVM.Log.Add(
+                OLProgram.ViewModel.BaseVM.getTimeStamp(DateTime.Now)
+                + " - Bill has been saved.");
         }
 
         private string trimCSV(string csv)
         {
-            return csv.Replace(@"\", @"\\").Replace(",", @"\"); // TODO: Much better!
+            return csv.Replace(@"\", @"\\").Replace(",", @"\");
         }
 
         private int calcSum(Dictionary<string, int> productsBought) // productsBought<Product.ProductId, Amount>

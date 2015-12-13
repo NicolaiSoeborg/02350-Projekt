@@ -65,7 +65,7 @@ namespace OLProgram.ViewModel
             SaveDataCommand = new RelayCommand(SaveCurrentData);
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
-            GenerateBillCommand = new RelayCommand(GenerateBill); // TODO
+            GenerateBillCommand = new RelayCommand(GenerateBill);
             ReSaveBillCommand = new Command.ReSaveBillCommand();    
         }
 
@@ -76,10 +76,8 @@ namespace OLProgram.ViewModel
             {
                 billPath = path;
                 ReSaveBillCommand.Execute(null);
+                RaisePropertyChanged(() => ReSaveBillCommand);
             }
-            RaisePropertyChanged(() => ReSaveBillCommand);
-
-            Log.Add(getTimeStamp(DateTime.Now) + " - Bill has been  generated. ");
         }
 
         private void DeleteSelectedProduct(Product selectedProduct)
