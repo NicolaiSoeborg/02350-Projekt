@@ -46,12 +46,14 @@ namespace OLProgram.ViewModel
                 if (loggedInUser == null)
                 {
                     MessageBox.Show("Selected user does not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    
                     RaisePropertyChanged(() => loginTextBox);
                 }
             }
             else
             {
                 MessageBox.Show("Not a valid Barcode", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                
                 RaisePropertyChanged(() => loginTextBox);
             }
         }

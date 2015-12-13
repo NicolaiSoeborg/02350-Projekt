@@ -60,7 +60,7 @@
                                 <StackPanel x:Name="LoginStackPanel" Margin="9" >
                                     <TextBlock Text="Login" FontSize="30" />
                                     <TextBlock Text="User:" />
-                                    <TextBox x:Name="UserTxtBox" Width="{Binding ActualWidth, ElementName=LoginStackPanel}">
+                                    <TextBox x:Name="UserTxtBox" Width="{Binding ActualWidth, ElementName=LoginStackPanel}" Text="{Binding loginTextBox}">
                                         <TextBox.InputBindings>
                                             <KeyBinding Key="Enter" Command="{Binding LoginCommand}" CommandParameter="{Binding Text, ElementName=UserTxtBox}"/>
                                         </TextBox.InputBindings>
