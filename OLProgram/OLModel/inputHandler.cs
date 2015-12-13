@@ -2,22 +2,22 @@
 
 namespace OLModel
 {
-    public class inputHandler : INotifyPropertyChanged
+    public class InputHandler : INotifyPropertyChanged
     {
         private string input;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public inputHandler()
+        public InputHandler()
         {
         }
 
-        public inputHandler(string value)
+        public InputHandler(string value)
         {
             this.input = value;
         }
 
-        public string inputGetSetter 
+        public string InputGetSetter 
         {
             get { return input; }
             set

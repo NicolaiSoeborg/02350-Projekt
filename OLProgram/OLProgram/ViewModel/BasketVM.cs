@@ -13,7 +13,7 @@ namespace OLProgram.ViewModel
         public static Basket Basket { get; set; }
         public string HelloTxtUsername { get { return loggedInUser == null ? "NoUserLoggedIn" : String.Format("Velkommen {0}!", loggedInUser.Name); } }
         public static String inputForBasket { get; set; }
-        public static inputHandler inputBasket { get; set; }
+        public static InputHandler inputBasket { get; set; }
 
         public ICommand AddProductToBasketCommand { get; }
         public ICommand DecreaseBasketItemCommand { get; }
@@ -29,8 +29,8 @@ namespace OLProgram.ViewModel
             if (Basket == null) Basket = new Basket();
             if (inputBasket == null)
             {
-                inputBasket = new inputHandler();
-                inputBasket.inputGetSetter = "";
+                inputBasket = new InputHandler();
+                inputBasket.InputGetSetter = "";
             }
             inputForBasket = "";
 
