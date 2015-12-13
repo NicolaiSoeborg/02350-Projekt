@@ -9,18 +9,17 @@ namespace OLProgram.ViewModel
     public class MainVM : BaseVM
     {
         // Tekstbox på LoginUC:
-        public static InputHandler loginTextBox { get; set; }
+        public string loginTextBox { get; set; }
         
         private string _txtUsername = "";
         public string TxtUsername
         {
             get { if (loggedInUser == null) return _txtUsername; /*else*/ return loggedInUser.Name; }
-            set { _txtUsername = value; }
+            set { if (value != null) _txtUsername = value; }
         }
 
         public RelayCommand<String> LoginCommand { get; }
         public RelayCommand<int> keyPressedCommand { get; }
-        //public RelayCommand EnterPressedCommand { get; }
 
         public MainVM()
         {
@@ -28,9 +27,6 @@ namespace OLProgram.ViewModel
 
             // Commands:
             LoginCommand = new RelayCommand<String>(DoLogin);
-            loginTextBox = new InputHandler();
-            loginTextBox.InputGetSetter = string.Empty;
-            //EnterPressedCommand = new RelayCommand(EnterPressed);
         }
 
         private void DoLogin(String BarCode)
@@ -49,18 +45,14 @@ namespace OLProgram.ViewModel
                 }
                 if (loggedInUser == null)
                 {
-                    MessageBox.Show("Selected user does not exist in database", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    loginTextBox.InputGetSetter = string.Empty;
+                    MessageBox.Show("Selected user does not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     RaisePropertyChanged(() => loginTextBox);
                 }
-                   
             }
             else
             {
                 MessageBox.Show("Not a valid Barcode", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                loginTextBox.InputGetSetter = string.Empty;
                 RaisePropertyChanged(() => loginTextBox);
-                
             }
         }
 

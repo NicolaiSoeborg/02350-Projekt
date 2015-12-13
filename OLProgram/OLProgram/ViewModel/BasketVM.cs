@@ -12,8 +12,7 @@ namespace OLProgram.ViewModel
     {
         public static Basket Basket { get; set; }
         public string HelloTxtUsername { get { return loggedInUser == null ? "NoUserLoggedIn" : String.Format("Velkommen {0}!", loggedInUser.Name); } }
-        public static String inputForBasket { get; set; }
-        public static InputHandler inputBasket { get; set; }
+        public static String InputForBasket { get; set; }
 
         public ICommand AddProductToBasketCommand { get; }
         public ICommand DecreaseBasketItemCommand { get; }
@@ -27,12 +26,7 @@ namespace OLProgram.ViewModel
         public BasketVM()
         {
             if (Basket == null) Basket = new Basket();
-            if (inputBasket == null)
-            {
-                inputBasket = new InputHandler();
-                inputBasket.InputGetSetter = "";
-            }
-            inputForBasket = "";
+            InputForBasket = "";
 
             // Commands to access from UI:
             AddProductToBasketCommand = new RelayCommand<Product>(AddProductToBasket);
@@ -40,41 +34,41 @@ namespace OLProgram.ViewModel
             DeleteBasketItemCommand = new RelayCommand<Product>(DeleteBasketItem);
             ClearBasketCommand = new RelayCommand(ClearBasket);
             CheckOutCommand = new RelayCommand(CheckOutBasket);
-            EnterCommand = new RelayCommand(enterInput);
+            EnterCommand = new RelayCommand(EnterInput);
             writeInputCommand = new RelayCommand<KeyEventArgs>(writeInput);
             HomeCommand = new RelayCommand(HomeButton);
         }
 
-        private Dictionary<Key, char> num2Char = new Dictionary<Key, char> { { Key.D0, '0' }, { Key.D1, '1' }, { Key.D2, '2' }, { Key.D3, '3' }, { Key.D4, '4' }, { Key.D5, '5' }, { Key.D6, '6' }, { Key.D7, '7' }, { Key.D8, '8' }, { Key.D9, '9' } };
+        private /*final?*/ Dictionary<Key, char> num2Char = new Dictionary<Key, char> { { Key.D0, '0' }, { Key.D1, '1' }, { Key.D2, '2' }, { Key.D3, '3' }, { Key.D4, '4' }, { Key.D5, '5' }, { Key.D6, '6' }, { Key.D7, '7' }, { Key.D8, '8' }, { Key.D9, '9' } };
         private void writeInput(KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                enterInput();
+                EnterInput();
             else
             {
                 if (num2Char.ContainsKey(e.Key))
-                    inputForBasket += num2Char[e.Key];
+                    InputForBasket += num2Char[e.Key];
             }
         }
 
         // Kræver optimeringer
-        public void enterInput()
+        public void EnterInput()
         {            
-            if (inputForBasket != null)
+            if (InputForBasket != null)
             { 
-                if(inputForBasket.Length == 4) {
-                    enterInput_User();
+                if (InputForBasket.Length == 4) {
+                    EnterInput_User();
                 } else {
-                    enterInput_Product();
+                    EnterInput_Product();
                 }
             }
-            inputForBasket = "";
+            InputForBasket = "";
         }
 
-        private void enterInput_User()
+        private void EnterInput_User()
         {
             int userID;
-            if (int.TryParse(inputForBasket, out userID))
+            if (int.TryParse(InputForBasket, out userID))
             {
                 foreach (User user in Users)
                 {
@@ -87,14 +81,13 @@ namespace OLProgram.ViewModel
             }
         }
 
-        private void enterInput_Product()
+        private void EnterInput_Product()
         {
             foreach (Product product in Products)
             {
-                if (inputForBasket.Equals(product.ProductId))
+                if (InputForBasket.Equals(product.ProductId))
                 {
                     undoRedoController.AddAndExecute(new AddProductToBasketCommand(Basket, product, 1));
-                    inputForBasket = "";
                     return;
                 }
             }
