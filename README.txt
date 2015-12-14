@@ -15,6 +15,7 @@ ProductId	ProductName		Pris
 3		Somersby		0
 5708429004221	Svaneke Grunge IPA	0
 
+For at købe en produkt, benyttes enten musen eller produktets stregkode indtastes efterfulgt af "[Enter]".
 
 For at logge ind som admin trykkes "Ctrl + K".
 Koden er: OLProgram

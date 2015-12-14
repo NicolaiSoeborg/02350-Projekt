@@ -51,7 +51,7 @@ namespace OLProgram.ViewModel
                 Product svaneke = new Product("Svaneke Grunge IPA", "../Images/svaneke.JPG");
                 svaneke.ProductId = "5708429004221";
                 Products.Add(svaneke);
-            } 
+            }
             if (Users == null) Users = new ObservableCollection<User>() { new User(1106, "Bjarne"), new User(1002, "Nicolai"), new User(1003, "Silas"), new User(1004, "Greven") };
             if (Log == null) Log = new ObservableCollection<string>() { };
             if (LogForUsers == null) LogForUsers = new ObservableCollection<string>() { };
