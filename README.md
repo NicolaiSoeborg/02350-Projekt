@@ -38,16 +38,14 @@ Bemærk: Hvis du, midt i et køb, skifter til admin,
 
 ## TODO
  - Fix database
- - Fix building on appveyor ([![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master))
+ - Fix building on appveyor
  - Update this todo list with rest of todos
 
 
-# Linux support
+# UNIX support
 Building on UNIX is a problem as WPF isn't implemented in Mono ([and isn't going to implement it anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
 
-So building on 
-
-[![Build Status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
+Travis is setup to (try to) build on OLProgram on Mono, but is expected to fail the next long periode: [![Mono build status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
 
 # License
 Beerware
