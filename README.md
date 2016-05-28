@@ -1,6 +1,8 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master)
+OLProgram
+=========================
 
-# OLProgram
+[![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master) (TODO: Fix this. It works for me, so figure out why appveyor can't resolve GalaSoft.MvvmLight-assembly)
+
 Se [rapport.pdf](rapport.pdf) for info om projektet.
 Kildekoden ligger i "src" mappen.
 
@@ -36,6 +38,7 @@ Bemærk: Hvis du, midt i et køb, skifter til admin,
 
 ## TODO
  - Fix database
+ - Fix building on appveyor ([![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master))
  - Update this todo list with rest of todos
 
 
