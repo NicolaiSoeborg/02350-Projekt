@@ -1,4 +1,4 @@
-Build status: [![CircleCI](https://circleci.com/gh/NicolaiSoeborg/02350-Projekt.svg?style=svg)](https://circleci.com/gh/NicolaiSoeborg/02350-Projekt)
+Build status: [![Build Status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
 
 # OLProgram
 Se [rapport.pdf](rapport.pdf) for info om projektet.
