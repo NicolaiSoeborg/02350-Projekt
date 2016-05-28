@@ -1,4 +1,4 @@
-Build status: [![Build Status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
+[![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master)
 
 # OLProgram
 Se [rapport.pdf](rapport.pdf) for info om projektet.
@@ -15,10 +15,10 @@ Barcode	Navn
 ```
 
 ```
-ProductId	ProductName		Pris
-1		Grøn Tuborg		0
-2		Guld Tuborg		0
-3		Somersby		0
+ProductId		ProductName			Pris
+1				Grøn Tuborg			0
+2				Guld Tuborg			0
+3				Somersby			0
 5708429004221	Svaneke Grunge IPA	0
 ```
 
@@ -32,12 +32,19 @@ Bemærk: Hvis du, midt i et køb, skifter til admin,
 
 
 ## Version
-0.8 -- see todo list
+0.x -- see todo list
 
 ## TODO
- - Fix build
- - Auto save database
+ - Fix database
  - Update this todo list with rest of todos
+
+
+# Linux support
+Building on UNIX is a problem as WPF isn't implemented in Mono ([and isn't going to implement it anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
+
+So building on 
+
+[![Build Status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
 
 # License
 Beerware
