@@ -4,5 +4,6 @@ pull_requests:
 before_build:
 - cmd: nuget restore src/OLProgram.sln
 build:
+  project: src/OLProgram.sln
   verbosity: normal
 test: off
