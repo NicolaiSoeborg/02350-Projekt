@@ -3,13 +3,13 @@ OLProgram
 
 [![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master) (TODO: Fix this. It works for me, so figure out why appveyor can't resolve GalaSoft.MvvmLight-assembly)
 
-Se [rapport.pdf](rapport.pdf) for info om projektet.
-Kildekoden ligger i "src" mappen.
+See [rapport.pdf](rapport.pdf) (danish) for info about the project.
+Source project is "OLProgram.sln".
 
-Vi har givet programmet følgende standard brugere og produkter:
+The program contains the following default users and products:
 
 ```
-Barcode	Navn
+Barcode	Name
 1106	Bjarne
 1002	Nicolai
 1003	Silas
@@ -17,24 +17,17 @@ Barcode	Navn
 ```
 
 ```
-ProductId		ProductName			Pris
+ProductId		ProductName			Price
 1				Grøn Tuborg			0
 2				Guld Tuborg			0
 3				Somersby			0
 5708429004221	Svaneke Grunge IPA	0
 ```
 
-For at købe en produkt, benyttes enten musen eller produktets stregkode indtastes efterfulgt af "[Enter]".
-
-For at logge ind som admin trykkes "Ctrl + K".
-Koden er: OLProgram
-Tryk "Esc" for at gå til forsiden.
-Bemærk: Hvis du, midt i et køb, skifter til admin,
-	så gemmes kurven, så brugeren kan logge ind (igen) og fortsætte sit køb.
-
+To login as admin, press "Ctrl + K" and type the code: "OLProgram"
 
 ## Version
-0.x -- see todo list
+1.0.0 -- see todo list
 
 ## TODO
  - Fix database
@@ -43,9 +36,9 @@ Bemærk: Hvis du, midt i et køb, skifter til admin,
 
 
 # UNIX support
-Building on UNIX is a problem as WPF isn't implemented in Mono ([and isn't going to implement it anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
+Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going to be implemented [anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
 
-Travis is setup to (try to) build on OLProgram on Mono, but is expected to fail the next long periode: [![Mono build status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
+Travis CI is setup to (try to) build on OLProgram on Mono, but is expected to fail: [![Mono build status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
 
 # License
 Beerware
