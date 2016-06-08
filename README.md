@@ -3,6 +3,7 @@ OLProgram
 
 [![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master)
 [![GitHub issues](https://img.shields.io/github/issues/NicolaiSoeborg/02350-Projekt.svg)](https://github.com/NicolaiSoeborg/02350-Projekt/issues)
+[![Beerpay](https://beerpay.io/NicolaiSoeborg/02350-Projekt/badge.svg?style=flat)](https://beerpay.io/NicolaiSoeborg/02350-Projekt)
 [![license](https://img.shields.io/badge/License-Beerware-blue.svg)](https://github.com/NicolaiSoeborg/02350-Projekt/blob/master/LICENSE)
 
 
