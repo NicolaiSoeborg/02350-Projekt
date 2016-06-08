@@ -2,6 +2,9 @@ OLProgram
 =========================
 
 [![Build status](https://ci.appveyor.com/api/projects/status/huwcl6w75rt7c4am/branch/master?svg=true)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/branch/master)
+[![GitHub issues](https://img.shields.io/github/issues/NicolaiSoeborg/02350-Projekt.svg)](https://github.com/NicolaiSoeborg/02350-Projekt/issues)
+[![license](https://img.shields.io/badge/License-Beerware-blue.svg)](https://github.com/NicolaiSoeborg/02350-Projekt/blob/master/LICENSE)
+
 
 See [rapport.pdf](rapport.pdf) (danish) for info about the project.
 Source project is "OLProgram.sln".
@@ -18,7 +21,7 @@ Barcode	Name
 
 ```
 ProductId		ProductName			Price
-1				Grøn Tuborg		0
+1				GrÃ¸n Tuborg		 0
 2				Guld Tuborg			0
 3				Somersby			0
 5708429004221	Svaneke Grunge IPA	0
@@ -39,6 +42,3 @@ To login as admin, press "Ctrl + K" and type the password: "OLProgram"
 Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going to be implemented [anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
 
 Travis CI is setup to (try to) build on OLProgram on Mono, but is expected to fail: [![Mono build status](https://travis-ci.org/NicolaiSoeborg/02350-Projekt.svg?branch=master)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
-
-# License
-Beerware
