@@ -30,13 +30,13 @@ ProductId		ProductName			Price
 To login as admin, press "Ctrl + K" and type the password: "OLProgram"
 
 ## Version
-1.0.0 -- see todo list
+[1.0](https://github.com/NicolaiSoeborg/02350-Projekt/releases/tag/1.0)
 
 ## TODO
- - Fix database (sqlite)
- - Fix building on appveyor
- - Update this todo list with rest of todos
-
+ - Fix: Database (sqlite)
+ - Add: Changing of admin password
+ - Add: Extra change on bill ("svind")
+ - Todo: Update this todo list with rest of todos
 
 ## UNIX support
 Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going to be implemented [anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
