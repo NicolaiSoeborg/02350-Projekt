@@ -69,6 +69,16 @@ namespace OLProgram.ViewModel
             ReSaveBillCommand = new Command.ReSaveBillCommand();    
         }
 
+        private void LoadExistingData()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SaveCurrentData()
+        {
+            throw new NotImplementedException();
+        }
+
         private void GenerateBill()
         {
             string path = dialogHelper.ShowSaveBill();
@@ -84,24 +94,25 @@ namespace OLProgram.ViewModel
         {
             if (selectedProduct != null)
             {
-                var response = MessageBox.Show("Do you really want to delete Product " + selectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                var response = MessageBox.Show("Do you really want to delete " + selectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
-                   
-                Log.Add(getTimeStamp(DateTime.Now) + " - Product " + selectedProduct.ProductName + " was deleted. ");
-                Products.Remove(selectedProduct);
+                {
+                    Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - Product " + selectedProduct.ProductName + " was deleted.");
+                    Model.Instance.Products.Remove(selectedProduct);
+                }
             }
         }
 
         private void AddNewProduct()
         {
-            Products.Add(new Product("New product"));
-            Log.Add(getTimeStamp(DateTime.Now) + " - New Product added to Products");
+            Model.Instance.Products.Add(new Product("New product", 0));
+            Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - New product added.");
         }
 
         private void AddNewUser()
         {
-            Users.Add(new User("New user"));
-            Log.Add(getTimeStamp(DateTime.Now) + " - New User added to Users");
+            Model.Instance.Users.Add(new User("New user"));
+            Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - New user added.");
         }
 
         private void CloseApplication()
@@ -148,103 +159,20 @@ namespace OLProgram.ViewModel
                 var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
                 {
-                    Log.Add(getTimeStamp(DateTime.Now) + " - User " + selectedUser.ToString() + " was deleted. ");
-                    Users.Remove(selectedUser);
+                    Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - User " + selectedUser.ToString() + " was deleted.");
+                    Model.Instance.Users.Remove(selectedUser);
                 }
-            }
-        }
-
-        private async void LoadExistingData()
-        {
-            string path = dialogHelper.ShowOpen();
-            if (path != null)
-            {
-                // Load Users and Products from xml file
-                Data DataToLoad = await SerializerXML.Instance.AsyncDeserializeFromFile(path);
-
-                // Clear current useres and add the loaded users
-                Users.Clear();
-                DataToLoad.Users.ForEach(x => Users.Add(x));
-                Products.Clear();
-                DataToLoad.Products.ForEach(x => Products.Add(x));
-
-                // Do the Logs
-                LogForUsers.Clear();
-                DataToLoad.UserLog.ForEach(x => LogForUsers.Add(x));
-
-                DataToLoad.AdminLog.ForEach(x => Log.Add(x));
-
-                // Load each users dictionary 
-                int DictionaryCounter = 0;
-                int Counter = 0;
-                int currentIndex = 0;
-                foreach (User user in Users)
-                {
-                    Counter = 0;
-                    foreach(String temp in DataToLoad.ProductKeys)
-                    {
-                        if (DataToLoad.ProductsForEachUser[currentIndex] != 0)
-                        {
-                            user.ProductsBought.Add(DataToLoad.ProductKeys[DictionaryCounter], DataToLoad.AmountBought[DictionaryCounter]);
-                            DictionaryCounter++;
-                            Counter++;
-                            if (DataToLoad.ProductsForEachUser[currentIndex] == Counter)
-                            {
-                                currentIndex++;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            currentIndex++;
-                            break;
-                        }
-                  }
-             }
-            Log.Add(getTimeStamp(DateTime.Now) + " - Existing data loaded");
-            }
-        }
-
-        private void SaveCurrentData()
-        {
-            string path = dialogHelper.ShowSave();
-            if (path != null)
-            {
-                List<String> tempProductKeys = new List<string>();
-                List<int> tempAmountBought = new List<int>();
-                List<int> tempProductsForEachUser = new List<int>();
-                int Counter;
-                foreach(User user in Users)
-                {
-                    Counter = 0;
-                    
-                    foreach(var item in user.ProductsBought)
-                    {
-                        tempProductKeys.Add(item.Key);
-                        tempAmountBought.Add(item.Value);
-                        Counter++;
-                    }
-                    tempProductsForEachUser.Add(Counter);
-                }
-
-                Data DataToSave = new Data() { Users = Users.ToList(),
-                                                Products = Products.ToList(), AmountBought = tempAmountBought,
-                                                ProductKeys = tempProductKeys, ProductsForEachUser = tempProductsForEachUser,
-                                                AdminLog = Log.ToList(), UserLog = LogForUsers.ToList()};
-                SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
             }
         }
 
         private void NewData()
         {
-            if (dialogHelper.ShowNew())
+            var response = MessageBox.Show("Are you sure?", "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (response == MessageBoxResult.Yes  && dialogHelper.ShowNew())
             {
-                Users.Clear();
-                Products.Clear();
-                LogForUsers.Clear();
-                Log.Add(getTimeStamp(DateTime.Now) + " - Data was deleted");
-                OLModel.User.UserIDCounter = 2000;
-                OLModel.Product.ProductIdCounter = 0;
+                Model.Instance.Users.Clear();
+                Model.Instance.Products.Clear();
+                Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - Data was deleted.");
             }
         }
 

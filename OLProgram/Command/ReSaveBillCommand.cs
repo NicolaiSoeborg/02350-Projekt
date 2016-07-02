@@ -13,8 +13,8 @@ namespace OLProgram.Command
     public class ReSaveBillCommand : ICommand
     {
         private string _billPath { get { return OLProgram.ViewModel.AdminVM.billPath; } }
-        private ObservableCollection<User> Users { get { return OLProgram.ViewModel.BaseVM.Users; } }
-        private ObservableCollection<Product> Products { get { return OLProgram.ViewModel.BaseVM.Products; } }
+        private ObservableCollection<User> Users { get; } // { return Model.Instance.Users; } }
+        private ObservableCollection<Product> Products { get; } // { return Model.Instance.Products; } }
 
 #pragma warning disable
         // Kræves af en ICommand. Vi bruger "CanExecute" i GUI.
@@ -36,7 +36,7 @@ namespace OLProgram.Command
                 from user in Users
                 select new {
                     name = user.Name,
-                    sum = calcSum(user.ProductsBought)
+                    sum = 0 //sum = calcSum(user.ProductsBought)
                 }
             );
             
@@ -45,7 +45,7 @@ namespace OLProgram.Command
             
             File.WriteAllText(_billPath, csv.ToString());
 
-            OLProgram.ViewModel.BaseVM.Log.Add(
+            Model.Instance.AdminLog.Add(
                 OLProgram.ViewModel.BaseVM.getTimeStamp(DateTime.Now)
                 + " - Bill has been saved.");
         }

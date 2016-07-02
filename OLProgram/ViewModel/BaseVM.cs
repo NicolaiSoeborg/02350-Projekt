@@ -28,11 +28,10 @@ namespace OLProgram.ViewModel
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
 
-        // Liste over brugere og produkter
-        public static ObservableCollection<User> Users { get; set; }
+        // Liste over brugere og produkter (TODO: Remove?)
+        /*public static ObservableCollection<User> Users { get; set; }
         public static ObservableCollection<Product> Products { get; set; }
-        public static ObservableCollection<String> Log { get; set; }
-        public static ObservableCollection<String> LogForUsers { get; set; }
+        public static ObservableCollection<String> Log { get; set; }*/
         public static User loggedInUser { get; set; }
 
         // Ref til MainWindow, brug MainWindow.Content = new View.ViewUC(); for at skrifte UC.
@@ -44,18 +43,7 @@ namespace OLProgram.ViewModel
 
         public BaseVM()
         {
-
-            // Standard værdier, hvis intet er defineret.
-            if (Products == null) {
-                Products = new ObservableCollection<Product>() { new Product("Grøn Tuborg", "../Images/tuborg.png"), new Product("Guld Tuborg", "../Images/guldtuborg.png"), new Product("Somersby", "../Images/somersby.png") };
-                Product svaneke = new Product("Svaneke Grunge IPA", "../Images/svaneke.JPG");
-                svaneke.ProductId = "5708429004221";
-                Products.Add(svaneke);
-            }
-            if (Users == null) Users = new ObservableCollection<User>() { new User(1106, "Bjarne"), new User(1002, "Nicolai"), new User(1003, "Silas"), new User(1004, "Greven") };
-            if (Log == null) Log = new ObservableCollection<string>() { };
-            if (LogForUsers == null) LogForUsers = new ObservableCollection<string>() { };
-
+            MessageBox.Show(String.Format("User count: {0}", OLModel.Model.Instance.Users.Count));
 
             // Commands
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
@@ -77,7 +65,7 @@ namespace OLProgram.ViewModel
         // Bruges både i AdminVM og BasketVM, så defineres kun én gang her:
         public static String getTimeStamp(DateTime value)
         {
-            return value.ToString("yyyy-MM-dd HH:mm:ss");
+            return value.ToString("yyyy-MM-dd HH:mm:ss"); // TODO: Flyt to Model.helpers
         }
 
     }

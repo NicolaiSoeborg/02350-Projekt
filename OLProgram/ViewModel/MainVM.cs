@@ -31,12 +31,11 @@ namespace OLProgram.ViewModel
 
         private void DoLogin(String BarCode)
         {
-            int currentBarCodeValue;
-            if (int.TryParse(BarCode, out currentBarCodeValue) && BarCode.Length == 4)
+            if (BarCode != null && BarCode.Length == 4)
             {
-                foreach (User user in Users)
+                foreach (User user in Model.Instance.Users)
                 {
-                    if (user.UserID == currentBarCodeValue)
+                    if (BarCode.Equals(user.UserID))
                     {
                         loggedInUser = user;
                         MainWindow.Content = new View.UserUC();
@@ -46,14 +45,12 @@ namespace OLProgram.ViewModel
                 if (loggedInUser == null)
                 {
                     MessageBox.Show("Selected user does not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    
                     RaisePropertyChanged(() => loginTextBox);
                 }
             }
             else
             {
-                MessageBox.Show("Not a valid Barcode", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                
+                MessageBox.Show("Not a valid barcode", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);                
                 RaisePropertyChanged(() => loginTextBox);
             }
         }

@@ -1,55 +1,40 @@
 ﻿using System;
 using System.IO;
-using System.Xml.Serialization;
 using System.Collections.ObjectModel;
 
 namespace OLModel
 {
     public class Product : NotifyBase
     {
-        // Overvej at slette, da den ikke bliver genmt ned i XML og derved potentielt kan fucke det op
-        public static int ProductIdCounter = 0;
-
         public string ProductId { get; set; }
         public string ProductName { get; set; }
         public string ImageFileName { get; }
-        public int Stock { get; set; }
-        public int Bought { get; set; }
-        public int Price { get; set; } 
+        public int Stock { get; set; } // TODO
+        public int Price { get; set; }
 
-        internal Product() : this("", "") { } // Used by serializer
+        public Product(string productName, int price)
+            : this(null, productName, price, "../Images/default.png") { }
 
-        public Product(string productName) : this(productName, "../Images/default.png") { }
+        public Product(string productId, string productName, int price)
+            : this(productId, productName, price, "../Images/default.png") { }
 
         // This Constructor is used for making basketitems, making clone of the parameter Product
         public Product(Product product)
         {
+            if (product == null) return;
             ProductId = product.ProductId;
             ProductName = product.ProductName;
+            Price = product.Price;
             ImageFileName = product.ImageFileName;
-            Price = 0;
         }
 
-        public Product(string productName, string imageFileName)
+        public Product(string productId, string productName, int price, string imageFileName)
         {
-            ProductIdCounter++;
-            ProductId = ProductIdCounter.ToString();
+            if (productId == null) productId = "TODO";
+            this.ProductId = productId;
             this.ProductName = productName;
+            this.Price = price;
             this.ImageFileName = imageFileName;
-        }
-
-        public MemoryStream Serialize()
-        {
-            var stream = new MemoryStream();
-            XmlSerializer serializer = new XmlSerializer(typeof(Product));
-            serializer.Serialize(stream, this);
-            return stream;
-        }
-
-        public static Product Deserialize(Stream serialization)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Product));
-            return serializer.Deserialize(serialization) as Product; // TODO: What if we can't deserialize.
         }
 
         public override string ToString()
