@@ -13,8 +13,7 @@ namespace OLModel
 
         public User(string userID, string name)
         {
-            if (userID == null)
-                userID = ""; // TODO
+            if (userID == null) userID = "TODO"; // SELECT max(userid AS INTEGER) FROM users
             this.UserID = userID;
             this.Name = name;
         }

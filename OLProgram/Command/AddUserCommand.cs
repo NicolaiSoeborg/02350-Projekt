@@ -14,9 +14,6 @@ namespace OLProgram.Command
             _user = user;
         }
 
-        // TODO: Users tilføjes til "_users" (dvs BaseVM.Users) men gemmes kun i hukommelsen
-        // -> Hvis programmet uventet lukker ned vil disse ændringer ikke blive gemt.
-
         public void Execute()
         {
             _users.Add(_user);

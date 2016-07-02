@@ -28,7 +28,6 @@
         </Menu.ItemsPanel>
         <MenuItem>
             <MenuItem.Header>
-                <!--TODO MAKE GO HOME COMMAND-->
                 <Button  Style="{StaticResource Style1}" Command="{Binding HomeCommand}" ToolTip="Go to homescreen">Home &#xE10F;</Button>
             </MenuItem.Header>
         </MenuItem>

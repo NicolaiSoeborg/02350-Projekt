@@ -8,11 +8,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OLProgram")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Keep track of beer usage and simplify billing.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The dudes")]
+[assembly: AssemblyCompany("PF")]
 [assembly: AssemblyProduct("OLProgram")]
-[assembly: AssemblyCopyright("Copyright © Christian Grevil, Nicolai Søborg, Rasmus Jensen, Silas Pihl 2015")]
+[assembly: AssemblyCopyright("Copyleft © Christian Grevil, Nicolai Søborg, Rasmus Jensen, Silas Pihl 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

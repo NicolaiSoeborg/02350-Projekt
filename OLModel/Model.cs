@@ -9,6 +9,7 @@ namespace OLModel
         // TODO: Save stuff on setters
         public List<User> Users { get; set; }
         public List<Product> Products { get; set; }
+        public List<Transaction> Transactions { get; set; }
         public List<String> AdminLog { get; set; }
         public List<String> UserLog { get; set; }
 
@@ -23,17 +24,17 @@ namespace OLModel
             SQLiteConnection dbConn = new SQLiteConnection(connStr);
             dbConn.Open();
             string[] statements = {
-                "CREATE TABLE IF NOT EXISTS users(studentID INT NOT NULL PRIMARY KEY, studentName TEXT);",
-                "CREATE TABLE IF NOT EXISTS products(productID INT NOT NULL PRIMARY KEY, productName TEXT, productImage TEXT, price INT);",
+                "CREATE TABLE IF NOT EXISTS users(studentID TEXT NOT NULL PRIMARY KEY, studentName TEXT);",
+                "CREATE TABLE IF NOT EXISTS products(productID TEXT NOT NULL PRIMARY KEY, productName TEXT, productImage TEXT, price INT);",
+                "CREATE TABLE IF NOT EXISTS transactions(studentID TEXT, productID TEXT, amount INT);", // TODO: add time
                 "CREATE TABLE IF NOT EXISTS settings(key TEXT NOT NULL PRIMARY KEY, val INT);",
                 "CREATE TABLE IF NOT EXISTS logs(time TEXT NOT NULL, permission INT, event TEXT);",
 
                 "INSERT INTO users VALUES (1337, 'Admin');",
-                "INSERT INTO products VALUES (5708429004221, 'Svaneke Grunge IPA', 'IPA.png', 20);",
+                "INSERT INTO products VALUES (5708429004221, 'Svaneke Grunge IPA', 'svaneke.jpg', 20);",
                 "INSERT INTO settings VALUES ('version', "+MODEL_VERSION+");",
                 "INSERT INTO logs VALUES ('" + Helpers.getTimeStamp() + "', 1, 'Created new database');"
             };
-
             foreach (string stmt in statements)
             {
                 SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
@@ -113,6 +114,26 @@ namespace OLModel
                         : new Product(productId, productName, price, productImage)
                     );
 
+                }
+            }
+            #endregion
+
+            Transactions = new List<Transaction>();
+            command = new SQLiteCommand("SELECT * FROM transactions", dbConn);
+            reader = command.ExecuteReader();
+            #region transactions
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    //transactions(studentID TEXT, productID TEXT, amount INT);", // TODO: add time
+                    string studentId = reader["studentID"].ToString();
+                    string productId = reader["productID"].ToString();
+                    int amount;
+                    if (!Int32.TryParse(reader["amount"].ToString(), out amount))
+                        amount = 0;
+
+                    Transactions.Add( new Transaction(studentId, productId, amount) );
                 }
             }
             #endregion

@@ -10,6 +10,17 @@ namespace OLModel
         public string ProductName { get; set; }
         public string ImageFileName { get; }
         public int Stock { get; set; } // TODO
+        public int Bought {
+            get {
+                int amount = 0;
+                foreach (Transaction t in Model.Instance.Transactions)
+                {
+                    if (this.ProductId.Equals(t.productId))
+                        amount += t.amount;
+                }
+                return amount;
+            }
+        }
         public int Price { get; set; }
 
         public Product(string productName, int price)

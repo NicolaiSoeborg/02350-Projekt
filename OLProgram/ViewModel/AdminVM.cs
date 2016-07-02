@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows;
 using System.Security.Cryptography;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace OLProgram.ViewModel
 {
@@ -13,7 +15,7 @@ namespace OLProgram.ViewModel
     {
         public string TxtAdminPassword { get; set; }
         public static Window _adminLoginWindow = null;
-        public static string billPath { get; set; }
+        public List<String> AdminLog { get { return Model.Instance.AdminLog; } }
 
         // Global commands for Admins
         public RelayCommand CloseApplicationCommand { get; }
@@ -35,9 +37,6 @@ namespace OLProgram.ViewModel
         public RelayCommand NewDataCommand { get; }
         public RelayCommand GenerateBillCommand { get; }
         
-        // ICommand as we want to block "(Re)Save" bill untill a GenerateBill has occured
-        public System.Windows.Input.ICommand ReSaveBillCommand { get; } 
-
         // For load, Save and new 
         public DialogHelper dialogHelper { get; } = new DialogHelper();
 
@@ -66,7 +65,6 @@ namespace OLProgram.ViewModel
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
             GenerateBillCommand = new RelayCommand(GenerateBill);
-            ReSaveBillCommand = new Command.ReSaveBillCommand();    
         }
 
         private void LoadExistingData()
@@ -84,11 +82,54 @@ namespace OLProgram.ViewModel
             string path = dialogHelper.ShowSaveBill();
             if (path != null)
             {
-                billPath = path;
-                ReSaveBillCommand.Execute(null);
-                RaisePropertyChanged(() => ReSaveBillCommand);
+                if (File.Exists(path) && MessageBoxResult.Yes != MessageBox.Show("File already exists! Overwrite?", "File exists", MessageBoxButton.YesNo, MessageBoxImage.Exclamation))
+                    return;
+
+                // TODO: Svind
+
+                /*     ID   NAME   PROD1  PROD2   SUM
+                      1337  Admin    3      2      =[YOU DO THE MATH]
+                      1001  Alice    1      2   
+                      1002  Bob      0      0   
+                      1003  Charlie  0      2   
+                */
+                StringBuilder csv = new StringBuilder();
+
+                // Header
+                csv.Append("ID, Name, ");
+                foreach (Product p in Model.Instance.Products)
+                    csv.AppendFormat("{0}, ", trimCSV(p.ProductName));
+                csv.Append("\r\n");
+
+                foreach (User u in Model.Instance.Users)
+                {
+                    csv.AppendFormat("{0}, {1}, ", trimCSV(u.UserID), trimCSV(u.Name));
+                    foreach (Product p in Model.Instance.Products)
+                    {
+                        // How many product has user bought? (lambda <3)
+                        int amount = 0;
+                        foreach (Transaction t in Model.Instance.Transactions)
+                        {
+                            if (u.UserID.Equals(t.studentId) && p.ProductId.Equals(t.productId))
+                                amount += t.amount;
+                        }
+                        int toPay = amount * p.Price; // TODO: Add svind
+                        csv.AppendFormat("{0}, ", toPay);
+                    }
+                    csv.Append("\r\n");
+                }
+                
+                File.WriteAllText(path, csv.ToString());
+                string log = String.Format("{0} - Bill has been saved at \"{1}\".", OLModel.Helpers.getTimeStamp(), path);
+                Model.Instance.AdminLog.Add(log);
             }
         }
+
+        private string trimCSV(string csv)
+        {
+            return csv.Replace(@"\", @"\\").Replace(",", @"\");
+        }
+
 
         private void DeleteSelectedProduct(Product selectedProduct)
         {

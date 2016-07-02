@@ -120,7 +120,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Command\ReSaveBillCommand.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Command\AddProductToBasketCommand.cs" />
     <Compile Include="Command\AddUserCommand.cs" />
@@ -346,7 +345,7 @@
     <Resource Include="Images\BeerBottles.jpg" />
     <Resource Include="Images\color-beer-bottles.png" />
     <Resource Include="Images\Ale No16.png" />
-    <Resource Include="Images\svaneke.JPG" />
+    <Resource Include="Images\svaneke.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OLModel\OLModel.csproj">

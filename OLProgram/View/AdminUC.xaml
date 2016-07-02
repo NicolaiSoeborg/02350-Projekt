@@ -12,7 +12,7 @@
         <ViewModel:AdminVM />
     </UserControl.DataContext>
 
-    <!-- TODO: Unbind Ctrl+K (ChangeToAdminCommand) -->
+    <!-- TODO: Unbind Ctrl+K (ChangeToAdminCommand) or rebind to new set password? -->
 
     <DockPanel x:Name="MainAdminDockPanel">
         <Menu DockPanel.Dock="Top">
@@ -34,7 +34,6 @@
             </MenuItem>
             <MenuItem Header="Generate _Bill">
                 <MenuItem Header="_Generate bill" Command="{Binding GenerateBillCommand}" />
-                <MenuItem Header="Re_save bill" Command="{Binding ReSaveBillCommand}" />
             </MenuItem>
         </Menu>
         <!--</DockPanel>-->
@@ -46,7 +45,7 @@
             <View:AddUserUC />
             <View:AddProductUC />
             <GroupBox Header="Log">
-                <ListView ItemsSource="{Binding Log}"/>
+                <ListView ItemsSource="{Binding AdminLog}"/>
             </GroupBox>
         </UniformGrid>
 

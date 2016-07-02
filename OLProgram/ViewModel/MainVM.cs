@@ -3,11 +3,14 @@ using OLModel;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace OLProgram.ViewModel
 {
     public class MainVM : BaseVM
     {
+        public static List<string> PublicLog { get { return Model.Instance.UserLog; } }
+
         // Tekstbox på LoginUC:
         public string loginTextBox { get; set; }
         
