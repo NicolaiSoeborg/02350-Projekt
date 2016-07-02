@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Basket.cs" />
     <Compile Include="BasketItem.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="NotifyBase.cs" />
     <Compile Include="Product.cs" />

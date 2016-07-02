@@ -45,9 +45,8 @@ namespace OLProgram.Command
             
             File.WriteAllText(_billPath, csv.ToString());
 
-            Model.Instance.AdminLog.Add(
-                OLProgram.ViewModel.BaseVM.getTimeStamp(DateTime.Now)
-                + " - Bill has been saved.");
+            string log = String.Format("{0} - Bill has been saved.", OLModel.Helpers.getTimeStamp());
+            Model.Instance.AdminLog.Add(log);
         }
 
         private string trimCSV(string csv)

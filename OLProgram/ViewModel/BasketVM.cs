@@ -94,8 +94,9 @@ namespace OLProgram.ViewModel
         {
             foreach (BasketItem basketItem in Basket.BasketItems) {
                 Model.Instance.Users[Model.Instance.Users.IndexOf(loggedInUser)].BuyProducts(basketItem.ProductId, basketItem.Count);
-                Model.Instance.UserLog.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " bought " + basketItem.Count + " of " + basketItem.Name + "(" + basketItem.ProductId + ")");
-                
+                string log = String.Format("{0} - {1}  bought {2} of {3} ({4})", OLModel.Helpers.getTimeStamp(), loggedInUser, basketItem.Count, basketItem.Name, basketItem.ProductId);
+                Model.Instance.UserLog.Add(log);
+
                 foreach (Product product in Model.Instance.Products)
                 {
                     if (product.ProductId.Equals(basketItem.ProductId))

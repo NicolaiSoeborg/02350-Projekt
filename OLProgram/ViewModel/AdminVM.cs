@@ -97,7 +97,8 @@ namespace OLProgram.ViewModel
                 var response = MessageBox.Show("Do you really want to delete " + selectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
                 {
-                    Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - Product " + selectedProduct.ProductName + " was deleted.");
+                    string log = String.Format("{0} - Product {1} was deleted", OLModel.Helpers.getTimeStamp(), selectedProduct);
+                    Model.Instance.AdminLog.Add(log);
                     Model.Instance.Products.Remove(selectedProduct);
                 }
             }
@@ -105,14 +106,17 @@ namespace OLProgram.ViewModel
 
         private void AddNewProduct()
         {
+            //MessageBox.Show("Adding new product");
             Model.Instance.Products.Add(new Product("New product", 0));
-            Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - New product added.");
+            string log = String.Format("{0} - New product added.", OLModel.Helpers.getTimeStamp());
+            Model.Instance.AdminLog.Add(log);
         }
 
         private void AddNewUser()
         {
             Model.Instance.Users.Add(new User("New user"));
-            Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - New user added.");
+            string log = String.Format("{0} - New user added.", OLModel.Helpers.getTimeStamp());
+            Model.Instance.AdminLog.Add(log);
         }
 
         private void CloseApplication()
@@ -159,7 +163,8 @@ namespace OLProgram.ViewModel
                 var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
                 {
-                    Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - User " + selectedUser.ToString() + " was deleted.");
+                    string log = String.Format("{0} - User {1} was deleted.", OLModel.Helpers.getTimeStamp(), selectedUser);
+                    Model.Instance.AdminLog.Add(log);
                     Model.Instance.Users.Remove(selectedUser);
                 }
             }
@@ -168,11 +173,12 @@ namespace OLProgram.ViewModel
         private void NewData()
         {
             var response = MessageBox.Show("Are you sure?", "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-            if (response == MessageBoxResult.Yes  && dialogHelper.ShowNew())
+            if (response == MessageBoxResult.Yes && dialogHelper.ShowNew())
             {
                 Model.Instance.Users.Clear();
                 Model.Instance.Products.Clear();
-                Model.Instance.AdminLog.Add(getTimeStamp(DateTime.Now) + " - Data was deleted.");
+                string log = String.Format("{0} - Data was deleted.", OLModel.Helpers.getTimeStamp());
+                Model.Instance.AdminLog.Add(log);
             }
         }
 

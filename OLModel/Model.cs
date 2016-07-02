@@ -12,9 +12,8 @@ namespace OLModel
         public List<String> AdminLog { get; set; }
         public List<String> UserLog { get; set; }
 
-
         public static int MODEL_VERSION = 1;
-        public static int LOG_ADMIN_ONLY = 1; // everything <= is admin only (see note below)
+        private static int LOG_ADMIN_ONLY = 1; // everything <= is admin only (see note below)
 
         private void createNewDatabase(string filename)
         {
@@ -32,7 +31,7 @@ namespace OLModel
                 "INSERT INTO users VALUES (1337, 'Admin');",
                 "INSERT INTO products VALUES (5708429004221, 'Svaneke Grunge IPA', 'IPA.png', 20);",
                 "INSERT INTO settings VALUES ('version', "+MODEL_VERSION+");",
-                "INSERT INTO logs VALUES ('" + getTimeStamp(DateTime.Now) + "', 1, 'Created new database');"
+                "INSERT INTO logs VALUES ('" + Helpers.getTimeStamp() + "', 1, 'Created new database');"
             };
 
             foreach (string stmt in statements)
@@ -43,11 +42,6 @@ namespace OLModel
             }
             //dbConn.Commit();
             dbConn.Close();
-        }
-
-        public static String getTimeStamp(DateTime value)
-        {
-            return value.ToString("yyyy-MM-dd HH:mm:ss"); // TODO: Fjern fra BaseVM
         }
 
         private int getVersion (SQLiteConnection dbConn)

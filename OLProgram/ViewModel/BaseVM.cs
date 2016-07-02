@@ -24,14 +24,25 @@ namespace OLProgram.ViewModel
     {
         // Undo/Redo controller + commands that the UI can be bound to.
         public UndoRedoController undoRedoController = UndoRedoController.Instance;
-
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
 
-        // Liste over brugere og produkter (TODO: Remove?)
-        /*public static ObservableCollection<User> Users { get; set; }
-        public static ObservableCollection<Product> Products { get; set; }
-        public static ObservableCollection<String> Log { get; set; }*/
+
+        /*
+            TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+            TODO                                         TODO
+            TODO    Fix setters (and do we really        TODO
+            TODO    have to copy the user/prod list?)    TODO
+            TODO                                         TODO
+            TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        */
+        public static ObservableCollection<User> Users {
+            get { return new ObservableCollection<User>(Model.Instance.Users); }
+        }
+        public static ObservableCollection<Product> Products {
+            get { return new ObservableCollection<Product>(Model.Instance.Products); }
+        }
+
         public static User loggedInUser { get; set; }
 
         // Ref til MainWindow, brug MainWindow.Content = new View.ViewUC(); for at skrifte UC.
@@ -43,8 +54,6 @@ namespace OLProgram.ViewModel
 
         public BaseVM()
         {
-            MessageBox.Show(String.Format("User count: {0}", OLModel.Model.Instance.Users.Count));
-
             // Commands
             UndoCommand = new RelayCommand(undoRedoController.Undo, undoRedoController.CanUndo);
             RedoCommand = new RelayCommand(undoRedoController.Redo, undoRedoController.CanRedo);
@@ -60,12 +69,6 @@ namespace OLProgram.ViewModel
         private static void ShowMainLoginGUI()
         {
             MainWindow.Content = new View.LoginUC();
-        }
-
-        // Bruges både i AdminVM og BasketVM, så defineres kun én gang her:
-        public static String getTimeStamp(DateTime value)
-        {
-            return value.ToString("yyyy-MM-dd HH:mm:ss"); // TODO: Flyt to Model.helpers
         }
 
     }
