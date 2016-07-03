@@ -12,7 +12,10 @@
         <ViewModel:AdminVM />
     </UserControl.DataContext>
 
-    <!-- TODO: Unbind Ctrl+K (ChangeToAdminCommand) or rebind to new set password? -->
+    <!-- TODO: Unbind Ctrl+K (ChangeToAdminCommand) or rebind to new set password? 
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding HowToRebindCtrlK?}" Gesture="CTRL+K" />
+    </UserControl.InputBindings> -->
 
     <DockPanel x:Name="MainAdminDockPanel">
         <Menu DockPanel.Dock="Top">
@@ -24,9 +27,12 @@
                 <MenuItem Header="_Exit" x:Name="exit" Command="{Binding CloseApplicationCommand}" />
             </MenuItem>
             <MenuItem Header="_Edit">
+                <MenuItem Header="Change Admin _Password" Command="{Binding ShowChangePasswordCommand}" />
+                <!--
                 <MenuItem Header="C_ut" Command="Cut" />
                 <MenuItem Header="_Copy" Command="Copy" />
                 <MenuItem Header="_Paste" Command="Paste" />
+                -->
             </MenuItem>
             <MenuItem Header="_Add">
                 <MenuItem Header="Add _User" Command="{Binding AddNewUserCommand}" />

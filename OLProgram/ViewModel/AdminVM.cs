@@ -21,6 +21,11 @@ namespace OLProgram.ViewModel
         public RelayCommand CloseApplicationCommand { get; }
         public RelayCommand AdminLoginCommand { get; } // Benyttes gennem AdminLoginWindow "Login" knappen
 
+        // Used for changing admin password
+        public string TxtNewAdminPassword { get; set; }
+        public RelayCommand AdminChangePasswordCommand { get; }
+        public RelayCommand ShowChangePasswordCommand { get; }
+
         // Admin Commands for Users
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
         public RelayCommand<User> SaveCurrentUserInformationCommand { get; }
@@ -50,9 +55,11 @@ namespace OLProgram.ViewModel
             // Commands:
             AdminLoginCommand = new RelayCommand(DoAdminLogin);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
+            AdminChangePasswordCommand = new RelayCommand(ChangeAdminPassword);
+            ShowChangePasswordCommand = new RelayCommand(ShowChangePassword);
 
             // Admin Commands for UsersVM
-            DeleteSelectedUserCommand = new RelayCommand<User> (DeleteSelectedUser);
+            DeleteSelectedUserCommand = new RelayCommand<User>(DeleteSelectedUser);
             AddNewUserCommand = new RelayCommand(AddNewUser);
             //SaveCurrentUserInformationCommand = new RelayCommand<User, String>(saveCurrentUserInformation);
 
@@ -130,7 +137,6 @@ namespace OLProgram.ViewModel
             return csv.Replace(@"\", @"\\").Replace(",", @"\");
         }
 
-
         private void DeleteSelectedProduct(Product selectedProduct)
         {
             if (selectedProduct != null)
@@ -141,6 +147,20 @@ namespace OLProgram.ViewModel
                     string log = String.Format("{0} - Product {1} was deleted", OLModel.Helpers.getTimeStamp(), selectedProduct);
                     Model.Instance.AdminLog.Add(log);
                     Model.Instance.Products.Remove(selectedProduct);
+                }
+            }
+        }
+
+        private void DeleteSelectedUser(User selectedUser)
+        {
+            if (selectedUser != null)
+            {
+                var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                if (response == MessageBoxResult.Yes)
+                {
+                    string log = String.Format("{0} - User {1} was deleted.", OLModel.Helpers.getTimeStamp(), selectedUser);
+                    Model.Instance.AdminLog.Add(log);
+                    Model.Instance.Users.Remove(selectedUser);
                 }
             }
         }
@@ -184,31 +204,41 @@ namespace OLProgram.ViewModel
         private void DoAdminLogin()
         {
             string inputPassword = HashPassword(TxtAdminPassword);
-            if (_adminLoginWindow != null && inputPassword != null)
+            string adminpw = Properties.Settings.Default.adminpwd;
+            if (_adminLoginWindow != null
+                && inputPassword != null
+                && inputPassword.Equals(adminpw))
             {
-                string adminpw = Properties.Settings.Default.adminpwd;
-                if (inputPassword.Equals(adminpw))
-                {
-                    // Login korrekt!
-                    TxtAdminPassword = ""; // Clear saved password
-                    MainWindow.Content = new View.AdminUC();
-                    _adminLoginWindow.Close();
-                }
+                // Login korrekt!
+                TxtAdminPassword = ""; // Clear saved password
+                MainWindow.Content = new View.AdminUC();
+                _adminLoginWindow.Close();
             }
+            //else TxtAdminPassword = "";
         }
-        
-        private void DeleteSelectedUser(User selectedUser)
+
+        private void ShowChangePassword()
         {
-            if (selectedUser != null)
+            (new View.AdminChangePasswordWindow()).ShowDialog();
+        }
+
+        private void ChangeAdminPassword()
+        {
+            string oldPassHash = HashPassword(TxtAdminPassword);
+            string newPassHash = HashPassword(TxtNewAdminPassword);
+            string adminpw = Properties.Settings.Default.adminpwd;
+            if (newPassHash != null &&
+                oldPassHash != null && oldPassHash.Equals(adminpw))
             {
-                var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-                if (response == MessageBoxResult.Yes)
-                {
-                    string log = String.Format("{0} - User {1} was deleted.", OLModel.Helpers.getTimeStamp(), selectedUser);
-                    Model.Instance.AdminLog.Add(log);
-                    Model.Instance.Users.Remove(selectedUser);
-                }
+                // Login korrekt!
+                Properties.Settings.Default.adminpwd = newPassHash; // This doesn't work in "debug mode", does it work in "release mode"?
+                Properties.Settings.Default.Save();
+                TxtAdminPassword = "";
+                TxtNewAdminPassword = "";
+                MessageBox.Show("Password changed.");
             }
+            else
+                MessageBox.Show("Wrong password!");
         }
 
         private void NewData()

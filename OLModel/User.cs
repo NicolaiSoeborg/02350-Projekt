@@ -13,26 +13,39 @@ namespace OLModel
 
         public User(string userID, string name)
         {
-            if (userID == null) userID = "TODO"; // SELECT max(userid AS INTEGER) FROM users
+            if (userID == null)
+                userID = getNewUserId().ToString();
             this.UserID = userID;
             this.Name = name;
         }
+    
+        private int getNewUserId()
+        {
+            // TODO: SELECT max(studentID AS INTEGER) FROM users;
+            int i = 1000;
+            while (true)
+            {
+                bool idAlreadInUse = false;
+                foreach (User u in Model.Instance.Users)
+                {
+                    idAlreadInUse |= u.UserID.Equals(i.ToString());
+                }
+                if (idAlreadInUse)
+                    i++; 
+                else break;
+            }
+            return i;
+        }
 
-        // Product is added to the users list and bought is incremented 
         public void BuyProducts(string ProductID, int amountBought)
         {
-            // Add "product*amount" to user
-            /*
-            if (ProductsBought.ContainsKey(ProductID))
-                ProductsBought[ProductID] += amountBought;
-            else
-                ProductsBought.Add(ProductID, amountBought);
-            */
+            var t = new Transaction(UserID, ProductID, amountBought);
+            Model.Instance.Transactions.Add(t);
         }
 
         public override String ToString()
         {
-            return String.Format("{0}: {1}", UserID, Name);
+            return String.Format("{0} ({1})", Name, UserID);
         }
     }
 }

@@ -28,19 +28,14 @@ namespace OLProgram.ViewModel
         public ICommand RedoCommand { get; }
 
 
-        /*
-            TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-            TODO                                         TODO
-            TODO    Fix setters (and do we really        TODO
-            TODO    have to copy the user/prod list?)    TODO
-            TODO                                         TODO
-            TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        */
-        public static ObservableCollection<User> Users {
-            get { return new ObservableCollection<User>(Model.Instance.Users); }
+        public static ObservableCollection<User> Users
+        {
+            get { return Model.Instance.Users; }
+            set { Model.Instance.Users = value; }
         }
         public static ObservableCollection<Product> Products {
-            get { return new ObservableCollection<Product>(Model.Instance.Products); }
+            get { return Model.Instance.Products; }
+            set { Model.Instance.Products = value; }
         }
 
         public static User loggedInUser { get; set; }

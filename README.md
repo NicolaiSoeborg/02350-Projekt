@@ -24,12 +24,12 @@ ProductId		ProductName			Price
 To login as admin, press "Ctrl + K" and type the password: "OLProgram"
 
 ## Version
-[1.1](https://github.com/NicolaiSoeborg/02350-Projekt/releases/tag/1.1)
+[1.1-debug](https://github.com/NicolaiSoeborg/02350-Projekt/releases/)
 
 ## TODO
- - Add: Changing of admin password
- - Add: Extra change on bill ("svind") -- see AdminVM.cs:80
- - Todo: Update this todo list with rest of todos
+ - Add: Extra change on bill ("svind") -- see AdminVM.cs
+ - Fix: Delete many users / products at once
+ - Add: Import / export users
 
 ## UNIX support
 Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going to be implemented [anytime soon](http://www.mono-project.com/docs/gui/wpf/)).

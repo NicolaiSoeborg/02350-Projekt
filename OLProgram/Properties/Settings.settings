@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OLProgram.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="adminpwd" Type="System.String" Scope="Application">
+    <Setting Name="adminpwd" Type="System.String" Scope="User">
       <Value Profile="(Default)">R4JrVIuzP2DEGtCkcrpX8bJUhOfmAow2wpH2XgOfL5o=</Value>
     </Setting>
   </Settings>

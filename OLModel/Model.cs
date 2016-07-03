@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.SQLite;
 
@@ -7,9 +9,8 @@ namespace OLModel
 {
     public class Model
     {
-        // TODO: Save stuff on setters
-        public List<User> Users { get; set; }
-        public List<Product> Products { get; set; }
+        public ObservableCollection<User> Users { get; set; }
+        public ObservableCollection<Product> Products { get; set; }
         public List<Transaction> Transactions { get; set; }
         public List<String> AdminLog { get; set; }
         public List<String> UserLog { get; set; }
@@ -68,11 +69,11 @@ namespace OLModel
 
         private bool OpenConnection()
         {
-            if (!System.IO.File.Exists(dbFilename))
-                return createNewDatabase();
-
             if (dbConn != null && dbConn.State == ConnectionState.Open)
                 return true; // Connection already open?
+
+            if (!System.IO.File.Exists(dbFilename))
+                return createNewDatabase();
 
             dbConn = new SQLiteConnection(String.Format(connStr, dbFilename));
             dbConn.Open();
@@ -81,6 +82,12 @@ namespace OLModel
         }
 
         private Model() {
+            Users = new ObservableCollection<User>();
+            Products = new ObservableCollection<Product>();
+            Transactions = new List<Transaction>();
+            AdminLog = new List<String>();
+            UserLog = new List<String>();
+
             if (!OpenConnection()) return; // TODO: Kill?
 
             int version = getVersion();
@@ -90,7 +97,6 @@ namespace OLModel
                 return; // TODO: Kill?
             }
 
-            Users = new List<User>();
             SQLiteCommand command = new SQLiteCommand("SELECT * FROM users", dbConn);
             SQLiteDataReader reader = command.ExecuteReader();
             #region users
@@ -103,9 +109,9 @@ namespace OLModel
                     Users.Add( new User(studentID, studentName) );
                 }
             }
+            Users.CollectionChanged += UsersAddedOrRemoved; // Warning: Add _after_ filling list
             #endregion
 
-            Products = new List<Product>();
             command = new SQLiteCommand("SELECT * FROM products", dbConn);
             reader = command.ExecuteReader();
             #region products
@@ -129,9 +135,9 @@ namespace OLModel
 
                 }
             }
+            Products.CollectionChanged += ProductsAddedOrRemoved; // Warning: Add _after_ filling list
             #endregion
 
-            Transactions = new List<Transaction>();
             command = new SQLiteCommand("SELECT * FROM transactions", dbConn);
             reader = command.ExecuteReader();
             #region transactions
@@ -151,9 +157,6 @@ namespace OLModel
             }
             #endregion
 
-
-            AdminLog = new List<String>();
-            UserLog = new List<String>();
             command = new SQLiteCommand("SELECT time, permission, event FROM logs", dbConn);
             reader = command.ExecuteReader();
             #region log
@@ -181,23 +184,71 @@ namespace OLModel
 
         }
 
+        private void UsersAddedOrRemoved(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (User user in e.NewItems)
+                {
+                    string stmt = "INSERT OR REPLACE INTO users (studentID, studentName) VALUES (@id, @name)";
+                    SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
+                    command.Parameters.AddWithValue("id", user.UserID);
+                    command.Parameters.AddWithValue("name", user.Name);
+                    Console.WriteLine(String.Format("Added/updated user {0}.", user));
+                    command.ExecuteNonQuery();
+                    //user.PropertyChanged += UsersAddedOrRemoved;
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (User user in e.OldItems)
+                {
+                    string stmt = "DELETE FROM users WHERE studentID = @id AND studentName = @name"; // TODO: make sure to "LIMIT 1"
+                    SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
+                    command.Parameters.AddWithValue("id", user.UserID);
+                    command.Parameters.AddWithValue("name", user.Name);
+                    Console.WriteLine(String.Format("SQL: {0}", stmt));
+                    command.ExecuteNonQuery();
+                    //user.PropertyChanged -= UsersAddedOrRemoved;
+                }
+            }
+        }
+        private void ProductsAddedOrRemoved(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Product product in e.NewItems)
+                {
+                    string stmt = "INSERT OR REPLACE INTO products (productID, productName, productImage, price) VALUES (@id, @name, @img, @price)";
+                    SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
+                    command.Parameters.AddWithValue("id", product.ProductId);
+                    command.Parameters.AddWithValue("name", product.ProductName);
+                    command.Parameters.AddWithValue("img", product.ImageFileName);
+                    command.Parameters.AddWithValue("price", product.Price);
+                    Console.WriteLine(String.Format("Added/updated product {0}.", product));
+                    command.ExecuteNonQuery();
+                    //product.PropertyChanged += ProductsAddedOrRemoved;
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Product product in e.OldItems)
+                {
+                    string stmt = "DELETE FROM products WHERE productID = @id AND productName = @name AND productImage = @img AND price = @price"; // TODO: make sure to "LIMIT 1"
+                    SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
+                    command.Parameters.AddWithValue("id", product.ProductId);
+                    command.Parameters.AddWithValue("name", product.ProductName);
+                    command.Parameters.AddWithValue("img", product.ImageFileName);
+                    command.Parameters.AddWithValue("price", product.Price);
+                    Console.WriteLine(String.Format("SQL: {0}", stmt));
+                    command.ExecuteNonQuery();
+                    //product.PropertyChanged += ProductsAddedOrRemoved;
+                }
+            }
+        }
+
         ~Model()
         {
-            #region unneeded
-            /*Console.WriteLine(String.Format("{0} - Model destructor called.", Helpers.getTimeStamp()));
-            if (dbConn != null)
-            {
-                while (dbConn.State == ConnectionState.Fetching
-                    || dbConn.State == ConnectionState.Executing)
-                {
-                    Console.WriteLine(String.Format("{0} - Waiting for db connection.", Helpers.getTimeStamp()));
-                    System.Threading.Thread.Sleep(1000); // sleep 1 sec
-                }
-
-                if (dbConn.State == ConnectionState.Open)
-                    dbConn.Close();
-            }*/
-            #endregion
             Console.WriteLine(String.Format("{0} - Model shutdown.", Helpers.getTimeStamp()));
         }
 

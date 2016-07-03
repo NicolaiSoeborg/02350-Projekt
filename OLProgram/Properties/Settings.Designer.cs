@@ -23,12 +23,15 @@ namespace OLProgram.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("R4JrVIuzP2DEGtCkcrpX8bJUhOfmAow2wpH2XgOfL5o=")]
         public string adminpwd {
             get {
                 return ((string)(this["adminpwd"]));
+            }
+            set {
+                this["adminpwd"] = value;
             }
         }
     }
