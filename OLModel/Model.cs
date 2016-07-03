@@ -30,13 +30,13 @@ namespace OLModel
             dbConn.Open();
             string[] statements = {
                 "CREATE TABLE IF NOT EXISTS users(studentID TEXT NOT NULL PRIMARY KEY, studentName TEXT);",
-                "CREATE TABLE IF NOT EXISTS products(productID TEXT NOT NULL PRIMARY KEY, productName TEXT, productImage TEXT, price INT);",
+                "CREATE TABLE IF NOT EXISTS products(productID TEXT NOT NULL PRIMARY KEY, productName TEXT, productImage TEXT, price INT, stock INT);",
                 "CREATE TABLE IF NOT EXISTS transactions(studentID TEXT, productID TEXT, amount INT);", // TODO: add time
                 "CREATE TABLE IF NOT EXISTS settings(key TEXT NOT NULL PRIMARY KEY, val INT);",
                 "CREATE TABLE IF NOT EXISTS logs(time TEXT NOT NULL, permission INT, event TEXT);",
 
                 "INSERT INTO users VALUES (1337, 'Admin');",
-                "INSERT INTO products VALUES (5708429004221, 'Svaneke Grunge IPA', 'svaneke.jpg', 20);",
+                "INSERT INTO products VALUES (5708429004221, 'Svaneke Grunge IPA', 'svaneke.jpg', 20, 0);",
                 "INSERT INTO settings VALUES ('version', "+MODEL_VERSION+");",
                 "INSERT INTO logs VALUES ('" + Helpers.getTimeStamp() + "', 1, 'Created new database');"
             };
@@ -70,7 +70,7 @@ namespace OLModel
         private bool OpenConnection()
         {
             if (dbConn != null && dbConn.State == ConnectionState.Open)
-                return true; // Connection already open?
+                return true; // Connection already open
 
             if (!System.IO.File.Exists(dbFilename))
                 return createNewDatabase();
@@ -124,13 +124,13 @@ namespace OLModel
 
                     int price;
                     if (!Int32.TryParse(reader["price"].ToString(), out price))
-                        price = -1;
+                        price = 10000; // This should be noticeable
 
-                    Products.Add(
-                        "".Equals(productImage)
-                        ? new Product(productId, productName, price)
-                        : new Product(productId, productName, price, productImage)
-                    );
+                    int stock;
+                    if (!Int32.TryParse(reader["stock"].ToString(), out stock))
+                        stock = 0;
+
+                    Products.Add( new Product(productId, productName, price, stock, productImage) );
 
                 }
             }

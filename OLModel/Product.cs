@@ -23,11 +23,9 @@ namespace OLModel
         }
         public int Price { get; set; }
 
-        public Product(string productName, int price)
-            : this(null, productName, price, "../Images/default.png") { }
 
-        public Product(string productId, string productName, int price)
-            : this(productId, productName, price, "../Images/default.png") { }
+        public Product(string productName, int price)
+            : this(null, productName, price, 0, "../Images/default.png") { }
 
         // This Constructor is used for making basketitems, making clone of the parameter Product
         public Product(Product product)
@@ -36,16 +34,18 @@ namespace OLModel
             ProductId = product.ProductId;
             ProductName = product.ProductName;
             Price = product.Price;
+            Stock = product.Stock;
             ImageFileName = product.ImageFileName;
         }
 
-        public Product(string productId, string productName, int price, string imageFileName)
+        public Product(string productId, string productName, int price, int stock, string imageFileName)
         {
             if (productId == null)
                 productId = getNewProductId();
             this.ProductId = productId;
             this.ProductName = productName;
             this.Price = price;
+            this.Stock = stock;
             this.ImageFileName = imageFileName;
         }
 
