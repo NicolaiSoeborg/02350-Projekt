@@ -11,7 +11,7 @@ namespace OLModel
     {
         public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<Product> Products { get; set; }
-        public List<Transaction> Transactions { get; set; }
+        public ObservableCollection<Transaction> Transactions { get; } = new ObservableCollection<Transaction>();
         public List<String> AdminLog { get; set; }
         public List<String> UserLog { get; set; }
 
@@ -84,7 +84,6 @@ namespace OLModel
         private Model() {
             Users = new ObservableCollection<User>();
             Products = new ObservableCollection<Product>();
-            Transactions = new List<Transaction>();
             AdminLog = new List<String>();
             UserLog = new List<String>();
 
@@ -155,6 +154,7 @@ namespace OLModel
                     Transactions.Add( new Transaction(studentId, productId, amount) );
                 }
             }
+            Transactions.CollectionChanged += TransactionAdded;
             #endregion
 
             command = new SQLiteCommand("SELECT time, permission, event FROM logs", dbConn);
@@ -246,6 +246,32 @@ namespace OLModel
                 }
             }
         }
+        private void TransactionAdded(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Transaction t in e.NewItems)
+                {
+                    string stmt = "INSERT INTO transactions (studentID, productID, amount) VALUES (@sID, @pID, @amount)";
+                    SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
+                    command.Parameters.AddWithValue("sID", t.studentId);
+                    command.Parameters.AddWithValue("pID", t.productId);
+                    command.Parameters.AddWithValue("amount", t.amount);
+                    Console.WriteLine(String.Format("Transaction: {0}.", t));
+                    command.ExecuteNonQuery();
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Transaction t in e.OldItems)
+                {
+                    string log = String.Format("{0} - WARNING: Transaction '{1}' deleted!", Helpers.getTimeStamp(), t);
+                    AdminLog.Add(log);
+                    Console.WriteLine(log);
+                }
+            }
+        }
+
 
         ~Model()
         {

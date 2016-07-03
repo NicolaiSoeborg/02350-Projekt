@@ -19,5 +19,10 @@ namespace OLModel
             this.productId = productId;
             this.amount = amount;
         }
+
+        public override string ToString()
+        {
+            return String.Format("{0} bought {1} of {2}", studentId, amount, productId);
+        }
     }
 }
