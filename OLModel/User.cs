@@ -14,12 +14,12 @@ namespace OLModel
         public User(string userID, string name)
         {
             if (userID == null)
-                userID = getNewUserId().ToString();
+                userID = getNewUserId();
             this.UserID = userID;
             this.Name = name;
         }
     
-        private int getNewUserId()
+        private string getNewUserId()
         {
             // TODO: SELECT max(studentID AS INTEGER) FROM users;
             int i = 1000;
@@ -34,7 +34,7 @@ namespace OLModel
                     i++; 
                 else break;
             }
-            return i;
+            return i.ToString();
         }
 
         public void BuyProducts(string ProductID, int amountBought)
