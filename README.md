@@ -38,6 +38,8 @@ To login as admin, press "Ctrl + K" and type the password: "OLProgram"
  - Add: Extra change on bill ("svind")
  - Todo: Update this todo list with rest of todos
 
+**Please checkout the [SQLite branch](https://github.com/NicolaiSoeborg/02350-Projekt/branches)!**
+
 ## UNIX support
 Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going to be implemented [anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
 
