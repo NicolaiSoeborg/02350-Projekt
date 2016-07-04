@@ -19,7 +19,7 @@ namespace OLModel
         private const int LOG_ADMIN_ONLY = 1; // everything <= is admin only (see note below)
 
         private SQLiteConnection dbConn;
-        private const string dbFilename = "testdb.sqlite";
+        private const string dbFilename = "beer.sqlite3";
         private const string connStr = "Data Source={0};Version=3;";
 
         private bool createNewDatabase()
