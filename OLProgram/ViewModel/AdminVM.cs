@@ -186,7 +186,7 @@ namespace OLProgram.ViewModel
 
         private string trimCSV(string csv)
         {
-            return csv.Replace(@"\", @"\\").Replace(",", @"\");
+            return csv.Replace(@"\", @"\\").Replace(",", @"\,");
         }
 
         private void DeleteSelectedProduct(Product selectedProduct)
@@ -257,15 +257,14 @@ namespace OLProgram.ViewModel
             string inputPassword = HashPassword(TxtAdminPassword);
             string adminpw = Properties.Settings.Default.adminpwd;
             if (_adminLoginWindow != null
-                && inputPassword != null
-                && inputPassword.Equals(adminpw))
+                && inputPassword != null && inputPassword.Equals(adminpw))
             {
                 // Login korrekt!
-                TxtAdminPassword = ""; // Clear saved password
+                TxtAdminPassword = ""; // Clear password
                 MainWindow.Content = new View.AdminUC();
                 _adminLoginWindow.Close();
             }
-            //else TxtAdminPassword = "";
+            //else TxtAdminPassword = ""; // TODO: Clear password field
         }
 
         private void ShowChangePassword()
@@ -282,10 +281,9 @@ namespace OLProgram.ViewModel
                 oldPassHash != null && oldPassHash.Equals(adminpw))
             {
                 // Login korrekt!
-                Properties.Settings.Default.adminpwd = newPassHash; // This doesn't work in "debug mode", does it work in "release mode"?
-                Properties.Settings.Default.Save();
-                TxtAdminPassword = "";
-                TxtNewAdminPassword = "";
+                Properties.Settings.Default.adminpwd = newPassHash;
+                Properties.Settings.Default.Save(); // This doesn't work in "debug mode", does it work in "release mode"?
+                TxtAdminPassword = ""; TxtNewAdminPassword = "";
                 MessageBox.Show("Password changed.");
             }
             else
