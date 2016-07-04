@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace OLModel
 {
@@ -9,19 +10,16 @@ namespace OLModel
         public string ProductId { get; set; }
         public string ProductName { get; set; }
         public string ImageFileName { get; }
+        public int Price { get; set; }
         public int Stock { get; set; }
         public int Bought {
-            get { // TODO: This can probably be expressed as a simple lambda func?
-                int amount = 0;
-                foreach (Transaction t in Model.Instance.Transactions)
-                {
-                    if (this.ProductId.Equals(t.productId))
-                        amount += t.amount;
-                }
-                return amount;
+            get {
+                return Model.Instance.Transactions
+                    .Where(t => ProductId.Equals(t.productId))
+                    .Sum(t => t.amount);
             }
         }
-        public int Price { get; set; }
+        
 
 
         public Product(string productName, int price)
