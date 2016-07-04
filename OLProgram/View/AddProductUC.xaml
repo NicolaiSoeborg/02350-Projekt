@@ -18,6 +18,13 @@
                 <Button Grid.Column="2" Command="{Binding DeleteSelectedProductCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductControl}">Delete Product</Button>
             </Grid>
             <DataGrid DockPanel.Dock="Top" x:Name="ProductControl" ItemsSource="{Binding Products}" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add product" Command="{Binding AddNewProductCommand}" />
+                        <MenuItem Header="Remove product" Command="{Binding DeleteSelectedProductCommand}" />
+                        <MenuItem Header="Show log for product" Command="{Binding ShowLogForProduct}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ProductId" Binding="{Binding ProductId}" Width="10*"/>
                     <DataGridTextColumn Header="ProductName" Binding="{Binding ProductName}" Width="20*"/>

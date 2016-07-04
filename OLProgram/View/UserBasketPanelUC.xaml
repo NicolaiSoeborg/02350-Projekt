@@ -25,7 +25,6 @@
             </Grid.ColumnDefinitions>
             <!--TODO Make ClearBasketCommand-->
             <Button Grid.Column="0" Command="{Binding DataContext.ClearBasketCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type View:UserUC}}}">Delete Basket</Button>
-            <!--TODO Make CheckoutCommand-->
             <Button Content="Checkout" Command="{Binding CheckOutCommand}" Grid.Column="1" />
         </Grid>
     </Grid>

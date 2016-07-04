@@ -12,7 +12,10 @@
         <ViewModel:AdminVM />
     </UserControl.DataContext>
 
-    <!-- TODO: Unbind Ctrl+K (ChangeToAdminCommand) -->
+    <!-- TODO: Unbind Ctrl+K (ChangeToAdminCommand) or rebind to new set password? 
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding HowToRebindCtrlK?}" Gesture="CTRL+K" />
+    </UserControl.InputBindings> -->
 
     <DockPanel x:Name="MainAdminDockPanel">
         <Menu DockPanel.Dock="Top">
@@ -24,17 +27,24 @@
                 <MenuItem Header="_Exit" x:Name="exit" Command="{Binding CloseApplicationCommand}" />
             </MenuItem>
             <MenuItem Header="_Edit">
+                <MenuItem Header="Change Admin _Password" Command="{Binding ShowChangePasswordCommand}" />
+                <!--
                 <MenuItem Header="C_ut" Command="Cut" />
                 <MenuItem Header="_Copy" Command="Copy" />
                 <MenuItem Header="_Paste" Command="Paste" />
+                -->
             </MenuItem>
             <MenuItem Header="_Add">
                 <MenuItem Header="Add _User" Command="{Binding AddNewUserCommand}" />
-                <MenuItem Header="Add _Product" Command="{Binding AddProductToGlobalCommand}" />
+                <MenuItem Header="Add _Product" Command="{Binding AddNewProductCommand}" />
+            </MenuItem>
+            <MenuItem Header="Logs">
+                <MenuItem Header="Full _user log" Command="{Binding ShowFullUserLogCommand}" />
+                <MenuItem Header="Full _admin log" Command="{Binding ShowFullAdminLogCommand}" />
+                <MenuItem Header="Full _transaction log" Command="{Binding ShowFullTransactionLogCommand}" />
             </MenuItem>
             <MenuItem Header="Generate _Bill">
                 <MenuItem Header="_Generate bill" Command="{Binding GenerateBillCommand}" />
-                <MenuItem Header="Re_save bill" Command="{Binding ReSaveBillCommand}" />
             </MenuItem>
         </Menu>
         <!--</DockPanel>-->
@@ -46,7 +56,7 @@
             <View:AddUserUC />
             <View:AddProductUC />
             <GroupBox Header="Log">
-                <ListView ItemsSource="{Binding Log}"/>
+                <ListView ItemsSource="{Binding AdminLog}"/>
             </GroupBox>
         </UniformGrid>
 

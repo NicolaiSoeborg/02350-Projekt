@@ -20,10 +20,19 @@
                 <Button Grid.Column="2" Command="{Binding DeleteSelectedUserCommand}" CommandParameter="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
             </Grid>
             <DataGrid DockPanel.Dock="Top" x:Name="UsersControl" ItemsSource="{Binding Users}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add new user" Command="{Binding AddNewUserCommand}" />
+                        <MenuItem Header="Remove user" Command="{Binding DeleteSelectedUserCommand}" />
+                        <MenuItem Header="Show log for user" Command="{Binding ShowLogForUser}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
-                    <DataGridTextColumn Binding="{Binding ProductsCount}" Header="Bought" Width="10*"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="15*"/>
+                    <DataGridTextColumn Binding="{Binding Team}" Header="Team" Width="15*"/>
+                    <DataGridCheckBoxColumn Binding="{Binding Enabled}" Header="Enabled" Width="35" IsReadOnly="True" />
+                    <!-- Enabled is read-only as the logic for not-enabled users isn't in place, yet. -->
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

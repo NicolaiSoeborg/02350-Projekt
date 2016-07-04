@@ -7,7 +7,7 @@
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:ViewModel="clr-namespace:OLProgram.ViewModel"
         xmlns:View="clr-namespace:OLProgram.View"
-        mc:Ignorable="d" d:DesignHight="600" d:DesignWidth="800"
+        mc:Ignorable="d" d:DesignHight="800" d:DesignWidth="600"
         Focusable="True">
 
     <UserControl.DataContext>
@@ -20,7 +20,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <!-- TODO: Hvilke specifikke keybindings skal views have? Globale keybindings (Undo/Redo) er defineret i MainWindow
+    <!-- Hvilke specifikke keybindings skal dette view have? Globale keybindings (Undo/Redo) er defineret i MainWindow
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding TODO_SomeCommand}" Gesture="CTRL+T" />
     </UserControl.InputBindings>-->

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows;
 using System.Security.Cryptography;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace OLProgram.ViewModel
 {
@@ -13,20 +15,31 @@ namespace OLProgram.ViewModel
     {
         public string TxtAdminPassword { get; set; }
         public static Window _adminLoginWindow = null;
-        public static string billPath { get; set; }
+        public List<String> AdminLog { get { return Model.Instance.AdminLog; } }
+
+        // Logs:
+        public static List<String> LogForX { get; set; }
+        public RelayCommand ShowFullUserLogCommand { get; }
+        public RelayCommand ShowFullAdminLogCommand { get; }
+        public RelayCommand ShowFullTransactionLogCommand { get; }
 
         // Global commands for Admins
         public RelayCommand CloseApplicationCommand { get; }
         public RelayCommand AdminLoginCommand { get; } // Benyttes gennem AdminLoginWindow "Login" knappen
 
+        // Used for changing admin password
+        public string TxtNewAdminPassword { get; set; }
+        public RelayCommand AdminChangePasswordCommand { get; }
+        public RelayCommand ShowChangePasswordCommand { get; }
+
         // Admin Commands for Users
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
-        public RelayCommand<User> SaveCurrentUserInformationCommand { get; }
+        public RelayCommand<User> ShowLogForUser { get; }
         public RelayCommand AddNewUserCommand { get; }
 
         //Admin Commands for Products
-        public RelayCommand AddProductToGlobalCommand { get; }
         public RelayCommand<Product> DeleteSelectedProductCommand { get; }
+        public RelayCommand<Product> ShowLogForProduct { get; }
         public RelayCommand AddNewProductCommand { get; }
 
         // Admin commands for Load, Save and New
@@ -35,9 +48,6 @@ namespace OLProgram.ViewModel
         public RelayCommand NewDataCommand { get; }
         public RelayCommand GenerateBillCommand { get; }
         
-        // ICommand as we want to block "(Re)Save" bill untill a GenerateBill has occured
-        public System.Windows.Input.ICommand ReSaveBillCommand { get; } 
-
         // For load, Save and new 
         public DialogHelper dialogHelper { get; } = new DialogHelper();
 
@@ -51,22 +61,80 @@ namespace OLProgram.ViewModel
             // Commands:
             AdminLoginCommand = new RelayCommand(DoAdminLogin);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
+            AdminChangePasswordCommand = new RelayCommand(ChangeAdminPassword);
+            ShowChangePasswordCommand = new RelayCommand(ShowChangePassword);
 
-            // Admin Commands for UsersVM
-            DeleteSelectedUserCommand = new RelayCommand<User> (DeleteSelectedUser);
+            // Admin Commands for users
+            DeleteSelectedUserCommand = new RelayCommand<User>(DeleteSelectedUser);
             AddNewUserCommand = new RelayCommand(AddNewUser);
-            //SaveCurrentUserInformationCommand = new RelayCommand<User, String>(saveCurrentUserInformation);
+            ShowLogForUser = new RelayCommand<User>(UserShowLog);
 
-            // Admin Commands for ProductsVM
+            // Admin Commands for products
             DeleteSelectedProductCommand = new RelayCommand<Product>(DeleteSelectedProduct);
             AddNewProductCommand = new RelayCommand(AddNewProduct);
+            ShowLogForProduct = new RelayCommand<Product>(ProductShowLog);
+
+            // Log commands:
+            ShowFullUserLogCommand = new RelayCommand(ShowUsersLog);
+            ShowFullAdminLogCommand = new RelayCommand(ShowAdminLog);
+            ShowFullTransactionLogCommand = new RelayCommand(ShowTransactionsLog);
 
             // Admin commands for Load, Save and New
             SaveDataCommand = new RelayCommand(SaveCurrentData);
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
             GenerateBillCommand = new RelayCommand(GenerateBill);
-            ReSaveBillCommand = new Command.ReSaveBillCommand();    
+        }
+
+        private void ShowTransactionsLog()
+        {
+            LogForX = Model.Instance.Transactions
+                .Select(t => String.Format("{0} bought {1} x {2}.", t.studentId, t.amount, t.productId))
+                .ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+        private void ShowUsersLog()
+        {
+            LogForX = Model.Instance.UserLog.ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+        private void ShowAdminLog()
+        {
+            LogForX = Model.Instance.AdminLog.ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+
+        private void ProductShowLog(Product selectedProduct)
+        {
+            if (selectedProduct == null) return;
+            LogForX = Model.Instance.Transactions
+                .Where(t => t.productId.Equals(selectedProduct.ProductId))
+                .Select(t => String.Format("{0} bought {1} x {2}.", t.studentId, t.amount, t.productId))
+                .ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+        private void UserShowLog(User selectedUser)
+        {
+            if (selectedUser == null) return;
+            LogForX = Model.Instance.Transactions
+                .Where(t => t.studentId.Equals(selectedUser.UserID))
+                .Select(t => String.Format("{0} bought {1} x {2}.", selectedUser.Name, t.amount, t.productId))
+                .ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+        private void LoadExistingData()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SaveCurrentData()
+        {
+            throw new NotImplementedException();
         }
 
         private void GenerateBill()
@@ -74,34 +142,93 @@ namespace OLProgram.ViewModel
             string path = dialogHelper.ShowSaveBill();
             if (path != null)
             {
-                billPath = path;
-                ReSaveBillCommand.Execute(null);
-                RaisePropertyChanged(() => ReSaveBillCommand);
+                if (File.Exists(path) && MessageBox.Show("File already exists! Overwrite?", "File exists", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No)
+                    return;
+
+                // TODO: Svind
+
+                /*     ID   NAME   PROD1  PROD2   SUM
+                      1337  Admin    3      2      =[YOU DO THE MATH]
+                      1001  Alice    1      2   
+                      1002  Bob      0      0   
+                      1003  Charlie  0      2   
+                */
+                StringBuilder csv = new StringBuilder();
+
+                // Header
+                csv.Append("ID, Name, ");
+                foreach (Product p in Model.Instance.Products)
+                    csv.AppendFormat("{0}, ", trimCSV(p.ProductName));
+                csv.Append("\r\n");
+
+                foreach (User u in Model.Instance.Users)
+                {
+                    csv.AppendFormat("{0}, {1}, ", trimCSV(u.UserID), trimCSV(u.Name));
+                    foreach (Product p in Model.Instance.Products)
+                    {
+                        // How many product has user bought?
+                        int amount = Model.Instance.Transactions
+                            .Where(t => u.UserID.Equals(t.studentId)
+                                    && p.ProductId.Equals(t.productId))
+                            .Sum(t => t.amount);
+
+                        int toPay = amount * p.Price; // TODO: Add svind
+                        csv.AppendFormat("{0}, ", toPay);
+                    }
+                    csv.Append("\r\n");
+                }
+                
+                File.WriteAllText(path, csv.ToString());
+                string log = String.Format("{0} - Bill has been saved at \"{1}\".", OLModel.Helpers.getTimeStamp(), path);
+                Model.Instance.AdminLog.Add(log);
             }
+        }
+
+        private string trimCSV(string csv)
+        {
+            return csv.Replace(@"\", @"\\").Replace(",", @"\");
         }
 
         private void DeleteSelectedProduct(Product selectedProduct)
         {
             if (selectedProduct != null)
             {
-                var response = MessageBox.Show("Do you really want to delete Product " + selectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                var response = MessageBox.Show("Do you really want to delete " + selectedProduct.ProductName + "?", "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
-                   
-                Log.Add(getTimeStamp(DateTime.Now) + " - Product " + selectedProduct.ProductName + " was deleted. ");
-                Products.Remove(selectedProduct);
+                {
+                    string log = String.Format("{0} - Product {1} was deleted", OLModel.Helpers.getTimeStamp(), selectedProduct);
+                    Model.Instance.AdminLog.Add(log);
+                    Model.Instance.Products.Remove(selectedProduct);
+                }
+            }
+        }
+
+        private void DeleteSelectedUser(User selectedUser)
+        {
+            if (selectedUser != null)
+            {
+                var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                if (response == MessageBoxResult.Yes)
+                {
+                    string log = String.Format("{0} - User {1} was deleted.", OLModel.Helpers.getTimeStamp(), selectedUser);
+                    Model.Instance.AdminLog.Add(log);
+                    Model.Instance.Users.Remove(selectedUser);
+                }
             }
         }
 
         private void AddNewProduct()
         {
-            Products.Add(new Product("New product"));
-            Log.Add(getTimeStamp(DateTime.Now) + " - New Product added to Products");
+            Model.Instance.Products.Add(new Product("New product", 0));
+            string log = String.Format("{0} - New product added.", OLModel.Helpers.getTimeStamp());
+            Model.Instance.AdminLog.Add(log);
         }
 
         private void AddNewUser()
         {
-            Users.Add(new User("New user"));
-            Log.Add(getTimeStamp(DateTime.Now) + " - New User added to Users");
+            Model.Instance.Users.Add(new User("New user"));
+            string log = String.Format("{0} - New user added.", OLModel.Helpers.getTimeStamp());
+            Model.Instance.AdminLog.Add(log);
         }
 
         private void CloseApplication()
@@ -128,123 +255,52 @@ namespace OLProgram.ViewModel
         private void DoAdminLogin()
         {
             string inputPassword = HashPassword(TxtAdminPassword);
-            if (_adminLoginWindow != null && inputPassword != null)
+            string adminpw = Properties.Settings.Default.adminpwd;
+            if (_adminLoginWindow != null
+                && inputPassword != null
+                && inputPassword.Equals(adminpw))
             {
-                string adminpw = Properties.Settings.Default.adminpwd;
-                if (inputPassword.Equals(adminpw))
-                {
-                    // Login korrekt!
-                    TxtAdminPassword = ""; // Clear saved password
-                    MainWindow.Content = new View.AdminUC();
-                    _adminLoginWindow.Close();
-                }
+                // Login korrekt!
+                TxtAdminPassword = ""; // Clear saved password
+                MainWindow.Content = new View.AdminUC();
+                _adminLoginWindow.Close();
             }
-        }
-        
-        private void DeleteSelectedUser(User selectedUser)
-        {
-            if (selectedUser != null)
-            {
-                var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-                if (response == MessageBoxResult.Yes)
-                {
-                    Log.Add(getTimeStamp(DateTime.Now) + " - User " + selectedUser.ToString() + " was deleted. ");
-                    Users.Remove(selectedUser);
-                }
-            }
+            //else TxtAdminPassword = "";
         }
 
-        private async void LoadExistingData()
+        private void ShowChangePassword()
         {
-            string path = dialogHelper.ShowOpen();
-            if (path != null)
-            {
-                // Load Users and Products from xml file
-                Data DataToLoad = await SerializerXML.Instance.AsyncDeserializeFromFile(path);
-
-                // Clear current useres and add the loaded users
-                Users.Clear();
-                DataToLoad.Users.ForEach(x => Users.Add(x));
-                Products.Clear();
-                DataToLoad.Products.ForEach(x => Products.Add(x));
-
-                // Do the Logs
-                LogForUsers.Clear();
-                DataToLoad.UserLog.ForEach(x => LogForUsers.Add(x));
-
-                DataToLoad.AdminLog.ForEach(x => Log.Add(x));
-
-                // Load each users dictionary 
-                int DictionaryCounter = 0;
-                int Counter = 0;
-                int currentIndex = 0;
-                foreach (User user in Users)
-                {
-                    Counter = 0;
-                    foreach(String temp in DataToLoad.ProductKeys)
-                    {
-                        if (DataToLoad.ProductsForEachUser[currentIndex] != 0)
-                        {
-                            user.ProductsBought.Add(DataToLoad.ProductKeys[DictionaryCounter], DataToLoad.AmountBought[DictionaryCounter]);
-                            DictionaryCounter++;
-                            Counter++;
-                            if (DataToLoad.ProductsForEachUser[currentIndex] == Counter)
-                            {
-                                currentIndex++;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            currentIndex++;
-                            break;
-                        }
-                  }
-             }
-            Log.Add(getTimeStamp(DateTime.Now) + " - Existing data loaded");
-            }
+            (new View.AdminChangePasswordWindow()).ShowDialog();
         }
 
-        private void SaveCurrentData()
+        private void ChangeAdminPassword()
         {
-            string path = dialogHelper.ShowSave();
-            if (path != null)
+            string oldPassHash = HashPassword(TxtAdminPassword);
+            string newPassHash = HashPassword(TxtNewAdminPassword);
+            string adminpw = Properties.Settings.Default.adminpwd;
+            if (newPassHash != null &&
+                oldPassHash != null && oldPassHash.Equals(adminpw))
             {
-                List<String> tempProductKeys = new List<string>();
-                List<int> tempAmountBought = new List<int>();
-                List<int> tempProductsForEachUser = new List<int>();
-                int Counter;
-                foreach(User user in Users)
-                {
-                    Counter = 0;
-                    
-                    foreach(var item in user.ProductsBought)
-                    {
-                        tempProductKeys.Add(item.Key);
-                        tempAmountBought.Add(item.Value);
-                        Counter++;
-                    }
-                    tempProductsForEachUser.Add(Counter);
-                }
-
-                Data DataToSave = new Data() { Users = Users.ToList(),
-                                                Products = Products.ToList(), AmountBought = tempAmountBought,
-                                                ProductKeys = tempProductKeys, ProductsForEachUser = tempProductsForEachUser,
-                                                AdminLog = Log.ToList(), UserLog = LogForUsers.ToList()};
-                SerializerXML.Instance.AsyncSerializeToFile(DataToSave, path);
+                // Login korrekt!
+                Properties.Settings.Default.adminpwd = newPassHash; // This doesn't work in "debug mode", does it work in "release mode"?
+                Properties.Settings.Default.Save();
+                TxtAdminPassword = "";
+                TxtNewAdminPassword = "";
+                MessageBox.Show("Password changed.");
             }
+            else
+                MessageBox.Show("Wrong password!");
         }
 
         private void NewData()
         {
-            if (dialogHelper.ShowNew())
+            var response = MessageBox.Show("Are you sure?", "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (response == MessageBoxResult.Yes && dialogHelper.ShowNew())
             {
-                Users.Clear();
-                Products.Clear();
-                LogForUsers.Clear();
-                Log.Add(getTimeStamp(DateTime.Now) + " - Data was deleted");
-                OLModel.User.UserIDCounter = 2000;
-                OLModel.Product.ProductIdCounter = 0;
+                Model.Instance.Users.Clear();
+                Model.Instance.Products.Clear();
+                string log = String.Format("{0} - Data was deleted.", OLModel.Helpers.getTimeStamp());
+                Model.Instance.AdminLog.Add(log);
             }
         }
 

@@ -1,57 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
 
 namespace OLModel
 {
     public class User
     {
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public string Name { get; set; }
-        public int ProductsCount { get; set; } = 0;
-        [XmlIgnore] public Dictionary<string,int> ProductsBought { get; } // TODO: NOT XmlSerializer-able!
-        public static int UserIDCounter = 2000;
+        public string Team { get; set; }
+        public int Rank { get; internal set; }
+        public bool Enabled {
+            get { return Rank > 0; }
+            set { Rank = !value ? 0 : Rank; }
+        }
 
-        internal User() : this(0, "") { } // Used by serializer
-        public User(string name) : this(UserIDCounter++, name) { }
+        public User(string name) : this(null, name) { }
+        public User(string userID, string name) : this(userID, name, "", 0) { }
 
-        public User(int userID, string name)
+        public User(string userID, string name, string team, int rank)
         {
+            if (userID == null)
+                userID = getNewUserId();
             this.UserID = userID;
             this.Name = name;
-            this.ProductsBought = new Dictionary<string, int>();
+            this.Team = team;
+            this.Rank = rank;
+        }
+    
+        private string getNewUserId()
+        {
+            // TODO: SELECT max(studentID AS INTEGER) FROM users;
+            int i = 1000;
+            while (true)
+            {
+                bool idAlreadInUse = false;
+                foreach (User u in Model.Instance.Users)
+                {
+                    idAlreadInUse |= u.UserID.Equals(i.ToString());
+                }
+                if (idAlreadInUse)
+                    i++; 
+                else break;
+            }
+            return i.ToString();
         }
 
-        // Product is added to the users list and bought is incremented 
         public void BuyProducts(string ProductID, int amountBought)
         {
-            // Add "product*amount" to user
-            if (ProductsBought.ContainsKey(ProductID))
-                ProductsBought[ProductID] += amountBought;
-            else
-                ProductsBought.Add(ProductID, amountBought);
-
-            ProductsCount += amountBought;
-        }
-
-        public MemoryStream Serialize()
-        {
-            var stream = new MemoryStream();
-            XmlSerializer serializer = new XmlSerializer(typeof(User));
-            serializer.Serialize(stream, this);
-            return stream;
-        }
-
-        public static User Deserialize(Stream serialization)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(User));
-            return serializer.Deserialize(serialization) as User; // TODO: What if we can't deserialize.
+            var t = new Transaction(UserID, ProductID, amountBought);
+            Model.Instance.Transactions.Add(t);
         }
 
         public override String ToString()
         {
-            return String.Format("{0}: {1}", UserID, Name);
+            return String.Format("{0} ({1})", Name, UserID);
         }
     }
 }

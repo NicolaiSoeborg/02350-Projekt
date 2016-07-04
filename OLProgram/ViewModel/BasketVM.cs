@@ -25,7 +25,8 @@ namespace OLProgram.ViewModel
 
         public BasketVM()
         {
-            if (Basket == null) Basket = new Basket();
+            if (Basket == null)
+                Basket = new Basket();
             InputForBasket = "";
 
             // Commands to access from UI:
@@ -67,23 +68,19 @@ namespace OLProgram.ViewModel
 
         private void EnterInput_User()
         {
-            int userID;
-            if (int.TryParse(InputForBasket, out userID))
+            foreach (User user in Model.Instance.Users)
             {
-                foreach (User user in Users)
+                if (InputForBasket.Equals(user.UserID))
                 {
-                    if (user.UserID == userID)
-                    {
-                        CheckOutBasket();
-                        return;
-                    }
+                    CheckOutBasket();
+                    return;
                 }
             }
         }
 
         private void EnterInput_Product()
         {
-            foreach (Product product in Products)
+            foreach (Product product in Model.Instance.Products)
             {
                 if (InputForBasket.Equals(product.ProductId))
                 {
@@ -96,20 +93,20 @@ namespace OLProgram.ViewModel
         private void CheckOutBasket()
         {
             foreach (BasketItem basketItem in Basket.BasketItems) {
-                Users[Users.IndexOf(loggedInUser)].BuyProducts(basketItem.ProductId, basketItem.Count);
-                Log.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " Bought " + basketItem.Count + " of productID " + basketItem.ProductId);
-                LogForUsers.Add(getTimeStamp(DateTime.Now) + " - " + loggedInUser.ToString() + " Bought " + basketItem.Count + " of productID " + basketItem.ProductId);
-                foreach (Product product in Products)
+                Model.Instance.Users[Model.Instance.Users.IndexOf(loggedInUser)].BuyProducts(basketItem.ProductId, basketItem.Count);
+                string log = String.Format("{0} - {1}  bought {2} of {3} ({4})", OLModel.Helpers.getTimeStamp(), loggedInUser, basketItem.Count, basketItem.Name, basketItem.ProductId);
+                Model.Instance.UserLog.Add(log);
+
+                foreach (Product product in Model.Instance.Products)
                 {
                     if (product.ProductId.Equals(basketItem.ProductId))
                     {
                         product.Stock -= basketItem.Count;
-                        product.Bought += basketItem.Count;
                     }
                 }
             }
 
-            loggedInUser = null;
+            loggedInUser = null; // logout
             new ClearBasketCommand(Basket).Execute();
             undoRedoController.ClearUndoRedoStacks();
             MainWindow.Content = new View.LoginUC();
