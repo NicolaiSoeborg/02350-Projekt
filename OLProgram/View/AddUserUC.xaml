@@ -20,6 +20,13 @@
                 <Button Grid.Column="2" Command="{Binding DeleteSelectedUserCommand}" CommandParameter="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
             </Grid>
             <DataGrid DockPanel.Dock="Top" x:Name="UsersControl" ItemsSource="{Binding Users}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add new user" Command="{Binding AddNewUserCommand}" />
+                        <MenuItem Header="Remove user" Command="{Binding DeleteSelectedUserCommand}" />
+                        <MenuItem Header="Show log for user" Command="{Binding ShowLogForUser}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="15*"/>

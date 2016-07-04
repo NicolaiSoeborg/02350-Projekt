@@ -20,8 +20,6 @@ namespace OLModel
             }
         }
         
-
-
         public Product(string productName, int price)
             : this(null, productName, price, 0, "../Images/default.png") { }
 

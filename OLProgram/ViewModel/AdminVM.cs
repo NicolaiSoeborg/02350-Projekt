@@ -17,6 +17,12 @@ namespace OLProgram.ViewModel
         public static Window _adminLoginWindow = null;
         public List<String> AdminLog { get { return Model.Instance.AdminLog; } }
 
+        // Logs:
+        public static List<String> LogForX { get; set; }
+        public RelayCommand ShowFullUserLogCommand { get; }
+        public RelayCommand ShowFullAdminLogCommand { get; }
+        public RelayCommand ShowFullTransactionLogCommand { get; }
+
         // Global commands for Admins
         public RelayCommand CloseApplicationCommand { get; }
         public RelayCommand AdminLoginCommand { get; } // Benyttes gennem AdminLoginWindow "Login" knappen
@@ -28,12 +34,12 @@ namespace OLProgram.ViewModel
 
         // Admin Commands for Users
         public RelayCommand<User> DeleteSelectedUserCommand { get; }
-        public RelayCommand<User> SaveCurrentUserInformationCommand { get; }
+        public RelayCommand<User> ShowLogForUser { get; }
         public RelayCommand AddNewUserCommand { get; }
 
         //Admin Commands for Products
-        public RelayCommand AddProductToGlobalCommand { get; }
         public RelayCommand<Product> DeleteSelectedProductCommand { get; }
+        public RelayCommand<Product> ShowLogForProduct { get; }
         public RelayCommand AddNewProductCommand { get; }
 
         // Admin commands for Load, Save and New
@@ -58,20 +64,67 @@ namespace OLProgram.ViewModel
             AdminChangePasswordCommand = new RelayCommand(ChangeAdminPassword);
             ShowChangePasswordCommand = new RelayCommand(ShowChangePassword);
 
-            // Admin Commands for UsersVM
+            // Admin Commands for users
             DeleteSelectedUserCommand = new RelayCommand<User>(DeleteSelectedUser);
             AddNewUserCommand = new RelayCommand(AddNewUser);
-            //SaveCurrentUserInformationCommand = new RelayCommand<User, String>(saveCurrentUserInformation);
+            ShowLogForUser = new RelayCommand<User>(UserShowLog);
 
-            // Admin Commands for ProductsVM
+            // Admin Commands for products
             DeleteSelectedProductCommand = new RelayCommand<Product>(DeleteSelectedProduct);
             AddNewProductCommand = new RelayCommand(AddNewProduct);
+            ShowLogForProduct = new RelayCommand<Product>(ProductShowLog);
+
+            // Log commands:
+            ShowFullUserLogCommand = new RelayCommand(ShowUsersLog);
+            ShowFullAdminLogCommand = new RelayCommand(ShowAdminLog);
+            ShowFullTransactionLogCommand = new RelayCommand(ShowTransactionsLog);
 
             // Admin commands for Load, Save and New
             SaveDataCommand = new RelayCommand(SaveCurrentData);
             LoadDataCommand = new RelayCommand(LoadExistingData);
             NewDataCommand = new RelayCommand(NewData);
             GenerateBillCommand = new RelayCommand(GenerateBill);
+        }
+
+        private void ShowTransactionsLog()
+        {
+            LogForX = Model.Instance.Transactions
+                .Select(t => String.Format("{0} bought {1} x {2}.", t.studentId, t.amount, t.productId))
+                .ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+        private void ShowUsersLog()
+        {
+            LogForX = Model.Instance.UserLog.ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+        private void ShowAdminLog()
+        {
+            LogForX = Model.Instance.AdminLog.ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+
+        private void ProductShowLog(Product selectedProduct)
+        {
+            if (selectedProduct == null) return;
+            LogForX = Model.Instance.Transactions
+                .Where(t => t.productId.Equals(selectedProduct.ProductId))
+                .Select(t => String.Format("{0} bought {1} x {2}.", t.studentId, t.amount, t.productId))
+                .ToList();
+            (new View.ShowLog()).ShowDialog();
+        }
+
+        private void UserShowLog(User selectedUser)
+        {
+            if (selectedUser == null) return;
+            LogForX = Model.Instance.Transactions
+                .Where(t => t.studentId.Equals(selectedUser.UserID))
+                .Select(t => String.Format("{0} bought {1} x {2}.", selectedUser.Name, t.amount, t.productId))
+                .ToList();
+            (new View.ShowLog()).ShowDialog();
         }
 
         private void LoadExistingData()
@@ -140,7 +193,7 @@ namespace OLProgram.ViewModel
         {
             if (selectedProduct != null)
             {
-                var response = MessageBox.Show("Do you really want to delete " + selectedProduct.ProductName, "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                var response = MessageBox.Show("Do you really want to delete " + selectedProduct.ProductName + "?", "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
                 {
                     string log = String.Format("{0} - Product {1} was deleted", OLModel.Helpers.getTimeStamp(), selectedProduct);
@@ -166,7 +219,6 @@ namespace OLProgram.ViewModel
 
         private void AddNewProduct()
         {
-            //MessageBox.Show("Adding new product");
             Model.Instance.Products.Add(new Product("New product", 0));
             string log = String.Format("{0} - New product added.", OLModel.Helpers.getTimeStamp());
             Model.Instance.AdminLog.Add(log);

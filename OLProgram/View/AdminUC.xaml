@@ -36,7 +36,12 @@
             </MenuItem>
             <MenuItem Header="_Add">
                 <MenuItem Header="Add _User" Command="{Binding AddNewUserCommand}" />
-                <MenuItem Header="Add _Product" Command="{Binding AddProductToGlobalCommand}" />
+                <MenuItem Header="Add _Product" Command="{Binding AddNewProductCommand}" />
+            </MenuItem>
+            <MenuItem Header="Logs">
+                <MenuItem Header="Full _user log" Command="{Binding ShowFullUserLogCommand}" />
+                <MenuItem Header="Full _admin log" Command="{Binding ShowFullAdminLogCommand}" />
+                <MenuItem Header="Full _transaction log" Command="{Binding ShowFullTransactionLogCommand}" />
             </MenuItem>
             <MenuItem Header="Generate _Bill">
                 <MenuItem Header="_Generate bill" Command="{Binding GenerateBillCommand}" />

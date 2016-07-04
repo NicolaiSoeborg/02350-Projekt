@@ -164,6 +164,9 @@
     <Compile Include="View\ProductSelectionUC.xaml.cs">
       <DependentUpon>ProductSelectionUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowLog.xaml.cs">
+      <DependentUpon>ShowLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserBasketPanelUC.xaml.cs">
       <DependentUpon>UserBasketPanelUC.xaml</DependentUpon>
     </Compile>
@@ -298,6 +301,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProductSelectionUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
