@@ -36,8 +36,6 @@ To login as admin, press `Ctrl + K` and type the password: `OLProgram`.
  - User barcodes are exactly 4 chars.
  - [DB Browser for SQLite](http://sqlitebrowser.org/) is handy for modifying the database (`beer.sqlite3`).
 
-**Please checkout the [SQLite branch](https://github.com/NicolaiSoeborg/02350-Projekt/branches)!**
-
 ## UNIX support
 Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going to be implemented [anytime soon](http://www.mono-project.com/docs/gui/wpf/)).
 
