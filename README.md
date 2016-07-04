@@ -32,6 +32,7 @@ To login as admin, press `Ctrl + K` and type the password: `OLProgram`.
  - Add: Import / export users
 
 ## A few notes
+ - Requires [.NET Framework 4.5.2](https://www.microsoft.com/en-us/download/details.aspx?id=42642).
  - User barcodes are exactly 4 chars.
  - [DB Browser for SQLite](http://sqlitebrowser.org/) is handy for modifying the database (`beer.sqlite3`).
 
