@@ -4,13 +4,12 @@ using System.Windows;
 namespace OLProgram.View
 {
     /// <summary>
-    /// Interaction logic for AdminLoginWindow.xaml
+    /// Interaction logic for AdminChangePasswordWindow.xaml
     /// </summary>
-    public partial class AdminLoginWindow : Window
+    public partial class AdminChangePasswordWindow : Window
     {
-        public AdminLoginWindow()
+        public AdminChangePasswordWindow()
         {
-            OLProgram.ViewModel.AdminVM._adminLoginWindow = this;
             InitializeComponent();
         }
     }
