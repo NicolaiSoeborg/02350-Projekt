@@ -8,15 +8,24 @@ namespace OLModel
     {
         public string UserID { get; set; }
         public string Name { get; set; }
+        public string Team { get; set; }
+        public int Rank { get; internal set; }
+        public bool Enabled {
+            get { return Rank > 0; }
+            set { Rank = !value ? 0 : Rank; }
+        }
 
         public User(string name) : this(null, name) { }
+        public User(string userID, string name) : this(userID, name, "", 0) { }
 
-        public User(string userID, string name)
+        public User(string userID, string name, string team, int rank)
         {
             if (userID == null)
                 userID = getNewUserId();
             this.UserID = userID;
             this.Name = name;
+            this.Team = team;
+            this.Rank = rank;
         }
     
         private string getNewUserId()

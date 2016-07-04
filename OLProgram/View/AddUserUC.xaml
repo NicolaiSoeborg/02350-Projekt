@@ -22,7 +22,10 @@
             <DataGrid DockPanel.Dock="Top" x:Name="UsersControl" ItemsSource="{Binding Users}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="20*"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="15*"/>
+                    <DataGridTextColumn Binding="{Binding Team}" Header="Team" Width="15*"/>
+                    <DataGridCheckBoxColumn Binding="{Binding Enabled}" Header="Enabled" Width="35" IsReadOnly="True" />
+                    <!-- Enabled is read-only as the logic for not-enabled users isn't in place, yet. -->
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

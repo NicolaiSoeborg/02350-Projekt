@@ -29,13 +29,13 @@ namespace OLModel
             dbConn = new SQLiteConnection(String.Format(connStr, dbFilename));
             dbConn.Open();
             string[] statements = {
-                "CREATE TABLE IF NOT EXISTS users(studentID TEXT NOT NULL PRIMARY KEY, studentName TEXT);",
+                "CREATE TABLE IF NOT EXISTS users(studentID TEXT NOT NULL PRIMARY KEY, studentName TEXT, team TEXT, rank INT);",
                 "CREATE TABLE IF NOT EXISTS products(productID TEXT NOT NULL PRIMARY KEY, productName TEXT, productImage TEXT, price INT, stock INT);",
                 "CREATE TABLE IF NOT EXISTS transactions(studentID TEXT, productID TEXT, amount INT);", // TODO: add time
                 "CREATE TABLE IF NOT EXISTS settings(key TEXT NOT NULL PRIMARY KEY, val INT);",
                 "CREATE TABLE IF NOT EXISTS logs(time TEXT NOT NULL, permission INT, event TEXT);",
 
-                "INSERT INTO users VALUES (1337, 'Admin');",
+                "INSERT INTO users VALUES (1337, 'Admin', 'Vektor', 2);",
                 "INSERT INTO products VALUES (5708429004221, 'Svaneke Grunge IPA', 'svaneke.jpg', 20, 0);",
                 "INSERT INTO settings VALUES ('version', "+MODEL_VERSION+");",
                 "INSERT INTO logs VALUES ('" + Helpers.getTimeStamp() + "', 1, 'Created new database');"
@@ -105,7 +105,13 @@ namespace OLModel
                 {
                     string studentID = reader["studentID"].ToString();
                     string studentName = reader["studentName"].ToString();
-                    Users.Add( new User(studentID, studentName) );
+                    string team = reader["team"].ToString();
+
+                    int rank;
+                    if (!Int32.TryParse(reader["rank"].ToString(), out rank))
+                        rank = 0;
+
+                    Users.Add( new User(studentID, studentName, team, rank) );
                 }
             }
             Users.CollectionChanged += UsersAddedOrRemoved; // Warning: Add _after_ filling list
@@ -190,10 +196,12 @@ namespace OLModel
             {
                 foreach (User user in e.NewItems)
                 {
-                    string stmt = "INSERT OR REPLACE INTO users (studentID, studentName) VALUES (@id, @name)";
+                    string stmt = "INSERT OR REPLACE INTO users (studentID, studentName, team, rank) VALUES (@id, @name, @team, @rank)";
                     SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
                     command.Parameters.AddWithValue("id", user.UserID);
                     command.Parameters.AddWithValue("name", user.Name);
+                    command.Parameters.AddWithValue("team", user.Team);
+                    command.Parameters.AddWithValue("rank", user.Rank);
                     Console.WriteLine(String.Format("Added/updated user {0}.", user));
                     command.ExecuteNonQuery();
                     //user.PropertyChanged += UsersAddedOrRemoved;
@@ -203,10 +211,12 @@ namespace OLModel
             {
                 foreach (User user in e.OldItems)
                 {
-                    string stmt = "DELETE FROM users WHERE studentID = @id AND studentName = @name"; // TODO: make sure to "LIMIT 1"
+                    string stmt = "DELETE FROM users WHERE studentID = @id AND studentName = @name AND team = @team AND rank = @rank"; // TODO: make sure to "LIMIT 1"
                     SQLiteCommand command = new SQLiteCommand(stmt, dbConn);
                     command.Parameters.AddWithValue("id", user.UserID);
                     command.Parameters.AddWithValue("name", user.Name);
+                    command.Parameters.AddWithValue("team", user.Team);
+                    command.Parameters.AddWithValue("rank", user.Rank);
                     Console.WriteLine(String.Format("SQL: {0}", stmt));
                     command.ExecuteNonQuery();
                     //user.PropertyChanged -= UsersAddedOrRemoved;
