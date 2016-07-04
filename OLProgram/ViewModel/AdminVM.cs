@@ -89,7 +89,7 @@ namespace OLProgram.ViewModel
             string path = dialogHelper.ShowSaveBill();
             if (path != null)
             {
-                if (File.Exists(path) && MessageBoxResult.Yes != MessageBox.Show("File already exists! Overwrite?", "File exists", MessageBoxButton.YesNo, MessageBoxImage.Exclamation))
+                if (File.Exists(path) && MessageBox.Show("File already exists! Overwrite?", "File exists", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No)
                     return;
 
                 // TODO: Svind
@@ -113,13 +113,12 @@ namespace OLProgram.ViewModel
                     csv.AppendFormat("{0}, {1}, ", trimCSV(u.UserID), trimCSV(u.Name));
                     foreach (Product p in Model.Instance.Products)
                     {
-                        // How many product has user bought? (lambda <3)
-                        int amount = 0;
-                        foreach (Transaction t in Model.Instance.Transactions)
-                        {
-                            if (u.UserID.Equals(t.studentId) && p.ProductId.Equals(t.productId))
-                                amount += t.amount;
-                        }
+                        // How many product has user bought?
+                        int amount = Model.Instance.Transactions
+                            .Where(t => u.UserID.Equals(t.studentId)
+                                    && p.ProductId.Equals(t.productId))
+                            .Sum(t => t.amount);
+
                         int toPay = amount * p.Price; // TODO: Add svind
                         csv.AppendFormat("{0}, ", toPay);
                     }
