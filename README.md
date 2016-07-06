@@ -41,4 +41,4 @@ Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going 
 
 Travis CI is setup to build OLProgram (using Mono), but is expected to fail:
 
-  [![Mono build status](https://img.shields.io/travis/NicolaiSoeborg/02350-Projekt/sqlite.svg?label=Mono%20build)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
+  [![Mono build status](https://img.shields.io/travis/NicolaiSoeborg/02350-Projekt/master.svg?label=Mono%20build)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
