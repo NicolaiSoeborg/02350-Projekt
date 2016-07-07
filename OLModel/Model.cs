@@ -14,7 +14,7 @@ namespace OLModel
         public ObservableCollection<Transaction> Transactions { get; } = new ObservableCollection<Transaction>();
         public List<String> AdminLog { get; set; }
         public List<String> UserLog { get; set; }
-
+        
         public const int MODEL_VERSION = 1;
         private const int LOG_ADMIN_ONLY = 1; // everything <= is admin only (see note below)
 
@@ -26,8 +26,18 @@ namespace OLModel
         {
             Console.WriteLine(String.Format("Creating database \"{0}\"", dbFilename));
             SQLiteConnection.CreateFile(dbFilename);
-            dbConn = new SQLiteConnection(String.Format(connStr, dbFilename));
-            dbConn.Open();
+            SQLiteConnection dbConn;
+            try
+            {
+                dbConn = new SQLiteConnection(String.Format(connStr, dbFilename));
+                dbConn.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Got exception when creating database:\r\n" + e.Message);
+                throw;
+            }
+            
             string[] statements = {
                 "CREATE TABLE IF NOT EXISTS users(studentID TEXT NOT NULL PRIMARY KEY, studentName TEXT, team TEXT, rank INT);",
                 "CREATE TABLE IF NOT EXISTS products(productID TEXT NOT NULL PRIMARY KEY, productName TEXT, productImage TEXT, price INT, stock INT);",
@@ -96,96 +106,106 @@ namespace OLModel
                 return; // TODO: Kill?
             }
 
-            SQLiteCommand command = new SQLiteCommand("SELECT * FROM users", dbConn);
-            SQLiteDataReader reader = command.ExecuteReader();
-            #region users
-            if (reader.HasRows)
+            #region Load users
+            using (SQLiteCommand command = new SQLiteCommand("SELECT * FROM users", dbConn))
             {
-                while (reader.Read())
+                SQLiteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    string studentID = reader["studentID"].ToString();
-                    string studentName = reader["studentName"].ToString();
-                    string team = reader["team"].ToString();
+                    while (reader.Read())
+                    {
+                        string studentID = reader["studentID"].ToString();
+                        string studentName = reader["studentName"].ToString();
+                        string team = reader["team"].ToString();
 
-                    int rank;
-                    if (!Int32.TryParse(reader["rank"].ToString(), out rank))
-                        rank = 0;
+                        int rank;
+                        if (!Int32.TryParse(reader["rank"].ToString(), out rank))
+                            rank = 0;
 
-                    Users.Add( new User(studentID, studentName, team, rank) );
+                        Users.Add( new User(studentID, studentName, team, rank) );
+                    }
                 }
             }
             Users.CollectionChanged += UsersAddedOrRemoved; // Warning: Add _after_ filling list
             #endregion
 
-            command = new SQLiteCommand("SELECT * FROM products", dbConn);
-            reader = command.ExecuteReader();
-            #region products
-            if (reader.HasRows)
+            #region Load products
+            using (SQLiteCommand command = new SQLiteCommand("SELECT * FROM products", dbConn))
             {
-                while (reader.Read())
+                SQLiteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    string productId = reader["productID"].ToString();
-                    string productName = reader["productName"].ToString();
-                    string productImage = reader["productImage"].ToString(); 
+                    while (reader.Read())
+                    {
+                        string productId = reader["productID"].ToString();
+                        string productName = reader["productName"].ToString();
+                        string productImage = reader["productImage"].ToString();
 
-                    int price;
-                    if (!Int32.TryParse(reader["price"].ToString(), out price))
-                        price = 10000; // This should be noticeable
+                        int price;
+                        if (!Int32.TryParse(reader["price"].ToString(), out price))
+                            price = 10000; // This should be noticeable
 
-                    int stock;
-                    if (!Int32.TryParse(reader["stock"].ToString(), out stock))
-                        stock = 0;
+                        int stock;
+                        if (!Int32.TryParse(reader["stock"].ToString(), out stock))
+                            stock = 0;
 
-                    Products.Add( new Product(productId, productName, price, stock, productImage) );
-
+                        Products.Add(new Product(productId, productName, price, stock, productImage));
+                    }
                 }
             }
             Products.CollectionChanged += ProductsAddedOrRemoved; // Warning: Add _after_ filling list
             #endregion
 
-            command = new SQLiteCommand("SELECT * FROM transactions", dbConn);
-            reader = command.ExecuteReader();
-            #region transactions
-            if (reader.HasRows)
+            #region Load transactions
+            using (SQLiteCommand command = new SQLiteCommand("SELECT * FROM transactions", dbConn))
             {
-                while (reader.Read())
+                SQLiteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    //transactions(studentID TEXT, productID TEXT, amount INT);", // TODO: add time
-                    string studentId = reader["studentID"].ToString();
-                    string productId = reader["productID"].ToString();
-                    int amount;
-                    if (!Int32.TryParse(reader["amount"].ToString(), out amount))
-                        amount = 0;
+                    while (reader.Read())
+                    {
+                        //transactions(studentID TEXT, productID TEXT, amount INT);", // TODO: add time
+                        string studentId = reader["studentID"].ToString();
+                        string productId = reader["productID"].ToString();
+                        int amount;
+                        if (!Int32.TryParse(reader["amount"].ToString(), out amount))
+                            amount = 0;
 
-                    Transactions.Add( new Transaction(studentId, productId, amount) );
+                        Transactions.Add(new Transaction(studentId, productId, amount));
+                    }
                 }
             }
             Transactions.CollectionChanged += TransactionAdded;
             #endregion
 
-            command = new SQLiteCommand("SELECT time, permission, event FROM logs", dbConn);
-            reader = command.ExecuteReader();
-            #region log
-            if (reader.HasRows)
+            #region Load log
+            using (SQLiteCommand command = new SQLiteCommand("SELECT time, permission, event FROM logs", dbConn))
             {
-                while (reader.Read())
+                SQLiteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    string time = reader["time"].ToString();
-                    string eventName = reader["event"].ToString();
-
-                    int permissions;
-                    if (!Int32.TryParse(reader["permission"].ToString(), out permissions))
-                        permissions = Int32.MaxValue;
-
-                    if (LOG_ADMIN_ONLY <= permissions) // TODO: refactor logic
+                    while (reader.Read())
                     {
-                        AdminLog.Add(string.Format("{0}: {1}", time, eventName));
-                    } else
-                    {
-                        UserLog.Add(string.Format("{0}: {1}", time, eventName));
+                        string time = reader["time"].ToString();
+                        string eventName = reader["event"].ToString();
+
+                        int permissions;
+                        if (!Int32.TryParse(reader["permission"].ToString(), out permissions))
+                            permissions = Int32.MaxValue;
+
+                        if (LOG_ADMIN_ONLY <= permissions) // TODO: refactor logic
+                        {
+                            AdminLog.Add(string.Format("{0}: {1}", time, eventName));
+                        }
+                        else
+                        {
+                            UserLog.Add(string.Format("{0}: {1}", time, eventName));
+                        }
                     }
                 }
             }
+            /*AdminLog.CollectionChanged += LogAddedOrRemoved;
+            UserLog.CollectionChanged += LogAddedOrRemoved;*/
             #endregion
 
         }
@@ -204,7 +224,6 @@ namespace OLModel
                     command.Parameters.AddWithValue("rank", user.Rank);
                     Console.WriteLine(String.Format("Added/updated user {0}.", user));
                     command.ExecuteNonQuery();
-                    //user.PropertyChanged += UsersAddedOrRemoved;
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -219,7 +238,6 @@ namespace OLModel
                     command.Parameters.AddWithValue("rank", user.Rank);
                     Console.WriteLine(String.Format("SQL: {0}", stmt));
                     command.ExecuteNonQuery();
-                    //user.PropertyChanged -= UsersAddedOrRemoved;
                 }
             }
         }
@@ -237,7 +255,6 @@ namespace OLModel
                     command.Parameters.AddWithValue("price", product.Price);
                     Console.WriteLine(String.Format("Added/updated product {0}.", product));
                     command.ExecuteNonQuery();
-                    //product.PropertyChanged += ProductsAddedOrRemoved;
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -252,7 +269,6 @@ namespace OLModel
                     command.Parameters.AddWithValue("price", product.Price);
                     Console.WriteLine(String.Format("SQL: {0}", stmt));
                     command.ExecuteNonQuery();
-                    //product.PropertyChanged += ProductsAddedOrRemoved;
                 }
             }
         }
@@ -281,7 +297,6 @@ namespace OLModel
                 }
             }
         }
-
 
         ~Model()
         {
