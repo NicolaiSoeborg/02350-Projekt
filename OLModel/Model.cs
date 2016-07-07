@@ -291,9 +291,8 @@ namespace OLModel
             {
                 foreach (Transaction t in e.OldItems)
                 {
-                    string log = String.Format("{0} - WARNING: Transaction '{1}' deleted!", Helpers.getTimeStamp(), t);
-                    AdminLog.Add(log);
-                    Console.WriteLine(log);
+                    Helpers.AdminLog("WARNING: Transaction '{0}' deleted!", t);
+                    Console.WriteLine(String.Format("Deleted transaction '{0}'.", t));
                 }
             }
         }

@@ -179,8 +179,7 @@ namespace OLProgram.ViewModel
                 }
                 
                 File.WriteAllText(path, csv.ToString());
-                string log = String.Format("{0} - Bill has been saved at \"{1}\".", OLModel.Helpers.getTimeStamp(), path);
-                Model.Instance.AdminLog.Add(log);
+                OLModel.Helpers.AdminLog("Bill has been saved at \"{0}\".", path);
             }
         }
 
@@ -196,9 +195,8 @@ namespace OLProgram.ViewModel
                 var response = MessageBox.Show("Do you really want to delete " + selectedProduct.ProductName + "?", "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
                 {
-                    string log = String.Format("{0} - Product {1} was deleted", OLModel.Helpers.getTimeStamp(), selectedProduct);
-                    Model.Instance.AdminLog.Add(log);
                     Model.Instance.Products.Remove(selectedProduct);
+                    OLModel.Helpers.AdminLog("Product {0} was deleted.", selectedProduct);
                 }
             }
         }
@@ -210,8 +208,7 @@ namespace OLProgram.ViewModel
                 var response = MessageBox.Show("Do you really want to delete user " + selectedUser.ToString(), "Deleting...", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (response == MessageBoxResult.Yes)
                 {
-                    string log = String.Format("{0} - User {1} was deleted.", OLModel.Helpers.getTimeStamp(), selectedUser);
-                    Model.Instance.AdminLog.Add(log);
+                    OLModel.Helpers.AdminLog("User {0} was deleted.", selectedUser);
                     Model.Instance.Users.Remove(selectedUser);
                 }
             }
@@ -220,15 +217,13 @@ namespace OLProgram.ViewModel
         private void AddNewProduct()
         {
             Model.Instance.Products.Add(new Product("New product", 0));
-            string log = String.Format("{0} - New product added.", OLModel.Helpers.getTimeStamp());
-            Model.Instance.AdminLog.Add(log);
+            OLModel.Helpers.AdminLog("New product added.");
         }
 
         private void AddNewUser()
         {
             Model.Instance.Users.Add(new User("New user"));
-            string log = String.Format("{0} - New user added.", OLModel.Helpers.getTimeStamp());
-            Model.Instance.AdminLog.Add(log);
+            OLModel.Helpers.AdminLog("New user added.");
         }
 
         private void CloseApplication()
@@ -297,8 +292,7 @@ namespace OLProgram.ViewModel
             {
                 Model.Instance.Users.Clear();
                 Model.Instance.Products.Clear();
-                string log = String.Format("{0} - Data was deleted.", OLModel.Helpers.getTimeStamp());
-                Model.Instance.AdminLog.Add(log);
+                OLModel.Helpers.AdminLog("Data was deleted.");
             }
         }
 

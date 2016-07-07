@@ -8,6 +8,14 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="500">
 
+    <UserControl.Resources>
+        <ContextMenu x:Key="AddUsercontextMenu">
+            <MenuItem Header="Add new user" Command="{Binding AddNewUserCommand}" />
+            <MenuItem Header="Remove user" Command="{Binding DeleteSelectedUserCommand}" />
+            <MenuItem Header="Show log for user" Command="{Binding ShowLogForUser}" />
+        </ContextMenu>
+    </UserControl.Resources>
+    
     <GroupBox Header="Edit Users">
         <DockPanel LastChildFill="true">
             <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
@@ -19,14 +27,7 @@
                 <Button Grid.Column="0" Command="{Binding AddNewUserCommand}">Add New User</Button>
                 <Button Grid.Column="2" Command="{Binding DeleteSelectedUserCommand}" CommandParameter="{Binding SelectedItem, ElementName=UsersControl}">Delete User</Button>
             </Grid>
-            <DataGrid DockPanel.Dock="Top" x:Name="UsersControl" ItemsSource="{Binding Users}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Add new user" Command="{Binding AddNewUserCommand}" />
-                        <MenuItem Header="Remove user" Command="{Binding DeleteSelectedUserCommand}" />
-                        <MenuItem Header="Show log for user" Command="{Binding ShowLogForUser}" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
+            <DataGrid DockPanel.Dock="Top" x:Name="UsersControl" ItemsSource="{Binding Users}" ContextMenu="{StaticResource AddUsercontextMenu}" CanUserSortColumns="False" HeadersVisibility="Column" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UserID}" Header="Barcode" Width="10*"/>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="15*"/>

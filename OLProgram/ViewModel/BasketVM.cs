@@ -39,8 +39,8 @@ namespace OLProgram.ViewModel
             writeInputCommand = new RelayCommand<KeyEventArgs>(writeInput);
             HomeCommand = new RelayCommand(HomeButton);
         }
-
-        private /*final?*/ Dictionary<Key, char> num2Char = new Dictionary<Key, char> { { Key.D0, '0' }, { Key.D1, '1' }, { Key.D2, '2' }, { Key.D3, '3' }, { Key.D4, '4' }, { Key.D5, '5' }, { Key.D6, '6' }, { Key.D7, '7' }, { Key.D8, '8' }, { Key.D9, '9' } };
+        
+        private readonly IReadOnlyDictionary<Key, char> num2Char = new Dictionary<Key, char> { { Key.D0, '0' }, { Key.D1, '1' }, { Key.D2, '2' }, { Key.D3, '3' }, { Key.D4, '4' }, { Key.D5, '5' }, { Key.D6, '6' }, { Key.D7, '7' }, { Key.D8, '8' }, { Key.D9, '9' } };
         private void writeInput(KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -94,8 +94,7 @@ namespace OLProgram.ViewModel
         {
             foreach (BasketItem basketItem in Basket.BasketItems) {
                 Model.Instance.Users[Model.Instance.Users.IndexOf(loggedInUser)].BuyProducts(basketItem.ProductId, basketItem.Count);
-                string log = String.Format("{0} - {1}  bought {2} of {3} ({4})", OLModel.Helpers.getTimeStamp(), loggedInUser, basketItem.Count, basketItem.Name, basketItem.ProductId);
-                Model.Instance.UserLog.Add(log);
+                OLModel.Helpers.PublicLog("{0} bought {1} of {2} ({3})", loggedInUser, basketItem.Count, basketItem.Name, basketItem.ProductId);
 
                 foreach (Product product in Model.Instance.Products)
                 {
