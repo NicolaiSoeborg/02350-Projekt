@@ -3,11 +3,12 @@ OLProgram
 
 [![Windows Build status](https://img.shields.io/appveyor/ci/NicolaiSoeborg/02350-Projekt/master.svg?label=Windows%20build)](https://ci.appveyor.com/project/NicolaiSoeborg/02350-projekt/)
 [![GitHub issues](https://img.shields.io/github/issues/NicolaiSoeborg/02350-Projekt.svg)](issues)
+[![Dependency Status](https://dependencyci.com/github/NicolaiSoeborg/02350-Projekt/badge)](https://dependencyci.com/github/NicolaiSoeborg/02350-Projekt)
 [![Beerpay](https://beerpay.io/NicolaiSoeborg/02350-Projekt/badge.svg?style=flat)](https://beerpay.io/NicolaiSoeborg/02350-Projekt)
-[![license](https://img.shields.io/badge/License-Beerware-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Beerware-blue.svg)](LICENSE)
 
 See [rapport.pdf](rapport.pdf) (danish) for info about the project.
-Source project is "OLProgram.sln".
+Source project is `OLProgram.sln`.
 
 The program contains the following default users and products:
 
@@ -42,3 +43,9 @@ Building on UNIX is a problem as WPF isn't implemented in Mono (and isn't going 
 Travis CI is setup to build OLProgram (using Mono), but is expected to fail:
 
   [![Mono build status](https://img.shields.io/travis/NicolaiSoeborg/02350-Projekt/master.svg?label=Mono%20build)](https://travis-ci.org/NicolaiSoeborg/02350-Projekt)
+
+
+## License
+OLProgram has the following dependencies:
+ * CommonServiceLocator. Released under the [Microsoft Public License (Ms-PL)](/LICENSE.Ms-PL).
+ * MVVM Light Toolkit. Released under [The MIT License](/LICENSE.MIT).
